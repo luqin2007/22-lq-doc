@@ -75,13 +75,28 @@ flexGrow=1
 - 客户端模式：客户端直接以客户端名义申请授权，实际不存在授权问题
 
 > [!note] 依赖：在 Security 同时，还应添加对应依赖：
-> - OAuth 验证服务端：`org.springframework.boot:spring-boot-starter-oauth2-authorization-server`
+> - OAuth 认证服务端：`org.springframework.boot:spring-boot-starter-oauth2-authorization-server`
 > - OAuth 资源服务端：`org.springframework.boot:spring-boot-starter-oauth2-resource-server`
 > - OAuth 客户端：`org.springframework.boot:spring-boot-starter-oauth2-client`
 
 ## 认证服务器
 
+使用 Spring Security 创建一个普通 OAuth2 认证服务器，可向 `localhost:<port>/oauth2/token` 发送带有 OAuth2.0 参数的 post 请求测试
+
+```reference fold
+file: "@/_resources/codes/spring-cloud/shopping-oauth-server/src/main/java/com/example/shoppingoauthserver/OAuthConfig.java"
+start: 18
+```
+
+![[../../../../_resources/images/Pasted image 20241018013235.png]]
+
 ## 资源服务器
+
+1. 将原本 `spring-security` 依赖替换成 `org.springframework.boot:spring-boot-starter-oauth2-resource-server`
+
+2. 在 Spring 应用上使用 `@EnableResourceServer` 注解，说明该应用是一个保护资源
+
+3. 在 `application.properties` 中配置认证检查地址
 
 ## 客户端
 

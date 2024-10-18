@@ -9,6 +9,9 @@
 ```
 -Dfile.encoding=UTF-8
 ```
+
+- [ ] Java 17+ 可能还有乱码，需要调整成 `compat`
+
 # CLion
 
 控制台输出编码设为 UTF8

@@ -5,7 +5,7 @@
 1. 创建用户认证
 
 ```reference
-file: "@/_resources/codes/spring-cloud/shopping-product-service/src/main/java/com/example/shopping/config/SecurityConfiguration.java"
+file: "@/_resources/codes/spring-cloud/shopping-product-service-before-10.3/src/main/java/com/example/shopping/config/SecurityConfiguration.java"
 start: 26
 end: 46
 ```
@@ -13,7 +13,7 @@ end: 46
 2. 实现用户鉴权
 
 ```reference
-file: "@/_resources/codes/spring-cloud/shopping-product-service/src/main/java/com/example/shopping/config/SecurityConfiguration.java"
+file: "@/_resources/codes/spring-cloud/shopping-product-service-before-10.3/src/main/java/com/example/shopping/config/SecurityConfiguration.java"
 start: 48
 end: 60
 ```
@@ -90,14 +90,22 @@ start: 18
 
 ![[../../../../_resources/images/Pasted image 20241018013235.png]]
 
-## 资源服务器
+## 客户端
 
 1. 将原本 `spring-security` 依赖替换成 `org.springframework.boot:spring-boot-starter-oauth2-resource-server`
 
-2. 在 Spring 应用上使用 `@EnableResourceServer` 注解，说明该应用是一个保护资源
+2. 在 `application.properties` 中配置认证检查地址
 
-3. 在 `application.properties` 中配置认证检查地址
+```reference
+file: "@/_resources/codes/spring-cloud/config-repo-files/productservice.properties"
+start: 19
+end: 20
+```
 
-## 客户端
+3. 在安全配置中指定 `oauth2ResourceServer`
 
-# JWT 认证
+```reference
+file: "@/_resources/codes/spring-cloud/shopping-product-service/src/main/java/com/example/shopping/config/SecurityConfiguration.java"
+start: 14
+end: 23
+```

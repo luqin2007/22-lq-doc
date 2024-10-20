@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiRiscv",
       "SiVisualbasic",
       "LiDatabase",
       "SiScala",
-      "SiRust",
-      "SiPython"
+      "SiRust"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -122,5 +122,6 @@
   "语言/Scala": "SiScala",
   "语言/Scala/语法": "SiScala",
   "语言/SQL": "LiDatabase",
-  "语言/VB6": "SiVisualbasic"
+  "语言/VB6": "SiVisualbasic",
+  "语言/Rust/rCore-Camp-2024A": "SiRiscv"
 }

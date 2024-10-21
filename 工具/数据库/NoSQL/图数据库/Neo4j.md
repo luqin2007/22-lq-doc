@@ -1,13 +1,9 @@
-
-# Cypher
-
 > [!note] CQL：Cypher Query Language，Neo4j 的查询语言，一种声明式模式匹配语言
 
 - 语句以 `;` 结尾
 - 使用 `$` 引用参数/变量
 - 使用 `//` 表示注释
-
-## 数据元素
+# 数据元素
 
 节点使用 `()` 表示，括号内为变量、属性、标签等，空表示一个匿名节点
 - 直接一个名字表示将节点赋值给同名变量
@@ -71,7 +67,6 @@
 > (a)-[*]->(b);
 > ```
 > 
-
 ## 关键字
 
 > [!hint] 类似 SQL，关键字大小写不敏感，习惯性大写
@@ -97,8 +92,7 @@
 | unwind         | 展开   | 将一个列表展开为一个序列            |
 | union          | 组合   | 将多个查询结果合并为一个结果          |
 | call           | 调用   | 调用存储过程                  |
-
-# 函数
+## 函数
 
 ```tabs
 tab: 字符串
@@ -184,3 +178,23 @@ tab: 断言
 | exists | 参数内容是否存在       |
 
 ```
+
+>[!note] 除自带的函数和存储过程外，Neo4j 也提供 [APOC](https://neo4j.com/docs/apoc/current/installation/) 用于复杂图数据处理与分析
+## 数据类型
+
+基本数据类型包括 `boolean`，`byte` - `long`，`float`，`double`，`char`，`string`，在此之上还支持 `Map` 和 `List` 两种容器。
+
+Neo4j 不支持 `datetime` 等表示时间日期的类型，可以通过系统提供的函数创建
+- `date()`：创建 `yyyy-MM-dd` 格式的时间字符串
+- `timestamp()`：获取当前时间的毫秒值（`System.currentTimeMillis()`）
+- `apoc.data.format()`：APOC 库提供的日期格式化工具
+# 数据操作
+## 节点操作
+
+使用 `create(<节点名>:<标签名>{属性列表})` 创建节点
+
+```cypher
+create(dept:Dept{deptno:10,dname:"Accounting",location:"Beijing"});
+```
+
+带有 `return 节点名` 可以将节点返回

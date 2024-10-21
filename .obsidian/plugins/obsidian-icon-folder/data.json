@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "RiErrorWarningFill",
       "SiRiscv",
       "SiVisualbasic",
       "LiDatabase",
-      "SiScala",
-      "SiRust"
+      "SiScala"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -123,5 +123,6 @@
   "语言/Scala/语法": "SiScala",
   "语言/SQL": "LiDatabase",
   "语言/VB6": "SiVisualbasic",
-  "语言/Rust/rCore-Camp-2024A": "SiRiscv"
+  "语言/Rust/rCore-Camp-2024A": "SiRiscv",
+  "工具/数据库/NoSQL/图数据库/Error": "RiErrorWarningFill"
 }

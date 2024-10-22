@@ -146,18 +146,28 @@ Neo4j 不支持 `datetime` 等表示时间日期的类型，可以通过系统�
 - `date()`：创建 `yyyy-MM-dd` 格式的时间字符串
 - `timestamp()`：获取当前时间的毫秒值（`System.currentTimeMillis()`）
 - `apoc.data.format()`：APOC 库提供的日期格式化工具
-## 节点操作
+## 元素操作
 
-### 节点创建
+### 创建
 
-使用 `CREATE(<节点名>:<标签名>{属性列表})` 创建节点
+使用 `CREATE` 创建节点和关系
+
+```cypher
+create(节点名)
+create(节点名:标签{属性列表})
+create(起点) -[变量:标签{属性列表}]-> (终点) return 变量;
+create(终点) <-[变量:标签{属性列表}]- (起点) return 变量;
+create(端点1) -[变量:标签{属性列表}]- (端点2) return 变量;
+```
+
+> [!note] 创建关系时，节点不存在的情况下会自动创建节点
+
+---
 
 ```cypher
 create(dept:Dept{deptno:10,dname:"Accounting",location:"Beijing"});
 create(andy:Person:Student:Writer{name:'andy',age:23});
 ```
-
----
 
 `````col
 ````col-md
@@ -205,13 +215,35 @@ return n;
 with ["a", "b", "c"] as coll  
 foreach (value in coll | create(:person{name:value}));
 ```
-### 节点查找
+
+> [!example] 创建关系和两端节点
+> ```cypher
+> create(a:Book{name:"程序设计基础"})-[r:base]->(b:Book{name:"数据结构"});
+> ```
+
+为已创建的节点添加关系，需要先[[#元素查找|查询]]出相关节点
+
+> [!example] 查询两组节点，在他们之间一一创建关系
+> ```cypher
+> match(a:Person),(b:Movie)
+> where a.name='Robert Zemeckis' and b.title='Forrest Gump'
+> create (a)-[r:DIRECTED]->(b)
+> return r;
+> ```
+
+### 查询
 
 ```cypher
 METCH(节点名:标签)
 WHERE 条件列表
 RETURN 节点或属性;
 ```
+
+使用 `match` 匹配关系
+- 泛指一切关系：`()--()`
+- 泛指单项关系：`()-->()` / `()<--()`
+- 泛指可有约束的一切关系：`()-[]-()`
+- 泛指可有约束的一切单向关系：`()-[]->()` / `()<-[]-()`
 
 ---
 
@@ -253,7 +285,8 @@ RETURN 节点或属性;
 > ```
 > ![[../../../../_resources/images/Pasted image 20241022014926.png]]
 
-> [!example] 使用 `ORDER BY` 分组查询，`SKIP` 跳过一定数量的结果，`LIMIT` 限定返回结果数量
+> [!example] 使用 `ORDER BY` 排序，`SKIP` 跳过一定数量的结果，`LIMIT` 限定返回结果数量
+> 默认升序排序，后可接 `DESC` 关键字表示降序排序
 > ```cypher
 > match(n)
 > return n
@@ -279,9 +312,14 @@ RETURN 节点或属性;
 > return a, keys(a);
 > ```
 >  ![[../../../../_resources/images/Pasted image 20241022020519.png]]
-### 节点修改
 
-使用 `MATCH` 查询出节点后，可接多条 `SET` 添加或修改节点
+> [!example] 查询所有关系，并返回关系及其类型
+> ```cypher
+> match()-[r]-() return r,type(r);
+> ```
+### 修改
+
+使用 `MATCH` 查询出节点后，可接多条 `SET` 添加或修改节点或关系
 - `n:标签`：添加标签
 - `n.property=value`：添加或修改属性
 - `a=b`：复制两个标签除 ID 外所有属性
@@ -305,9 +343,11 @@ RETURN 节点或属性;
 > set a=p
 > return a,p;
 > ```
-### 节点删除
+### 删除
 
-使用 `MATCH` 查询出节点后，可接多条 `DELETE` 删除节点、标签或属性
+使用 `MATCH` 查询出后，可接多条 `DELETE` 删除节点、关系或其标签或属性
+
+使用 `OPTION MATCH` 子句可以表示不确定节点间是否有关系
 
 ---
 
@@ -323,9 +363,20 @@ RETURN 节点或属性;
 > remove n:Person:Student
 > return n;
 > ```
+
+> [!example] 删除学生 `Tom Hanks` 指向课程 `NoSQL`，关系为 `Study` 的关系
+> ```cypher
+> match(:Student{name:'Tom Hanks'})-[s:Study]-(:Course{name:'NoSQL'})
+> delete s;
+> ```
+
+> [!example] 删除所有节点，若节点间有关系，同时删除对应关系
+> ```cypher
+> match(n) option match(n)-[r]-() delete n,r;
+> ```
 ### MERGE 子句
 
-很像 `getOrCreate` 的形式
+类似于 `getOrCreate` 的形式
 - 当模式存在时，匹配模式
 - 当模式不存在时，创建模式
 
@@ -352,49 +403,53 @@ RETURN 节点或属性;
 > ![[../../../../_resources/images/Pasted image 20241022024340.png]]
 > - 第二次执行：
 > ![[../../../../_resources/images/Pasted image 20241022024358.png]]
-## 关系操作
-### 创建关系
+## 聚合函数
+### 数值运算
 
 ```cypher
-create(起点) -[变量:标签{属性列表}]-> (终点) return 变量;
-create(终点) <-[变量:标签{属性列表}]- (起点) return 变量;
-create(端点1) -[变量:标签{属性列表}]- (端点2) return 变量;
+create (a:Student{id:1, score:97, classNo:3});
+create (a:Student{id:2, score:65, classNo:7});
+create (a:Student{id:3, score:92, classNo:7});
+create (a:Student{id:4, score:78, classNo:8});
+create (a:Student{id:5, score:83, classNo:8});
+match(n:Student{classNo:7}) return count(n);
 ```
 
-> [!note] 节点不存在的情况下会自动创建节点
-
----
-
-> [!example] 创建关系和两端节点
+>[!example] 计数 `COUNT`：计算 7 班学生数
 > ```cypher
-> create(a:Book{name:"程序设计基础"})-[r:base]->(b:Book{name:"数据结构"});
+> match(n:Student{classNo:7}) return count(n);
 > ```
+> ![[../../../../_resources/images/Pasted image 20241023023019.png]]
 
-> [!example] 查询两组节点，在他们之间一一创建关系
+> [!example] 求和 `SUM`，平均值 `AVG`：计算学生成绩总和和平均值
 > ```cypher
-> match(a:Person),(b:Movie)
-> where a.name='Robert Zemeckis' and b.title='Forrest Gump'
-> create (a)-[r:DIRECTED]->(b)
-> return r;
+> match(n:Student) return sum(n.score), avg(n.score);
 > ```
+> ![[../../../../_resources/images/Pasted image 20241023024241.png]]
 
-### 查询关系
-
-使用 `match` 匹配关系
-- 泛指一切关系：`()--()`
-- 泛指单项关系：`()-->()` / `()<--()`
-- 泛指可有约束的一切关系：`()-[]-()`
-- 泛指可有约束的一切单向关系：`()-[]->()` / `()<-[]-()`
-
----
-
-> [!example] 查询所有关系，并返回关系及其类型
+> [!example] 最大值 `MAX`，最小值 `MIN`：计算学生成绩最大值、最小值
 > ```cypher
-> match()-[r]-() return r,type(r);
+> match(n:Student) return max(n.score),  min(n.score);
 > ```
-### 修改关系
-### 删除关系
-## 排序与聚合
+> ![[../../../../_resources/images/Pasted image 20241023024332.png]]
+### 去重
+
+结果前加 `DISTINCT` 可以对结果去重
+
+>[!example] 查询某一类产品供应商厂家名
+> ```cypher
+> match(c:Category{name:"Produce"})<--(:Product)<--(s:Supplier)
+> return distinct s.companyName;
+> ```
+### 取值集合
+
+使用 `COLLECT` 可以将结果组成集合
+
+> [!example] 查询供应商的所有产品类型
+> ```cypher
+> match (s:Supplier)-->(:Product)-->(c:Category)
+> return s.companyName as Company, collect(distinct c.categoryName) as Categories
+> ```
 ## 路径操作
 ## 索引操作
 ## 约束

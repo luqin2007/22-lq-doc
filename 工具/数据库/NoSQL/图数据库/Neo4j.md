@@ -12,16 +12,6 @@
 - 节点属性使用 `{key1:value1,key2:value2}` 的形式声明
 - 节点标签使用 `:label` 的形式声明
 
-> [!example] 匹配王五节点，保存到 `wangwu` 变量中
-> - 节点标签包含 `:person`，`master`
-> - 节点包含以下属性：
->   - name="王五"
->   - age=26
-> 
-> ```cypher
-> (wangwu:person:master{name:"王五",age:26});
-> ```
-
 > [!note] 每个节点有一个唯一 ID 属性，创建节点由数据库时自动添加
 > - `id(n)` 返回唯一整数 id，已弃用
 > - `elementId(n)` 返回唯一字符串 id
@@ -30,47 +20,6 @@
 - 关系两端点是一个节点
 - `[]` 之间可以添加变量、属性、标签等，规则与[[#节点]]相同
 - 关系之间 `[]` 为空时可以省略
-
-> [!example] 关系相关示例
-> 匹配一个 a 到 b 的关系，其中 b 是一个变量
-> - 赋值给 r 变量
-> - 标签为 `friend_of`
-> - 包含属性 `year=2019`
-> 
-> ```cypher
-> (a)-[r:friend_of{year:2019}]->($b);
-> ```
-> 
-> 匹配长度为 2、忽略标签和属性的路径
-> ```cypher
-> (a)-->()-->(b);
-> ```
-> 
-> 匹配长度为 3 的路径
-> ```cypher
-> (a)-[*3]->(b);
-> ```
-> 
-> 匹配长度在 3-5 之间的路径
-> ```cypher
-> (a)-[*3..5]->(b);
-> ```
-> 
-> 匹配长度不小于 3 的路径
-> ```cypher
-> (a)-[*3..]->(b);
-> ```
-> 
-> 匹配长度不大于 5 的路径
-> ```cypher
-> (a)-[*..5]->(b);
-> ```
-> 
-> 匹配任意长度的路径
-> ```cypher
-> (a)-[*]->(b);
-> ```
-> 
 ### 关键字
 
 > [!hint] 类似 SQL，关键字大小写不敏感，习惯性大写
@@ -337,6 +286,8 @@ RETURN 节点或属性;
 - `n.property=value`：添加或修改属性
 - `a=b`：复制两个标签除 ID 外所有属性
 
+---
+
 > [!example] 为所有 age>=18 的 `Person` 节点添加 `Adult` 标签
 > ```cypher
 > match(n:Person)
@@ -358,6 +309,8 @@ RETURN 节点或属性;
 
 使用 `MATCH` 查询出节点后，可接多条 `DELETE` 删除节点、标签或属性
 
+---
+
 > [!example] 删除所有 `:Employee` 标签节点
 > ```cypher
 > match(e:Employee) delete e;
@@ -375,6 +328,8 @@ RETURN 节点或属性;
 很像 `getOrCreate` 的形式
 - 当模式存在时，匹配模式
 - 当模式不存在时，创建模式
+
+---
 
 > [!example] 匹配搜索模式：查找一个带有 `name="Michael Douglas"` 属性的 `:Person` 节点，若不存在时创建一个节点
 > ```cypher
@@ -398,6 +353,47 @@ RETURN 节点或属性;
 > - 第二次执行：
 > ![[../../../../_resources/images/Pasted image 20241022024358.png]]
 ## 关系操作
+### 创建关系
+
+```cypher
+create(起点) -[变量:标签{属性列表}]-> (终点) return 变量;
+create(终点) <-[变量:标签{属性列表}]- (起点) return 变量;
+create(端点1) -[变量:标签{属性列表}]- (端点2) return 变量;
+```
+
+> [!note] 节点不存在的情况下会自动创建节点
+
+---
+
+> [!example] 创建关系和两端节点
+> ```cypher
+> create(a:Book{name:"程序设计基础"})-[r:base]->(b:Book{name:"数据结构"});
+> ```
+
+> [!example] 查询两组节点，在他们之间一一创建关系
+> ```cypher
+> match(a:Person),(b:Movie)
+> where a.name='Robert Zemeckis' and b.title='Forrest Gump'
+> create (a)-[r:DIRECTED]->(b)
+> return r;
+> ```
+
+### 查询关系
+
+使用 `match` 匹配关系
+- 泛指一切关系：`()--()`
+- 泛指单项关系：`()-->()` / `()<--()`
+- 泛指可有约束的一切关系：`()-[]-()`
+- 泛指可有约束的一切单向关系：`()-[]->()` / `()<-[]-()`
+
+---
+
+> [!example] 查询所有关系，并返回关系及其类型
+> ```cypher
+> match()-[r]-() return r,type(r);
+> ```
+### 修改关系
+### 删除关系
 ## 排序与聚合
 ## 路径操作
 ## 索引操作

@@ -38,7 +38,7 @@ image: https://db-engines.com/pictures/db-engines_128x128.png
 
 # CAP 定理与 BASE 原则
 
-按  [[../../../课程/分布式系统#CAP 定理|CAP 原则]] 划分：
+按  [[../../../编程/分布式系统#CAP 定理|CAP 原则]] 划分：
 - 传统 SQL 数据库系统 RDBMS 满足 CA 原则
 - MongoDB，HBase，Redis 等满足 AP 原则，对一致性要求低一些
 - Cassandra，CouchDB，DynamoDB，Riak 等满足 AP 原则

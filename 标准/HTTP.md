@@ -133,7 +133,7 @@ HTTP 无状态性：客户端每次 HTTP 请求都是相对独立的，连续多
 
 又称身份认证或鉴权，通过一定手段，完成对用户身份确认
 - 服务端渲染模式推荐使用 Session 认证机制
-- 前后端分离模式且需要跨域访问时推荐使用 [[../语言/HTML/HTML API/HTML API#JWT|JWT]] 认证机制
+- 前后端分离模式且需要跨域访问时推荐使用 [[../编程/HTML/HTML API/HTML API#JWT|JWT]] 认证机制
 
 ## Session
 

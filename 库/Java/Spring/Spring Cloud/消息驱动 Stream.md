@@ -27,17 +27,7 @@ Spring Cloud Stream 使用订阅者模式
 
 ## Redis 缓存数据库
 
-Redis 是一个将数据缓存在内存中，再定期写入文件中的键值对数据库
-
-> [!warning] 官方版本 Windows 下需要 WSL 支持，也可以使用他人编译的[非官方版本](https://github.com/zkteco-home/redis-windows)
-
-```cardlink
-url: https://redis.io/docs/latest/get-started/
-title: "Community Edition"
-description: "Get started with Redis Community Edition"
-host: redis.io
-favicon: https://redis.io/docs/latest/images/favicons/favicon-196x196.png
-```
+> 安装详见 [[../../../../工具/数据库/Redis|Redis]]
 
 Spring 依赖：`org.springframework.boot:spring-boot-starter-data-redis`（在 NoSQL 分类中），内置驱动和 Lettuce 客户端，配置后可直接使用 `RedisTemplate` 读写数据库
 

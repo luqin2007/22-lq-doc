@@ -16,7 +16,7 @@
 > - `id(n)` 返回唯一整数 id，已弃用
 > - `elementId(n)` 返回唯一字符串 id
 
-使用 `-[]->`、`<-[]-` 表示有向关系（路径），`-[]-` 表示无向关系（路径）
+使用 `-[]->`、`<-[]-` 表示有向关系，`-[]-` 表示无向关系
 - 关系两端点是一个节点
 - `[]` 之间可以添加变量、属性、标签等，规则与[[#节点]]相同
 - 关系之间 `[]` 为空时可以省略
@@ -146,7 +146,7 @@ Neo4j 不支持 `datetime` 等表示时间日期的类型，可以通过系统�
 - `date()`：创建 `yyyy-MM-dd` 格式的时间字符串
 - `timestamp()`：获取当前时间的毫秒值（`System.currentTimeMillis()`）
 - `apoc.data.format()`：APOC 库提供的日期格式化工具
-## 元素操作
+## 节点与关系
 
 ### 创建
 
@@ -450,7 +450,40 @@ match(n:Student{classNo:7}) return count(n);
 > match (s:Supplier)-->(:Product)-->(c:Category)
 > return s.companyName as Company, collect(distinct c.categoryName) as Categories
 > ```
-## 路径操作
+## 路径
+
+一组联通的节点与关系的组合称为路径，如 `p=(a)-->(b)-->(c)`
+### 节点与关系
+
+使用 `nodes(path)` 获取路径上的所有节点，`relationships(path)` 获取路径上所有的关系
+
+>[!example] 获取路径上的节点和关系
+> ```cypher
+> match p=(a)-->(b)-->(c)
+> where a.name = '陈五' and c.name= '王子'
+> return nodes(p), relationships(p);
+> ```
+> 
+> `````col
+> ````col-md
+> flexGrow=1
+> ===
+> ![[../../../_resources/images/Pasted image 20241024002745.png]]
+> ````
+> ````col-md
+> flexGrow=3
+> ===
+> ![[../../../_resources/images/Pasted image 20241024002759.png]]
+> ````
+> `````
+### 限制路径长度
+
+使用 `*` 限制节点长度
+
+> [!example] 查找与王五的关系在 1-2 个节点以内的人
+>  
+### 最短路径
+### 路径上元素修改
 ## 索引操作
 ## 约束
 ## 存储过程

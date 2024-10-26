@@ -1,10 +1,7 @@
-# Module
-
-## Json
+# Json
 
 groovy.json 包中包含了对 Json 的序列化/反序列化类
-
-### JsonSupplier
+## JsonSupplier
 
 JsonSupplier 用于解析 Json 文本
 
@@ -51,7 +48,7 @@ new JsonSupplier(type: JsonParserType.INDEX_OVERLAY)
   JsonParserType#CHARACTER_SOURCE
 
   用于对 2MB 以上大文件的解析
-### JsonOutput
+## JsonOutput
 
 将 Groovy 对象转换为 Json 字符串，支持Map，List，POGO
 #### 格式化输出
@@ -61,13 +58,13 @@ new JsonSupplier(type: JsonParserType.INDEX_OVERLAY)
 
 使用 JsonBuilder 或 StreamingJsonBuilder 用过 DSL 自定义输出
 
-## 数据库
+# 数据库
 
 Groovy 提供 groovy.sql 模块，作为 Java JDBC 的抽象
 
 支持 HSQLDB，Oracle，SQL Server，MySQL 等
 
-### 连接
+## 连接
 
 连接需要 URL，用户名，密码，驱动名，使用 Sql.newInstance  工厂创建
 
@@ -95,7 +92,7 @@ Sql.withInstance(url, user, password, driver) { sql ->
 }
 ```
 
-#### 数据源
+### 数据源
 
 可使用 DataSource 或 Connection 对象创建 Sql，而不是 newInstance
 
@@ -112,7 +109,7 @@ def sql = new Sql(dataSource)
 
 
 
-#### @Grab
+### @Grab
 
 可使用 @Grab 注入数据库驱动
 
@@ -122,7 +119,7 @@ def sql = new Sql(dataSource)
 // create, use, and then close sql instance ...
 ```
 
-### 执行 SQL 语句
+## 执行 SQL 语句
 
 可使用 execute 执行 SQL 语句
 
@@ -138,7 +135,7 @@ sql.execute '''
 // close 'sql' instance ...
 ```
 
-#### 事务
+### 事务
 
 使用 withTransaction 执行事务
 
@@ -171,7 +168,7 @@ assert rowCountBefore == rowCountAfter
 
 
 
-#### 批量执行
+### 批量执行
 
 ```groovy
 sql.withBatch(3) { stmt ->
@@ -187,7 +184,7 @@ sql.withBatch(3) { stmt ->
 
 
 
-#### 分页
+### 分页
 
 ```groovy
 def qry = 'SELECT * FROM Author'
@@ -198,7 +195,7 @@ assert sql.rows(qry, 7, 3)*.firstname == ['Jon']
 
 
 
-#### 元数据
+### 元数据
 
 https://groovy-lang.org/databases.html#_fetching_metadata
 
@@ -221,7 +218,7 @@ def rs = md.getTables(null, null, 'AUTH%', null)
 assert rs.next()
 assert rs.getString('TABLE_NAME') == 'AUTHOR'
 ```
-#### 命名
+### 命名
 
 ```groovy
 sql.execute "INSERT INTO Author (firstname, lastname) VALUES (:first, :last)", first: 'Dierk', last: 'Koenig'
@@ -233,17 +230,17 @@ def map = [lion: 'King']
 sql.execute "INSERT INTO Author (firstname, lastname) VALUES (?1.first, ?2.lion)", pogo, map
 ```
 
-### CRUD 操作
+## CRUD 操作
 
 https://groovy-lang.org/databases.html#_basic_crud_operations
 
-## XML
+# XML
 
-### 解析
+## 解析
 
 基于 SAX 的解析
 
-#### XmlParser
+### XmlParser
 
 ```groovy
 def text = '''
@@ -263,7 +260,7 @@ assert list.technology.name.text() == 'Groovy'
 - 解析返回 Node 对象
 - 多用于同时读取和编辑
 
-#### XmlSlurper
+### XmlSlurper
 
 ```groovy
 def text = '''
@@ -284,7 +281,7 @@ assert list.technology.name == 'Groovy'
 - 解析返回 GPathResult 对象
 - 多用于只读，更新 xml 需要再次重建树，且不会在内存中创建完整树
 
-#### DOMC
+### DOMC
 
 可使用 groovy.xml.dom.DOMCategory 解析 XML，可获取整个文档 DOM
 
@@ -316,7 +313,7 @@ use(DOMCategory) {
 
 
 
-### GPath
+## GPath
 
 在 Groovy 中查询 XML 的常见方式，类似 XPath，主要用于处理嵌套 POJO 或 XML
 
@@ -328,7 +325,7 @@ use(DOMCategory) {
   - a.'@herf'
   - a.@herf
 
-#### 遍历树
+### 遍历树
 
 ```groovy
 static final String books = '''
@@ -367,7 +364,7 @@ assert response.value.books.book[0].@id ==  response.value.books.book[0]['@id']
 
 
 
-#### 灵活导航
+### 灵活导航
 
 - *：children
 
@@ -400,11 +397,11 @@ assert response.value.books.book[0].@id ==  response.value.books.book[0]['@id']
 
   
 
-### 创建
+## 创建
 
 https://groovy-lang.org/processing-xml.html
 
-#### MarkupBuilder
+### MarkupBuilder
 
 ```groovy
 def writer = new StringWriter()
@@ -462,7 +459,7 @@ assert movies.'x:movie'.last().text() == 'ronin'
 
 ...
 
-#### StreamingMarkupBuilder
+### StreamingMarkupBuilder
 
 ```groovy
 def xml = new StreamingMarkupBuilder().bind { 
@@ -485,14 +482,14 @@ def xml = new StreamingMarkupBuilder().bind {
 
 
 
-#### MarkupBuilderHelper
+### MarkupBuilderHelper
 
 - commit
 - 处理指令
 - XML 声明
 - 输出数据、转义 XML 实体
 
-#### DOMToGroovy
+### DOMToGroovy
 
 ```groovy
 def songs = """
@@ -529,7 +526,7 @@ assert new XmlSlurper().parseText(xmlRecovered).song.title.text() == 'Here I go'
 
 
 
-### 处理
+## 处理
 
 ```groovy
 def parser = new XmlParser()
@@ -559,7 +556,7 @@ response.numberOfResults.text() == "1"
 
 
 
-#### 添加/修改
+### 添加/修改
 
 ```groovy
 def response = new XmlParser().parseText(xml)
@@ -617,7 +614,7 @@ assert response.@numberOfResults == "2"
 
 
 
-#### 输出
+### 输出
 
 ```groovy
 def response = new XmlParser().parseText(xml)
@@ -627,16 +624,16 @@ def nodeAsText = XmlUtil.serialize(nodeToSerialize)
 assert nodeAsText ==
         XmlUtil.serialize('<?xml version="1.0" encoding="UTF-8"?><author id="1">Miguel de Cervantes</author>')
 ```
-## Ant Task
+# Ant Task
 
 https://groovy-lang.org/scripting-ant.html
-## 模板引擎
+# 模板引擎
 
 用于生成文本
-### 模板框架
+## 模板框架
 
 继承自 TemplateEngine
-### SimpleTemplateEngine
+## SimpleTemplateEngine
 
 允许使用类似 JSP Scriptlet，脚本和 EL 表达式生成文本
 
@@ -647,7 +644,7 @@ def template = new SimpleTemplateEngine().createTemplate(text).make(binding)
 def result = 'Dear "Sam Pullara",\nSo nice to meet you in San Francisco.\nSee you in December,\nGroovy-Dev'
 assert result == template.toString()
 ```
-### StreamingTemplateEngine
+## StreamingTemplateEngine
 
 类似 SimpleTemplateEngine，可写闭包，可处理大于 64K 的字符串
 
@@ -680,7 +677,7 @@ We are pleased to inform you that your paper entitled
 
 The conference committee.'''
 ```
-### GStringTemplateEngine
+## GStringTemplateEngine
 
 文件：test.template
 
@@ -707,7 +704,7 @@ So nice to meet you in "The Big Apple".
 See you in December,
 Groovy-Dev
 ```
-### XmlTemplateEngine
+## XmlTemplateEngine
 
 输出 XML，使用 gsp 代表代码
 
@@ -735,7 +732,7 @@ println template.toString()
   How are you today?
 </document>
 ```
-### MarkupTemplateEngine
+## MarkupTemplateEngine
 
 依赖于 DSL 生成类 XML 格式
 

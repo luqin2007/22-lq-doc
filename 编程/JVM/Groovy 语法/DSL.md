@@ -1,4 +1,6 @@
-DSL：领域特定语言 Domain-Specific Languages。Groovy 可以快速方便的创建 DSL
+>[!note] DSL：领域特定语言 Domain-Specific Languages
+
+Groovy 可以快速方便的创建 DSL
 # 链式调用
 
 - 允许省略顶级调用的括号

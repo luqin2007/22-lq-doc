@@ -1,7 +1,18 @@
-https://groovy-lang.org/documentation.html
-https://groovy-lang.org/groovy-dev-kit.html
+```cardlink
+url: https://groovy-lang.org/documentation.html
+title: "The Apache Groovy programming language - Documentation"
+host: groovy-lang.org
+favicon: img/xfavicon.ico.pagespeed.ic.5MuYua7ZOt.png
+```
 
-- 使用 with 和 tap 方法暂时替换 this
+```cardlink
+url: https://groovy-lang.org/groovy-dev-kit.html
+title: "The Apache Groovy programming language - The Groovy Development Kit"
+host: groovy-lang.org
+favicon: img/xfavicon.ico.pagespeed.ic.5MuYua7ZOt.png
+```
+
+使用 `with` 和 `tap` 方法暂时替换 `this`
 ## IO
 ### 读
 - eachXxx 方法，如 `eachLine`

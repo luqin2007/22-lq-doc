@@ -3,7 +3,7 @@
 
 `apoc.node.labels` 等指令需要配置安全配置，`neo4j restart` 重启数据库
 
-```properties title:/conf/neo4j.conf
+```properties title:$NEO4J_HOME/conf/neo4j.conf
 dbms.security.procedures.unrestricted=apoc.*
 dbms.security.procedures.whitelist=apoc.*
 ```

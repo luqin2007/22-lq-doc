@@ -457,7 +457,7 @@ match(n:Student{classNo:7}) return count(n);
 
 使用 `nodes(path)` 获取路径上的所有节点，`relationships(path)` 获取路径上所有的关系
 
->[!example] 获取路径上的节点和关系
+>[!example] 获取从陈五到王子的所有关系
 > ```cypher
 > match p=(a)-->(b)-->(c)
 > where a.name = '陈五' and c.name= '王子'
@@ -478,14 +478,127 @@ match(n:Student{classNo:7}) return count(n);
 > `````
 ### 限制路径长度
 
-使用 `*` 限制节点长度
+使用 `*` 限制节点长度，单独一个 `[*]` 表示任意长度
 
 > [!example] 查找与王五的关系在 1-2 个节点以内的人
->  
+> ```cypher
+> match(a:Person{name:'陈五'})-[*1..2]-(b) return a, b
+> ```
+> 
+> `````col
+> ````col-md
+> flexGrow=2
+> ===
+> ![[../../../_resources/images/Pasted image 20241028013852.png]]
+> ````
+> ````col-md
+> flexGrow=1
+> ===
+> ![[../../../_resources/images/Pasted image 20241028013913.png]]
+> ````
+> `````
+
 ### 最短路径
-### 路径上元素修改
+
+使用 `shortestPath([path])` 查找最短路径，`[path]` 代表一条路径描述，支持方向和长度限制
+
+> [!example] 查找陈五到熊宝之间不超过 15 的最短路径
+> ```cypher
+> match (d:Person{name:'陈五'})
+> match (e:Person{name:'熊宝'})
+> match p = shortestPath((d)-[*..15]->(e))
+> return p
+> ```
+> ![[../../../_resources/images/Pasted image 20241028020245.png]]
+
+使用 `allshortestpaths([path])` 可以查询所有最短路径
+
+> [!example] 查找陈五到熊宝之间所有最短路径
+> ```cypher
+> match (d:Person{name:'陈五'})
+> match (e:Person{name:'熊宝'})
+> match p = allshortestpaths((d)-[*]->(e))
+> return p
+> ```
+> ![[../../../_resources/images/Pasted image 20241028020712.png]]
+### 遍历路径
+
+使用 `foreach(v in list|ops)` 遍历元素
+
+> [!example] 标记陈五到王子之间的所有节点
+> ```cypher
+> match p = allshortestpaths((start)-[*]->(end))
+> where start.name='陈五' and end.name='王子'
+> foreach(n in nodes(p) | set n.mark = true)
+> ```
+> 使用 `match(p{mark:true}) return p` 可以查看结果
+> 
+> ![[../../../_resources/images/Pasted image 20241028023900.png]]
+
 ## 索引操作
+
+- 支持节点、关系的单一索引、联合索引，索引自动更新
+- 提高 `match`，`where`，`in` 等操作和运算的效率
+### 创建索引
+
+```cypher
+CREATE INDEX ON :标签名(属性列表)
+```
+
+> [!example] 为 `:Person` 节点按 `name` 属性创建索引
+> ```cypher
+> create index on :Person(name)
+> ```
+
+> [!example] 为 `:Person` 节点按 `name`、`born` 属性创建联合索引
+> ```cypher
+> create index on :Person(name, born)
+> ```
+
+> [!example] 为 `:ACTED_IN` 关系按 `roles` 属性创建索引
+> ```cypher
+> create index on :ACTED_IN(roles)
+> ```
+### 删除索引
+
+使用方法与[[#创建索引|创建]]相同，只是使用 `drop` 替代 `create`
+
+```cypher
+DROP INDEX ON : 标签(属性列表)
+```
+### 查询索引
+
+> [!example] 查询当前库中所有索引
+> ```cypher
+> :schema
+> ```
+> ![[../../../_resources/images/Pasted image 20241028024857.png]]
+### 使用索引
+
+`````col
+````col-md
+flexGrow=1
+===
+> [!note] 执行计划：Execution Plan，Neo4j 执行命令时将命令划分为多个子任务，子任务按顺序组合起来称为执行计划
+
+使用 `EXPLAN` 查看执行计划但不执行，使用 `PROFILE` 查看执行计划并执行
+
+```cypher
+explain match(n:Person)
+where n.name='张三'
+return n
+```
+````
+````col-md
+flexGrow=1
+===
+![[../../../_resources/images/Pasted image 20241028025322.png]]
+````
+`````
+使用 `USING INDEX 变量:标签(属性列表)` 可以显示指定使用索引，`变量` 与 `match` 中的变量相同即可 
 ## 约束
+
+- [ ] P70
 ## 存储过程
 # Neo4j 集群
 # 管理与监控

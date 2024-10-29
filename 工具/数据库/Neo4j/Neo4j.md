@@ -598,7 +598,67 @@ flexGrow=1
 使用 `USING INDEX 变量:标签(属性列表)` 可以显示指定使用索引，`变量` 与 `match` 中的变量相同即可 
 ## 约束
 
-- [ ] P70
+支持节点或关系的约束
+### 创建约束
+
+> [!attention] 创建约束时，若存在不满足约束的节点，约束创建失败
+
+```cypher
+CREATE CONSTRAINT ON 节点或关系模式 ASSERT 约束
+```
+
+Neo4j 支持唯一性约束，企业版还支持键约束和存在性约束
+- 唯一性约束：`ASSERT 属性 IS UNIQUE`，属性值可以不存在，但存在则必须唯一
+- 键约束：`ASSERT 属性 IS NODE KEY`，属性值必须存在且唯一
+- 存在性约束：`ASSERT exists(属性)`，属性必须存在
+
+> [!example] 为图书 `:Book` 节点的 ISBN 创建唯一性约束
+> ```cypher
+> create constraint on (book:Book)
+> assert book.ISBN is unique
+> ```
+### 删除约束
+
+用法同[[#创建约束]]，使用 `DROP` 命令
+
+```cypher
+DROP CONSTRAINT ON 节点或关系模式 ASSERT 约束
+```
+### 查看约束
+
+查看约束同样使用 `:schema` 命令
 ## 存储过程
-# Neo4j 集群
+
+使用 `CALL 存储过程()` 调用存储过程，常用过程有：
+
+| 存储过程名称                          | 功能说明          |
+| ------------------------------- | ------------- |
+| db. labels                      | 返回数据库中的所有标签   |
+| db. indexes                     | 返回数据库中的索引     |
+| db. propertyKeys                | 返回数据库中的属性键列表  |
+| db. relationshipTypes           | 返回数据库中的所有关系类型 |
+| db.constraints                  | 返回数据库中的所有约束   |
+| db.schema                       | 返回数据库模式       |
+| db. schema.nodeTypeProperties   | 返回模式中的节点类型属性  |
+| db. schema. relTypeProperties   | 返回模式中的关系类型属性  |
+| db. schema. visualization       | 可视化的方式显示数据库模式 |
+| dbms. changePassword            | 修改数据库密码       |
+| dbms. functions                 | 返回数据库函数列表     |
+| dbms. listConfig                | 返回数据库配置项      |
+| dbms. security. createUser      | 创建用户          |
+| dbms. security. deleteUser      | 删除用户          |
+| dbms. security. listUsers       | 列出所有用户        |
+| dbms. security. showCurrentUser | 显示当前用户        |
+| dbms.showCurrentUser            | 显示当前登录用户      |
+# 集群
+
+企业版 Neo4j 支持因果集群和高可用性集群，只需要修改 Neo4j 配置文件即可
 # 管理与监控
+## 数据导入
+
+Neo4j 支持导入 CSV 格式数据
+
+- [ ] P78
+## 备份与恢复
+## 事务管理
+## 监控

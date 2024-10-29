@@ -657,8 +657,86 @@ DROP CONSTRAINT ON 节点或关系模式 ASSERT 约束
 ## 数据导入
 
 Neo4j 支持导入 CSV 格式数据
+### LOAD
 
-- [ ] P78
+使用 CSV 文件的 URL 链接导入，导入本地文件可使用 `file:///` 协议
+
+```cypher
+LOAD CSV WITH HEADERS FROM "CSV 文件 URL 链接" AS 行变量
+// do something
+```
+
+>[!tip] 当导入的数据量很大，可以在前面添加 `USING PERIODIC COMMIT 行数` 表示每多少条提交一次事务以提高性能，行数默认 1000
+
+> [!example] 导入 `product.csv` 文件并创建 `:Product` 节点，将其中必要的列转换为数字和布尔值
+> 文件地址：`http://data.neo4j.com/northwind/products.csv`
+> 列标题：
+> ![[../../../_resources/images/Pasted image 20241029221205.png]]
+> ```cypher
+> load csv with headers from 'https://data.neo4j.com/northwind/products.csv' as row
+> create(n:Product)
+> set n = row, 
+>     n.unitPrice = toFloat(row.unitPrice),
+>     n.unitsInStock = toInteger(row.unitsInStock),
+>     n.unitsOnOrder = toInteger(row.unitsOnOrder),
+>     n.reorderLevel = toInteger(row.reorderLevel),
+>     n.discontinued = (row.discontinued <> "0");
+> ```
+> ![[../../../_resources/images/Pasted image 20241029221954.png]]
+
+> [!example] 导入 `order-details.csv`，在对应 `:Product` 节点与 `:Order` 节点间建立 `:ORDERS` 关系
+> 文件地址：`https://data.neo4j.com/northwind/order-details.csv`
+> 列标题：（`:Order` 节点通过 `https://data.neo4j.com/northwind/orders.csv` 导入）
+> ![[../../../_resources/images/Pasted image 20241029222650.png]]
+> ```cypher
+> load csv with headers from 'https://data.neo4j.com/northwind/order-details.csv' as line
+> match (p:Product), (o:Order)
+> where p.productID = line.productID and o.orderID = line.orderID
+> create (o) -[detail:ORDERS]-> (p)
+> set detail = line, 
+>     detail.unitPrice = toFloat(line.unitPrice),
+>     detail.quantity = toInteger(line.quantity),
+>     detail.discount = toFloat(line.discount);
+> ```
+> ![[../../../_resources/images/Pasted image 20241029225327.png]]
+### neo4j-import
+
+使用 `neo4j-import` 或 `neo4j-admin import` 命令导入，常用于首次批量导入数据
+- 优点：可并行导入，支持上亿规模的数据导入
+- 缺点：需要停止数据库运行
 ## 备份与恢复
+
+Neo4j 的 `neo4j-admin` 支持完全备份和增量备份。
+
+1. 停止 Neo4j 服务 `neo4j stop`
+2. 备份或恢复：`neo4j-admin database dump/load 数据库名 --to-path=备份目录
 ## 事务管理
+
+Neo4j 支持事务，锁可以加在节点或关系上
 ## 监控
+
+社区版仅提供基本容量大小、已分配 ID 数、页面缓存、事务等监控指标
+
+```cypher
+:sysinfo
+```
+
+企业版提供日志功能，位于 `logs` 目录下
+
+- neo4j.log：基础日志，其中写有关于 Neo4j 的一般信息。
+- debug.log：在调试 debug 的问题时有记录的日志信息。
+- query.log：记录超过设定查询时间阈值的查询日志，仅限企业版提供。
+- security.log：记录数据库安全事件日志，仅限企业版提供。
+- service-error. log：安装或运行 Windows 服务时遇到的错误日志，仅限 Windows 版本提供。
+- http.log：HTTPAPI 的请求日志。
+- gc.log：JVM 提供的垃圾收集日志记录。
+
+相关配置：
+
+| 参数名称                                     | 默认值   | 描述                                |
+| ---------------------------------------- | ----- | --------------------------------- |
+| dbms.log.query.enabled                   | false | 是否记录查询日志                          |
+| dbms.log.query.parameter_logging_enabled | true  | 是否设定查询耗时超过配置阈值                    |
+| dbms.log.query.rotation.keep_number      | 7     | 设置保存历史查询日志文件的数量                   |
+| dbms.log.query.rotation.size             | 20 MB | 设置查询日志自动轮换的文件大小                   |
+| dbms.log.query.threshold                 | 0     | 如果查询执行所用时间超出该阈值，则记录该查询。 0表示记录所有查询 |

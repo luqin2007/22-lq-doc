@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "SiNeo4j",
-      "SiRich",
-      "SiTqdm",
-      "RiProgress3Line",
-      "LiCodeXml"
+      "SiMongodb",
+      "LiGamepad",
+      "LiSchool",
+      "RiToolsFill",
+      "RiUserFollowFill"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -150,5 +150,11 @@
   "编程/Python/控制台进度条": "RiProgress3Line",
   "编程/Python/控制台进度条/tqdm.md": "SiTqdm",
   "编程/Python/控制台进度条/rich.md": "SiRich",
-  "工具/数据库/Neo4j": "SiNeo4j"
+  "工具/数据库/Neo4j": "SiNeo4j",
+  "标准": "RiFilePaperLine",
+  "个人笔记": "RiUserFollowFill",
+  "工具": "RiToolsFill",
+  "课程": "LiSchool",
+  "游戏": "LiGamepad",
+  "工具/数据库/MongoDB.md": "SiMongodb"
 }

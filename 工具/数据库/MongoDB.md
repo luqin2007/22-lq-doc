@@ -169,8 +169,8 @@ host: mongodb.net.cn
 flexGrow=1
 ===
 ```json
-db.<Collection 名>.insertOne("Json 数据对象")
-db.<Collection 名>.insertMany(["Json 数据对象"])
+db.<Collection 名>.insertOne(<Json 数据对象>)
+db.<Collection 名>.insertMany([<Json 数据对象>...])
 ```
 ````
 ````col-md
@@ -249,6 +249,7 @@ flexGrow=1
 `````
 ## 修改
 
+使用 `updateOne` 和 `updateMany` 更新数据，也可以使用 `replace(<query>, <doc>)` 系列函数替换文档
 `````col
 ````col-md
 flexGrow=1
@@ -277,12 +278,84 @@ db.<collection-name>.updateMany(<query>, <update>, {
 ```
 ````
 `````
-- `<query>`：查询条件，一个对象，同 `find`
-- [ ] 111
+- `<query>`：查询条件，一个对象，同 `find` 的格式
+- `<update>`：更新操作对象：`{ <op>: {k: v, ...}, ... }`
+	- `$set{k,v}`：设置文档某些键的值，不存在则新建
+	- `$currentDate{k, true}`：将当前时间设置为某些键的值
+	- `$inc`：值+1
+	- `$unset`：删除某键
+- `upsert`：是否自动创建
+- `writeConcern`：日志与操作超时设置，`{w: bool, j: bool, wtimeout: num}`
+- `collection`：自定义查询时的语言规范、字符串比较是否区分大小写等
+- `arrayFilters`：针对数组的更精细化的过滤器
+
+> [!example] 精准查找 id 为 `67246d39eaab76f58375e695` 的文档，修改 `Name="Yan", age=38`
+> ```js
+> db.ct.updateOne(
+>   { _id: ObjectId('67246d39eaab76f58375e695') }, 
+>   { $set: { Name: "Yan", age: 38 } })
+> ```
+
+> [!example] 更新 `Name` 为 `Chen` 的第一个文档，修改 `Name="Chen Gang, age=32"`
+> ```js
+> db.ct.updateOne(
+>   { Name: "Chen" },
+>   { $set: { Name: "Chen Gang", age: 32 } })
+> ```
+
+> [!example] 替换 `Name` 为 `"Li"` 的对象为 `{ Name: "Li Li", age: 23 }`
+> ```js
+> db.ct.replaceOne(
+>   { Name: "Li" },
+>   { Name: "Li Li", age: 23 })
+> ```
 ## 游标
-## 语句块
+
+`findMany` 返回一个游标实例，可通过循环迭代操作文档
+
+```js
+let cursor = db.<collection-name>.find(...)
+while (cursor.hasNext()) {
+    let obj = cursor.next()
+    // do something
+}
+```
+
+> [!note] Json 相关函数：`tojson`，`printjson` 等
 ## 链接引用
+
+DBRef 对象形式为 `{ $ref: <集合名>, $id: <文档 _id>, $db: <可选，数据库> }`
+
+```js
+let ref = DBRef("<collection-name>", ObjectId(...)[, "<db-name>"])
+```
+
+> [!attention] 仅在必要时使用 DBRef，正常情况下可以直接使用 `ObjectId` 作为引用
+`````col
+````col-md
+flexGrow=1
+===
+```js
+db.dep.insertOne({
+  name: "CS",
+  num: 15,
+  people: [
+    DBRef('people', ObjectId('6724747deaab76f58375e69c'), 'db'),
+    DBRef('people', ObjectId('6724747deaab76f58375e69d'), 'db'),
+    DBRef('people', ObjectId('6724747deaab76f58375e69e'), 'db'),
+  ]
+})
+```
+````
+````col-md
+flexGrow=1
+===
+![[../../_resources/images/Pasted image 20241101143012.png]]
+````
+`````
 ## 管道聚合
+
+
 # 索引
 # 数据库架构
 # 管理与监控

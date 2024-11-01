@@ -355,7 +355,202 @@ flexGrow=1
 `````
 ## 管道聚合
 
+对数据汇总统计
 
+```js
+db.<collection-name>.agredate(operation)
+```
+
+| 聚合操作     | 功能说明                                                                            |
+| -------- | ------------------------------------------------------------------------------- |
+| $match   | 过滤数据                                                                            |
+| $group   | 文档分组，用于统计结果，一般需要指定分组依据的字段和聚合运算，如 `$sum`、`$avg`、`$min`、`$max`、`$first`、`$last` 等 |
+| $project | 修改文档结构，可用来重命名、增加或删除输入字段                                                         |
+| $limit   | 限制返回的文档数                                                                        |
+| $skip    | 跳过指定数量的文档                                                                       |
+| $unwind  | 将文档某一数组类型字段拆分成多条，每条包含数组中的一个值                                                    |
+| $sort    | 排序                                                                              |
+| $geoNear | 按与某地理位置的距离排序                                                                    |
+### 聚合管道
+
+Aggregation Pipeline，通过一个序列分阶段、分步骤的将一系列文档处理成所需结果
+
+```js
+db.<collection-name>.agredate([operations...])
+```
+
+> [!example] 根据 `status='A'` 筛选数据，根据 `cust_id` 分组，统计每组文档的 `amount` 属性和
+> ```js
+> db.orders.aggregate([
+>   { $match: { status: "A" } },
+>   { $group: { _id: "$ cust_id", total: { $sum: "$ amount" } } }
+> ])
+> ```
+> ![[../../_resources/images/Pasted image 20241101151737.png]]
+### 单一目的聚合方法
+
+对于简单的聚合统计方法，MongoDB 提供单独的操作函数，包括 `sort`，`count`，`distinct` 等
+
+```js
+db.inventory.distinct("item")
+db.inventory.find({ status: 'A' }).count()
+```
+### MR 函数
+
+类似 Hadoop 的 `Map` 和 `Reduct` 操作
+
+> [!example] 根据 `status='A'` 筛选数据，根据 `cust_id` 分组，统计每组文档的 `amount` 属性和，将结果输出到 `order_totals` Collection 中
+> ```js
+> db.orders.mapReduce(
+>   function() { emit(this.cust_id, this.amount) },        // map
+>   function(key, values) { return Array.sum(values) },    // reduce
+>   {
+>     query: { status: 'A' },                              // query
+>     out: "order_totals"                                  // output
+>   })
+> ```
+> ![[../../_resources/images/Pasted image 20241101152921.png]]
 # 索引
+
+## 基本索引
+
+利用 B-Tree 结构创建索引，提高查询速度，但会略微降低写入速度用于更新索引
+### 创建索引
+
+```js
+db.<collection-name>.createIndex(<keys>, <options>)
+```
+
+- `<keys>`：`{ "键名": 1/-1 }` 对象，1 为升序创建索引，-1 为降序，支持多个键创建复合索引
+- `<options>`：参数
+	- `background: true`：后台创建，不会阻塞其他数据库操作
+### 查询索引信息
+
+- `db.<collection-name>.getIndexes()`：查看所有创建的索引
+
+![[../../_resources/images/Pasted image 20241101153811.png]]
+
+- `db.<collection-name>.totalIndexSize()`：获取索引表总大小
+
+![[../../_resources/images/Pasted image 20241101153832.png]]
+
+- `db.<collection-name>.reIndex()`：查看集合索引信息
+
+![[../../_resources/images/Pasted image 20241101153956.png]]
+
+- `<expression>.explain()` 可查看任意操作使用的索引
+### 删除索引
+
+- `db.<collection-name>.dropIndex("<index-name>")`：删除索引
+	- `<index-name>`：`getIndexes()` 中的 `name` 字段
+- `db.<collection-name>.dropIndexes()`：删除除 `_id` 外的所有索引
+## 全文索引
+
+针对文本类字段创建 `text` 类型全文索引，一个集合只能创建一个
+
+```js
+db.<collection-name>.createIndex( { <field-name>: "text" } )
+```
+
+全文索引也支持多个字段创建复合索引
+
+```js
+db.<collection-name>.createIndex( { <field-name1>: "text", <field-name2>: "text" } )
+```
+
+不确定哪些字段是文本类型时，支持使用 `$**` 通配符为文档所有字符类字段创建索引
+
+```js
+db.<collection-name>.createIndex( { “$**”: "text" } )
+```
+### 文本查询
+
+在 `find` 方法中使用 `$text` 利用全文索引查询符合条件的文档数据
+
+> [!example] 查询所有包含 `bad` 的文档
+> ```js
+> db.ct.find({ $text: { $search: "bad" } })
+> ```
+
+使用 ` ` 表示或条件
+
+> [!example] 查询所有包含 `bad` 或 `spoiled` 的文档
+> ```js
+> db.ct.find({ $text: { $search: "bad spoiled" } })
+> ```
+
+使用 `-` 表示排除
+
+> [!example] 查询所有包含 `bad` 但不包含 `ok` 的文档
+> ```js
+> db.ct.find({ $text: { $search: "bad -ok" } })
+> ```
+
+使用 `""` 引用带有空格的字符串，注意转义
+
+> [!example] 查询所有包含 `not ok` 的文档
+> ```js
+> db.ct.find({ $text: { $search: "\"not ok\"" } })
+> ```
+## 地理位置索引
+
+在包含地理空间形状和点集的集合上执行空间查询
+- 2d 索引：平面地理位置索引，创建和查找平面上的点
+- 2dsphere 索引：球面地理位置索引，存储和查找球面上的点
+
+```js
+db.<collection-name>.createIndex({ <field-name>: “2d” })
+```
+
+地理位置查询相关操作符包括
+
+| 查询类型                             | 几何类型 | 备注              |
+| -------------------------------- | ---- | --------------- |
+| $near: { GeoJSON点: ... }         | 球面   | 某邻域范围内文档        |
+| $near: { 传统坐标: … }               | 平面   | 某邻域范围内文档        |
+| $nearSphere: { GeoJSON 点: ... }  | 球面   | 某邻域范围内文档        |
+| $nearSphere: { 传统坐标: … }         | 球面   | 可使用 GeoJSON 点替换 |
+| $geoWithin: { $geometry: … }     | 球面   | 某区域范围内文档        |
+| $geoWithin: { $box: … }          | 平面   | 矩形区域内文档         |
+| $geoWithin: { $polygon: … }      | 平面   | 多边形区域内文档        |
+| $geoWithin: { $center: … }       | 平面   | 某圆形区域内文档        |
+| $geoWithin: { $centerSphere: … } | 球面   | 某点球面距离区域内文档     |
+| $geolntersects: { $geometry: … } | 球面   | 邻近相交区域范围内文档     |
+
+> [!note] GeoJSON：一种 Json 的描述图形的方法
+> 格式为 `{ type: <图形类型>, coordinates: <点或点集合> }`，图形可以是单个图形或多个图形
+> - 单个图形：包括点、线、多边形
+> - 多个图形：`type` 为对应图形前加 `Multi` 前缀，`coordinates` 为每个子图形的 `coordinates` 组成的数组
+> - 几何集合：`{ type: "GeometryCollection", coordinates: [<GeoJSON 对象>...] }`
+> ````tabs
+> tab: 点
+> ```js
+> { type: "Point", coordinates: [x: number, y: number] }
+> ```
+> tab: 线
+> ```js
+> { type: "Line", coordinates: [[x0, y0], [x1, y1]] }
+> ```
+> tab: 单环多边形
+> 存在至少 4 个点，最后一个点与第一个点相同以形成闭环
+> 
+> ```js
+> { type: "Polygon", coordinates: [[ [x0, y0], [x1, y1], ..., [x0, y0] ]] }
+> ```
+> tab: 多环多边形
+> - 第一个环必须是外环，外环不能自交叉
+> - 剩下的环必须在包含在外环内，内环之间不能交叉或覆盖
+> - 内环不能共变
+> 
+> ```js
+> { type: "Polygon", coordinates: [
+>   [ [x00, y00], [x01, y01], ..., [x00, y00] ],
+>   [ [x10, y10], [x11, y11], ..., [x10, y10] ],
+>   ...
+> ] }
+> ```
+> ````
+
+
 # 数据库架构
 # 管理与监控

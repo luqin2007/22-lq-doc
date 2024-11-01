@@ -301,14 +301,14 @@ db.<collection-name>.updateMany(<query>, <update>, {
 > db.ct.updateOne(
 >   { Name: "Chen" },
 >   { $set: { Name: "Chen Gang", age: 32 } })
-> ```
+> ``` 
 
-> [!example] 替换 `Name` 为 `"Li"` 的对象为 `{ Name: "Li Li", age: 23 }`
-> ```js
-> db.ct.replaceOne(
->   { Name: "Li" },
->   { Name: "Li Li", age: 23 })
-> ```
+> [!example] 替换 `Name` 为 `"Li"` 的对象为 `{json}{ Name: "Li Li", age: 23 }`
+```js
+db.ct.replaceOne(
+  { Name: "Li" },
+  { Name: "Li Li", age: 23 })
+```
 ## 游标
 
 `findMany` 返回一个游标实例，可通过循环迭代操作文档
@@ -498,25 +498,6 @@ db.<collection-name>.createIndex( { “$**”: "text" } )
 - 2d 索引：平面地理位置索引，创建和查找平面上的点
 - 2dsphere 索引：球面地理位置索引，存储和查找球面上的点
 
-```js
-db.<collection-name>.createIndex({ <field-name>: “2d” })
-```
-
-地理位置查询相关操作符包括
-
-| 查询类型                             | 几何类型 | 备注              |
-| -------------------------------- | ---- | --------------- |
-| $near: { GeoJSON点: ... }         | 球面   | 某邻域范围内文档        |
-| $near: { 传统坐标: … }               | 平面   | 某邻域范围内文档        |
-| $nearSphere: { GeoJSON 点: ... }  | 球面   | 某邻域范围内文档        |
-| $nearSphere: { 传统坐标: … }         | 球面   | 可使用 GeoJSON 点替换 |
-| $geoWithin: { $geometry: … }     | 球面   | 某区域范围内文档        |
-| $geoWithin: { $box: … }          | 平面   | 矩形区域内文档         |
-| $geoWithin: { $polygon: … }      | 平面   | 多边形区域内文档        |
-| $geoWithin: { $center: … }       | 平面   | 某圆形区域内文档        |
-| $geoWithin: { $centerSphere: … } | 球面   | 某点球面距离区域内文档     |
-| $geolntersects: { $geometry: … } | 球面   | 邻近相交区域范围内文档     |
-
 > [!note] GeoJSON：一种 Json 的描述图形的方法
 > 格式为 `{ type: <图形类型>, coordinates: <点或点集合> }`，图形可以是单个图形或多个图形
 > - 单个图形：包括点、线、多边形
@@ -551,6 +532,95 @@ db.<collection-name>.createIndex({ <field-name>: “2d” })
 > ```
 > ````
 
+```js
+db.<collection-name>.createIndex({ <field-name>: “2d” })
+// <field-name> 对应对象必须符合 GeoJSON 格式
+db.<collection-name>.createIndex({ <field-name>: “2dsphere” })
+```
 
+相关操作符如下，若要求为 `GeoJSON` 类型，属性对应对象必须符合 `GeoJSON` 格式
+
+| 查询类型                             | 几何类型 | 备注              |
+| -------------------------------- | ---- | --------------- |
+| $near: { GeoJSON点: ... }         | 球面   | 某邻域范围内文档        |
+| $near: { 传统坐标: … }               | 平面   | 某邻域范围内文档        |
+| $nearSphere: { GeoJSON 点: ... }  | 球面   | 某邻域范围内文档        |
+| $nearSphere: { 传统坐标: … }         | 球面   | 可使用 GeoJSON 点替换 |
+| $geoWithin: { $geometry: … }     | 球面   | 某区域范围内文档        |
+| $geoWithin: { $box: … }          | 平面   | 矩形区域内文档         |
+| $geoWithin: { $polygon: … }      | 平面   | 多边形区域内文档        |
+| $geoWithin: { $center: … }       | 平面   | 某圆形区域内文档        |
+| $geoWithin: { $centerSphere: … } | 球面   | 某点球面距离区域内文档     |
+| $geolntersects: { $geometry: … } | 球面   | 邻近相交区域范围内文档     |
+>[!example] 查询经纬度为 `-73.93414657, 40.82302903` 附近最近的居民
+> ```js
+> db.neighboorhoods.findOne({
+>     geometry: {
+>         $geoIntersects: {
+>             $geometry: {
+>                 type: "Point",
+>                 coordinates: [ -73.93414657, 40.82302903 ]
+>             }
+>         }
+>     }
+> })
+> ```
+
+> [!example] 已知节点 person 的位置为 `person.geometry`，查找该节点 5 英里内的饭店，按由近到远排序
+> ```js
+> db.restaurants.findMany({
+>     location: {
+>         $nearSphere: {
+>             $geometry: person.geometry
+>         },
+>         $maxDistance: 5 * METERS_PER_MILE
+> })
+> ```
 # 数据库架构
+## 分片与集群架构
+
+>[!note] 分片：在多台机器上分割数据，使数据库系统能存储和处理更多数据
+
+> [!note] 片键：Shared Key，文档中的一个键
+
+MongoDB 分片以集合为单位，在片键处拆分数据，形成多个数据块，数据块均衡分布到所有分片中
+- 每个文档必须包含片键
+- 每个文档必须包含片键的索引或复合索引
+
+横向扩展时，数据被分为多个 chunk。有关 chunk 的操作包括：
+- Splitting：当某个 chunk 超过配置的大小时，MongoDB 后台将该 chunk 切分为更小的 chunk
+- Balancing：指 chunk 的迁徙，保证每个 Shared Server 的均衡，由后台进程 balancer 完成
+
+MongoDB 分片机制包含 Shared，Config Server 和 Router 三个组件：
+- Shared：存储实际的数据块，实际中多由多台机器组成 replica set
+- Config Server：配置服务器，存储 Cluster 元数据，包括 Chunk 分块信息等
+- Router：Mongos，前端路由，负责客户端接入
+## 数据冗余复制集
+
+MongoDB 支持主从式分布部署，Primary 宕机后 Secondary 可以自动切换为 Primary。
+
+MongoDB 复制集群至少有两个节点，各个节点角色有：
+- 1 主节点 Primary，负责处理客户端请求，并将所有操作记录为 `oplog` 文件
+- 多个从节点 Secondary，定期轮询主节点，同步数据
+- 0 或 1 个仲裁者 Arbiter，发送心跳包确认集群中集合数量，在主节点故障时作为仲裁者决定从节点转为主节点
+	- 只读，只负责选举
+### 主节点
+
+```bash
+mongod --port <端口> --dbpath "<数据库存储位置>" --replSet 集群名
+```
+
+启动主节点后，通过 `rs` 管理复制集群
+- `rs.initiate()`：启动新副本集
+- `rs.conf()`：查看副本集配置
+- `rs.status()`：查看副本集状态
+- `rs.add("<host>:<port>")`：添加副本集成员
+- `db.isMaster()`：查看当前节点是否为主节点
+### 从节点选举
+
+`rs.initiate()` 进行初始化后发起 Primary 选举操作，获得大多数节点通过后可成为主节点。
+
+当不存在仲裁节点 Arbiter 节点时，当集群节点数量不足一半节点以上时，主节点宕机后无法从从节点中选举出新主节点（票数不足）
+## 分布式文件存储
+## Journaling 日志
 # 管理与监控

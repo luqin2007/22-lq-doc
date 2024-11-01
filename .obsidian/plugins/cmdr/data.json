@@ -44,6 +44,12 @@
       "icon": "lucide-file-plus",
       "name": "新建笔记",
       "mode": "any"
+    },
+    {
+      "id": "app:open-settings",
+      "icon": "lucide-settings",
+      "name": "打开设置",
+      "mode": "any"
     }
   ],
   "pageHeader": [

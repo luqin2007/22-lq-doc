@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "SiMongodb",
-      "LiGamepad",
-      "LiSchool",
-      "RiToolsFill",
-      "RiUserFollowFill"
+      "SiGithub",
+      "LiGithub",
+      "SiOpenwrt",
+      "SiKde",
+      "SiDebian"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -156,5 +156,10 @@
   "工具": "RiToolsFill",
   "课程": "LiSchool",
   "游戏": "LiGamepad",
-  "工具/数据库/MongoDB.md": "SiMongodb"
+  "工具/数据库/MongoDB.md": "SiMongodb",
+  "工具/Linux/Arch": "SiArchlinux",
+  "工具/Linux/Debian 系": "SiDebian",
+  "工具/Linux/KDE": "SiKde",
+  "工具/Linux/OpenWrt": "SiOpenwrt",
+  "工具/git/Github": "SiGithub"
 }

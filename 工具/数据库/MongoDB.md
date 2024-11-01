@@ -108,6 +108,14 @@ db.createCollection("集合名", { capped: true, size: 6142800, max: 10000 })
 - `size`：单个文档占用的字节数
 - `max`：包含文档的最大数量
 # 文档操作
+## 文档参考
+
+```cardlink
+url: https://mongodb.net.cn/manual/
+title: "参考_MonogDB 中文网"
+host: mongodb.net.cn
+```
+
 ## 数据类型
 
 除 JSON 的基本数据类型外，MongoDB 还额外提供以下类型：
@@ -153,12 +161,124 @@ db.createCollection("集合名", { capped: true, size: 6142800, max: 10000 })
 - 类型转换符
 	- `double`，`string`，`objectId`，`date`，`integer`，`long`，`decimal` 类型转换
 	- `$convert` 聚合类型转换符
-## 创建
+## 插入
 
-- [ ] P108
-## 删除
+> [!note] 插入数据时，若 collection 不存在，Mongodb 会自动创建对应 Collection
+`````col
+````col-md
+flexGrow=1
+===
+```json
+db.<Collection 名>.insertOne("Json 数据对象")
+db.<Collection 名>.insertMany(["Json 数据对象"])
+```
+````
+````col-md
+flexGrow=1
+===
+![[../../_resources/images/Pasted image 20241101120939.png]]
+````
+`````
 ## 查询
+
+- 获取所有文档
+
+```js
+db.<collection-name>.find()
+db.<collection-name>.find({})
+```
+
+- 查询所有文档，并以树形结构显示
+
+```js
+db.<collection-name>.find().pretty()
+db.<collection-name>.find({}).pretty()
+```
+
+- 按条件查询：`find`，`findOne`
+`````col
+````col-md
+flexGrow=1
+===
+```js
+db.<collection-name>.find({ condition })
+```
+````
+````col-md
+flexGrow=1
+===
+![[../../_resources/images/Pasted image 20241101124559.png]]
+````
+`````
+- 筛选
+	- `limit(n)`，`skip(n)`
+	- `sort({key:1/-1})`：按某键排序，1 为升序，-1 为降序，可以有多个关键字
+## 删除
+
+- 删除所有文档：`db.<collection-name>.drop()`
+- 删除特定文档：`deleteOne`，`deleteMany`，`findOneAndDelete`
+
+`````col
+````col-md
+flexGrow=1
+===
+```js
+db.ct.deleteOne({ "Name": "Tian" })
+```
+````
+````col-md
+flexGrow=1
+===
+![[../../_resources/images/Pasted image 20241101123036.png]]
+````
+`````
+
+`````col
+````col-md
+flexGrow=1
+===
+```js
+db.ct.deleteOne({ "Age": { $gt: 25 } })
+```
+````
+````col-md
+flexGrow=1
+===
+![[../../_resources/images/Pasted image 20241101123228.png]]
+````
+`````
 ## 修改
+
+`````col
+````col-md
+flexGrow=1
+===
+```js
+db.<collection-name>.updateOne(<query>, <update>, {
+	upsert: <bool>,
+	writeConcern: <document>,
+	collection: <document>,
+	arrayFilters: [条件],
+	hint: doc|str
+})
+```
+````
+````col-md
+flexGrow=1
+===
+```js
+db.<collection-name>.updateMany(<query>, <update>, {
+	upsert: <bool>,
+	writeConcern: <document>,
+	collection: <document>,
+	arrayFilters: [条件],
+	hint: doc|str
+})
+```
+````
+`````
+- `<query>`：查询条件，一个对象，同 `find`
+- [ ] 111
 ## 游标
 ## 语句块
 ## 链接引用

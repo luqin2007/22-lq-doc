@@ -54,5 +54,7 @@
   "obsidian-local-rest-api",
   "obsidian-git",
   "multi-column-markdown",
-  "global-proxy"
+  "global-proxy",
+  "html-server",
+  "obsidian-enhancing-export"
 ]

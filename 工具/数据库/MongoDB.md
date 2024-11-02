@@ -601,9 +601,13 @@ MongoDB 支持主从式分布部署，Primary 宕机后 Secondary 可以自动�
 
 MongoDB 复制集群至少有两个节点，各个节点角色有：
 - 1 主节点 Primary，负责处理客户端请求，并将所有操作记录为 `oplog` 文件
+	- 非阻塞的从节点读：借助引擎层可从任意时间戳读取的功能，实现节点读功能不受写入 `olog` 记录阻塞的影响
 - 多个从节点 Secondary，定期轮询主节点，同步数据
 - 0 或 1 个仲裁者 Arbiter，发送心跳包确认集群中集合数量，在主节点故障时作为仲裁者决定从节点转为主节点
 	- 只读，只负责选举
+- Hidden 节点：不会被选举为 Primary 节点，且对客户端应用不可见，不会接受客户端应用请求
+	- 常用于数据备份、离线计算等服务
+	- Delayed 节点：落后于 Primary 节点一段时间的 Hidden 节点，可用于写入无效数据时的恢复
 ### 主节点
 
 ```bash
@@ -621,6 +625,41 @@ mongod --port <端口> --dbpath "<数据库存储位置>" --replSet 集群名
 `rs.initiate()` 进行初始化后发起 Primary 选举操作，获得大多数节点通过后可成为主节点。
 
 当不存在仲裁节点 Arbiter 节点时，当集群节点数量不足一半节点以上时，主节点宕机后无法从从节点中选举出新主节点（票数不足）
+
+节点可以设置优先级 Priority，优先级越高越容易被选举为 Primary 节点。
+
+Priority = 0 的节点不会被选举为 Primary 节点，这类节点还可以被设置为 Hidden 节点。
 ## 分布式文件存储
+
+MongoDB 提供基于文件的分布式文件存储系统 GridFS，用于存储和检索超过限制 16 MB 的文件。
+- `fs.files`：存储文件元数据，如名称、类型、自定义属性等
+- `fs.chunks`：存储文件的实际内容，以二进制形式存储于 Chunks 中
+
+存入文件需要使用 mongofiles 工具
+
+> [!note] GridFS 管理工具 `mongofile` 不包含在 mongo shell 中，需要独立下载
+
+```bash
+# 存入
+mongofiles -d gridfs put <文件名>
+```
+
+可以直接使用 MongoDB 查询文件
+
+```js
+db.<collection-name>.files.find()
+```
+
+根据查询出的 ObjectId，获取对应 chunks
+
+```js
+db.<collection-name>.chunks.find({ files_id: ObjectId("xxxxx") })
+```
 ## Journaling 日志
+
+默认开启，用于保证数据库意外断电故障的恢复
+
+Journaling 日志包含两个内存视图，通过内存映射实现：
+- `private view`：对该内存的修改不会影响磁盘文件
+- `shared view`：系统周期性刷新到文件上
 # 管理与监控

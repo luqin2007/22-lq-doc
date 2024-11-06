@@ -631,6 +631,8 @@ mongod --port <端口> --dbpath "<数据库存储位置>" --replSet 集群名
 Priority = 0 的节点不会被选举为 Primary 节点，这类节点还可以被设置为 Hidden 节点。
 ## 分布式文件存储
 
+> [!note] 管理工具[下载](https://www.mongodb.com/try/download/database-tools)
+
 MongoDB 提供基于文件的分布式文件存储系统 GridFS，用于存储和检索超过限制 16 MB 的文件。
 - `fs.files`：存储文件元数据，如名称、类型、自定义属性等
 - `fs.chunks`：存储文件的实际内容，以二进制形式存储于 Chunks 中
@@ -663,3 +665,78 @@ Journaling 日志包含两个内存视图，通过内存映射实现：
 - `private view`：对该内存的修改不会影响磁盘文件
 - `shared view`：系统周期性刷新到文件上
 # 管理与监控
+## 导入导出
+
+>[!attention] 导入导出工具不适用于数据备份
+
+````tabs
+tab: 导出
+
+```bash
+mongoexport \
+-d <数据库名> \
+-c <Collection名> \
+-o <导出文件名> \
+--type <类型:json|csv> \
+# 可选，指定导出字段，逗号分割
+-f <字段名>
+```
+
+tab: 导入
+
+```bash
+mongoimport \
+-d <数据库名> \
+-c <Collection名> \
+--file <导入文件名> \
+--type <类型:json|csv> \
+# 可选，若格式为 csv，第一行是否为标题
+--headerline\
+# 可选，指定导出字段，逗号分割
+-f <字段名>
+```
+````
+## 备份恢复
+
+````tabs
+tab: 备份
+
+```bash
+mongodump \
+  -h <数据库服务器地址> \
+  -d <数据库名> \
+  -o <输出目录>
+```
+
+tab: 恢复
+
+```bash
+mongostore \
+  -d <数据库名> \
+  -o <备份目录>
+```
+````
+## 多文档事务
+
+> [!note] MongoDB 单文档操作本身具有原子性
+
+MongoDB 支持复制集内一个或多个文档的事务，需要在同一个 Session 中
+
+```json
+s = db.getMongo().startSession()
+s.startTransaction()
+// do something
+// 回滚：s.abortTransaction()
+s.commitTransaction()
+```
+## 数据库监控
+
+`mongostat`：查看 MongoDB 运行状态
+
+![[../../_resources/images/Pasted image 20241106131345.png]]
+
+`mongotop`：查看 MongoDB 操作用时
+
+![[../../_resources/images/Pasted image 20241106131427.png]]
+
+监控服务：MMS，MongoDB Monitoring Service

@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "SiReact",
-      "RiNextjsLine",
-      "LiAlarmClock",
       "SiGithub",
-      "LiGithub"
+      "LiGithub",
+      "SiOpenwrt",
+      "SiKde",
+      "SiDebian"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -160,8 +160,5 @@
   "工具/Linux/Debian 系": "SiDebian",
   "工具/Linux/KDE": "SiKde",
   "工具/Linux/OpenWrt": "SiOpenwrt",
-  "工具/git/Github": "SiGithub",
-  "Clippings": "LiAlarmClock",
-  "编程/JavaScript/Next.js.md": "RiNextjsLine",
-  "编程/JavaScript/React.md": "SiReact"
+  "工具/git/Github": "SiGithub"
 }

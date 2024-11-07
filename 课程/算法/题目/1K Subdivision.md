@@ -76,8 +76,3 @@ Here is the illustration for the second example.
 首先构建从 1 点出发的 BFS 树并去除所有超过 k 步的路径，分裂未达到 k 的节点路径即可
 - 某分支不足 k：分裂补全 k
 - 某分支存在已访问过的点：分裂补全 k（该点有另一条分支保护，此处可放心分裂）
-# 答案
-
-```cpp
-
-```

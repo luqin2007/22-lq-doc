@@ -27,7 +27,7 @@ Spring Cloud Stream 使用订阅者模式
 
 ## Redis 缓存数据库
 
-> 安装详见 [[../../../../工具/数据库/Redis|Redis]]
+> 安装详见 [[../../../../工具/数据库/Redis/Redis|Redis]]
 
 Spring 依赖：`org.springframework.boot:spring-boot-starter-data-redis`（在 NoSQL 分类中），内置驱动和 Lettuce 客户端，配置后可直接使用 `RedisTemplate` 读写数据库
 

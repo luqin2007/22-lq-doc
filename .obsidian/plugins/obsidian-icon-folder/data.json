@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiRedis",
       "SiGithub",
       "LiGithub",
       "SiOpenwrt",
-      "SiKde",
-      "SiDebian"
+      "SiKde"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -160,5 +160,6 @@
   "工具/Linux/Debian 系": "SiDebian",
   "工具/Linux/KDE": "SiKde",
   "工具/Linux/OpenWrt": "SiOpenwrt",
-  "工具/git/Github": "SiGithub"
+  "工具/git/Github": "SiGithub",
+  "工具/数据库/Redis": "SiRedis"
 }

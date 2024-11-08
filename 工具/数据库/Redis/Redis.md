@@ -9,46 +9,137 @@ description: "Get started with Redis Community Edition"
 host: redis.io
 favicon: https://redis.io/docs/latest/images/favicons/favicon-196x196.png
 ```
-# 键值操作
+# 操作指令
 
-## 键值操作
-## String
+使用 `redis-cli` 进入 Redis 控制台
 
-字符串，基本数据类型，二进制安全，因此可以表示任何文本数据和二进制数据
+> [!note] `redis-cli` 默认中文值使用 Unicode 码显示，通过 `redis-cli --raw` 可以使用中文显示
+
+| 命令类型         | 描述               |
+| ------------ | ---------------- |
+| Keys         | 管理 Redis 键值对     |
+| Strings      | 管理字符串 String 类型值 |
+| Lists        | 管理双向列表 List 类型值  |
+| Sets         | 管理集合 Set 类型值     |
+| Hashes       | 管理散列 Hash 类型值    |
+| Sorted Sets  | 管理有序集合 ZSet 类型值  |
+| Pub/Sub      | 发布/订阅操作          |
+| Streams      | 管理流 Stream 类型值   |
+| Geo          | 地理空间相关           |
+| Cluster      | 集群管理             |
+| HyperLog     | 键值数据基数统计         |
+| Connection   | 数据库链接            |
+| Transactions | 事务管理             |
+| Server       | 服务器管理，如查看当前状态信息等 |
+| Scripting    | 执行 Lua 脚本        |
+## Keys
 
 `````col
 ````col-md
+flexGrow=2
+===
+
+| 命令格式                             | 描述                              |
+| -------------------------------- | ------------------------------- |
+| `del <key>`                      | 删除 key                          |
+| `exists <key>`                   | 检查给定key是否存在，存在为 1，不存在为 0        |
+| `rename <key> <newkey>`          | 修改 key 的名称为 newkey              |
+| `renamens <key> <newkey>`        | 仅当 newkey 不存在时，将 key 改名为 newkey |
+| `type <key>`                     | 返回 key 储存的值类型                   |
+| `dump <key>`                     | 序列化 key，返回被序列化的值                |
+| `expire <key> <seconds>`         | 设置 key 过期时间（秒）                  |
+| `expireat <key> <timestamp>`     | 设置 key 过期时间（时间戳 UNIX Timestamp） |
+| `pexpire <key> <milliseconds>`   | 设置 key 过期时间（毫秒）                 |
+| `pexpireat <key> <ms-timestamp>` | 设置 key 过期时间（时间戳，毫秒）             |
+| `persist <key>`                  | 移除 key 过期时间                     |
+| `stl <key>`                      | 查看 key 剩余生存时间（秒）                |
+| `pttl <key>`                     | 查看 key 剩余生存时间（毫秒）               |
+| `keys <pattern>`                 | 通过模式匹配查找 key                    |
+| `move <key> <db>`                | 将当前数据库的 key 移动到给定的数据库 db 当中     |
+| `random <key>`                   | 随机返回一个 key                      |
+
+````
+````col-md
 flexGrow=1
 ===
-```redis
-set name "BUPT"
-get name
-```
+ttl 返回 -1 表示无超时，-2 表示已超时或键不存在
+
+![[../../../_resources/images/Pasted image 20241108155050.png]]
+````
+`````
+## String
+
+字符串或任何二进制数据类型，是基本数据类型，二进制安全
+
+`````col
+````col-md
+flexGrow=2
+===
+
+| 命令                                         | 描述                      |
+| ------------------------------------------ | ----------------------- |
+| `set <key> <value>`                        | 添加或设置 key 的值            |
+| `setnx <key> <value>`                      | 仅当 key 不存在时插入值          |
+| `setrange <key> <offset> <value>`          | 修改从 offset 开始的子串为 value |
+| `get <key>`                                | 获取 key 的值               |
+| `getrange <key> <start> <end>`             | 返回 key 字符串的子串           |
+| `getset <key> <value>`                     | 设置 key 的值并返回 key 的旧值    |
+| `mget <key> [<key2>..]`                    | 获取多个 key 的值             |
+| `mset <key> <value> [<key> <value> ...]`   | 设置多个键值对                 |
+| `msetnx <key> <value> [<key> <value> ...]` | 仅当 key 不存在时插入多个值        |
+| `getbit <key> <offset>`                    | 获取 key 存储值的二进制位         |
+| `setbit <key> <offset> <value>`            | 设置或清除 key 值指定位          |
+| `setex <key> <seconds> <value>`            | 设置值和超时时间（set+expire）    |
+| `psetex <key> <milliseconds> <value>`      | setex 毫秒版（set+pexpire）  |
+| `strlen <key>`                             | 返回 key 所存储的字符串值的长度      |
+| `incr <key>`                               | key 存储的值 +1（整形）         |
+| `incrby <key> <n>`                         | key 存储的值 +n（整形）         |
+| `incrbyfloat <key> <n>`                    | key 存储的值 +n（浮点）         |
+| `decr <key>`                               | key 存储的值 -1             |
+| `decrby <key> <n>`                         | key 存储的值 -n             |
+| `append <key> <value>`                     | 将值追加到末尾                 |
+
 ````
 ````col-md
 flexGrow=1
 ===
 ![[../../../_resources/images/Pasted image 20241106190457.png]]
+
+![[../../../_resources/images/Pasted image 20241108160938.png]]
 ````
 `````
 ## List
 
+简单双向链表，支持从头部和尾部插入、删除数据，下标从 0 开始（但控制台输出标号从 1 开始）
+
 > [!attention] 一个 List 最多存储 $2^{32}-1$ 个数据
 
-简单双向链表，支持从头部和尾部插入、删除数据，下标从 0 开始（但控制台输出标号从 1 开始）
 `````col
 ````col-md
-flexGrow=1
+flexGrow=2
 ===
-`<key>` 表示列表名
-- `LPUSH/RPUSH <key> <value...>`：插入数据
-- `LPOP/RPOP <key> <count=1>`：弹出数据
-- `LRANGE <key> <start> <end>`：列出列表数据
+
+| 命令                                             | 描述                              |
+| ---------------------------------------------- | ------------------------------- |
+| `llen <key>`                                   | 获取列表长度                          |
+| `lpop/rpop <key>`                              | 弹出并返回列表的第一个/最后一个元素              |
+| `blpop/brpop <key> [<key2> ...] <timeout>`     | 弹出并返回列表的第一个/最后一个元素<br>不存在时阻塞等待     |
+| `lpush/rpush <key> <value> [<value2> ...]`     | 将值插入列表头部/尾部                     |
+| `lpushx/rpushx <key> <value>`                  | 将值插入已存在的列表头部/尾部                 |
+| `lrange <key> <start> <end>`                   | 获取列表指定范围内的元素                    |
+| `lrem <key> <count> <value>`                   | 移除列表元素                          |
+| `lset <key> <index> <value>`                   | 通过索引设置列表元素的值                    |
+| `ltrim <key> <start> <end>`                    | 让列表只保留指定区间内的元素                  |
+| `rpoplpush <source> <destination>`             | 将列表最后一个元素移动到另一个列表头部并返回          |
+| `brpoplpush <source> <destination> <timcout>`  | 将列表最后一个元素移动到另一个列表头部并返回<br>不存在时阻塞等待 |
+| `lindex <key> <index>`                         | 通过索引获取列表中的元素                    |
+| `linsert <key> <BEFORE/AFTER> <pivot> <value>` | 在列表的元素前或者后插入元素                  |
+
 ````
 ````col-md
 flexGrow=1
 ===
-![[../../../_resources/images/Redis 2024-11-06 19.11.55.excalidraw]]
+![[../../../_resources/images/Pasted image 20241108163311.png]]
 ````
 `````
 ## Set
@@ -57,26 +148,114 @@ flexGrow=1
 
 > [!attention] 一个 Set 最多存储 $2^{32}-1$ 个数据
 
-`<key>` 表示 Set 名
-- `SADD <key> <value...>`：将一个值添加到集合，若集合中没有该元素则返回 1，否则返回 0
-- `SMEMBERS <key>`：列出集合数据
+
+`````col
+````col-md
+flexGrow=2
+===
+
+| 命令                                   | 描述                               |
+| ------------------------------------ | -------------------------------- |
+| `sadd <key> <member> [<member> ...]` | 向集合添加成员                          |
+| `srem <key> <member1> [<member2>]`   | 移除集合成员                           |
+| `sismember <key> <member>`           | 判断 member 元素是否是集合的成员             |
+| `scard <key>`                        | 获取集合长度                           |
+| `spop <key>`                         | 随机移除并返回集合中的一个元素                  |
+| `srandmember <key> [<count>]`        | 随机返回集合中一个或多个元素                   |
+| `sdiff <key1> [<key2>]`              | 返回给定集合的差集                        |
+| `sdiffstore <dest> <key1> [<key2>]`  | 返回给定集合的差集并存储在 dest 中             |
+| `sinter <key1> [<key2>]`             | 返回给定集合的交集                        |
+| `sinterstore <dest> <key>l [<key>2]` | 返回给定集合的交集并存储在 dest 中             |
+| `sunion <key1> [<key>2]`             | 返回给定集合的并集                        |
+| `smembers <key>`                     | 返回集合中的所有成员                       |
+| `smove <source> <dest> <member>`     | 将 member 元素从 source 集合移动到 dest 中 |
+
+````
+````col-md
+flexGrow=1
+===
+![[../../../_resources/images/Pasted image 20241108172400.png]]
+![[../../../_resources/images/Pasted image 20241108172440.png]]
+````
+`````
+
 ## ZSet
 
 类似 `Set`，但每个键都关联一个 `score` 值（浮点类型），内部数据按关联 `score` 大小排序
-- `ZADD <key> <score> <value>`：添加元素
-- `ZRANGEBYSCORE <key> <min> <max>`：根据 `score` 大小获取部分值
-## Hash
 
-> [!attention] 一个 Hash 最多存储 $2^{32}-1$ 个数据
+> [!attention] 一个 ZSet 最多存储 $2^{32}-1$ 个数据
+
+`````col
+````col-md
+flexGrow=2
+===
+
+| 命令格式                                                     | 描述                       |     |
+| -------------------------------------------------------- | ------------------------ | --- |
+| `zadd <key> <score> <member> [<score2> <member2> ...]`   | 添加或更新成员                  |     |
+| `zcard <key>`                                            | 获取集合成员数                  |     |
+| `zcount <key> <min> <max>`                               | 获取指定分数区间的成员数             |     |
+| `zincrby <key> <increment> <member>`                     | 指定成员的 score += increment |     |
+| `zinterstore <dist> <numkeys> <key> [<key> ... ]`        | 返回集合交集并存储在 dist 中        |     |
+| `zlexcount <key> <min> <max>`                            | 计算指定字典区间内的成员数量           |     |
+| `zrange <key> <start> <stop> [WITHSCORES]`               | 返回指定范围的成员（类似列表）          |     |
+| `zrangebylex <key> <min> <max> [LIMIT <offset> <count>]` | 返回字典区间的成员                |     |
+| `zrangebyscore <key> <min> <max> [WITHSCORES] [LIMIT]`   | 返回指定分数区间内的成员             |     |
+| `zscore <key> <member>`                                  | 返回成员的分数值                 |     |
+| `zrank <key> <member>`                                   | 返回指定成员的索引                |     |
+| `zrem <key> <member> [<member> ...]`                     | 移除的一个或多个成员               |     |
+| `zremrangebyscore <key> <min> <max>`                     | 移除给定分数区间的所有成员            |     |
+
+````
+````col-md
+flexGrow=1
+===
+![[../../../_resources/images/Pasted image 20241108201204.png]]
+````
+`````
+
+## Hash
 
 哈希表，一个以 String 为键，任意类型为值的表。
 
-Redis 称一个 Hash 中数据的键为 `field`（属性标签），`<key>` 表示该 Hash 名
-- `HMSET <key> <field> <value> [<field2> <value2> ...]`：添加、修改键值
-- `HGET <key> <field>`：获取值
+> [!attention] 一个 Hash 最多存储 $2^{32}-1$ 个数据
+
+`````col
+````col-md
+flexGrow=2
+===
+
+| 命令                                                      | 描述                                   |
+| ------------------------------------------------------- | ------------------------------------ |
+| `hexists <key> <field>`                                 | 查看哈希表 key中指定字段是否存在<br>0 表示不存在，1 表示存在 |
+| `hset <key> <field> <value>`                            | 将哈希表 key 中的字段 field 的值设为 value       |
+| `hsetnx <key> <field> <value>`                          | 只有在字段 field 不存在时设置字段的值               |
+| `hmset <key> <field> <value> [...]` | 设置多个键值对                              |
+| `hlen <key>`                                            | 获取哈希表中字段的数量                          |
+| `hkeys <key>`                                           | 获取所有哈希表中的字段                          |
+| `hmget <key> <field1> [<field2> ...]`                   | 获取所有给定字段的值                           |
+| `hdel <key> <field1> [<field2> ...]`                    | 删除哈希表字段                              |
+| `hget <key> <field>`                                    | 获取哈希表中指定字段的值                         |
+| `hgetall <key>`                                         | 获取哈希表中指定 key 的所有字段和值                 |
+| `hvals <key>`                                           | 获取哈希表中的所有值                           |
+| `hincrby <key> <field> <n>`                             | 为哈希表key 中的指定字段值 +n（整形）               |
+| `hincrbyfloat <key> <field> <n>`                        | 为哈希表key 中的指定字段值 +n（浮点）               |
+
+````
+````col-md
+flexGrow=1
+===
+![[../../../_resources/images/Pasted image 20241108174621.png]]
+````
+`````
 ## Stream
 
 实现生产者-消费者模型，多用于消息处理
+
+## 发布/订阅
+
+- 订阅频道：`subscribe <channel>`
+- 发布消息：`publish <channel> <message>`
 # 持久化管理
 
 >[!note] 持久化：将数据从内存同步到硬盘
@@ -120,4 +299,4 @@ Redis 主从架构通过哨兵机制监控运行状态。
 	- 通过向其他节点发送 PING 进行心跳检查，判断下线（1s/次）
 - 主观下线：心跳检查失败时，若超过一定时间没有回复，哨兵主观认为节点下线
 - 客观下线：某哨兵认为**主节点**主观下线后，向其他哨兵节点查询主节点状态，得到主节点下线的反馈达到一定数量时认为**主节点**客观下线
-- 领导者选举：主节点客观下线后，各哨兵节点进行协商，选举出新领导者并进行故障转移
+- 领导者选举：主节点客观下线后，各哨兵节点进行协商，以[[../NoSQL/一致性管理方法/Raft 算法|Raft 算法]]选举出新领导者并进行故障转移

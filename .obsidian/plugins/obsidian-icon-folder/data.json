@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "SiRedis",
       "SiGithub",
       "LiGithub",
       "SiOpenwrt",
-      "SiKde"
+      "SiKde",
+      "SiDebian"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -58,7 +58,6 @@
   "工具/Ventoy.md": "ApVentoy",
   "工具/vfox.md": "ApVfox",
   "工具/chsrc.md": "ApChsrc",
-  "工具/数据库/Redis.md": "SiRedis",
   "工具/数据库/Neo4j/Neo4j.md": "SiNeo4j",
   "编程/CSharp": "SiCsharp",
   "编程/CSS": "SiCss3",
@@ -160,6 +159,5 @@
   "工具/Linux/Debian 系": "SiDebian",
   "工具/Linux/KDE": "SiKde",
   "工具/Linux/OpenWrt": "SiOpenwrt",
-  "工具/git/Github": "SiGithub",
-  "工具/数据库/Redis": "SiRedis"
+  "工具/git/Github": "SiGithub"
 }

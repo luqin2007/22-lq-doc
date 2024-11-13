@@ -303,4 +303,69 @@ Redis 主从架构通过哨兵机制监控运行状态。
 - 领导者选举：主节点客观下线后，各哨兵节点进行协商，以[[../NoSQL/一致性管理方法/Raft 算法|Raft 算法]]选举出新领导者并进行故障转移
 ## 无中心集群
 
-![[../../../_resources/images/Redis 2024-11-08 20.29.53.excalidraw]]
+`Redis-Cluster` 集群采用无中心架构
+- 所有节点彼此互联
+- 超过半数节点失效后，节点失效
+- 客户端可与任意一个节点连接，不需要代理
+- 所有物理节点被映射到 `[0,16383]slot` 上，由 `Redis-Cluster` 维护
+	- 变量值被存于 `CRC16(key) % 16384` 对应的 `slot` 上
+	- 每个节点都可以是一个主从节点集群以保证可用性
+
+| 命令                                     | 说明                            |
+| -------------------------------------- | ----------------------------- |
+| `cluster info`                         | 输出集群信息                        |
+| `cluster nodes`                        | 输出所有节点信息                      |
+| `cluster meet <ip> <port>`             | 添加节点 `<ip>:<port>`            |
+| `cluster forget <id>`                  | 移除节点 `<id>`                   |
+| `cluster addslots <slots...>`          | 将一个或多个 `slot` 指派给当前节点         |
+| `cluster delslots <slots...>`          | 移除该节点的一个或多个 `slot` 指派         |
+| `cluster flushslots`                   | 移除指派给该节点的所有 `slot`            |
+| `cluster keyslot <key>`                | 计算键 `<key>` 应存储到哪个 `slot` 上   |
+| `cluster countkeysinslot <slot>`       | 计算某 `<slot>` 存储了多少键           |
+| `cluster getkeysinslot <slot> <count>` | 计算某 `<slot>` 存储的 `<count>` 个键 |
+# 管理与监控
+
+## 配置
+
+`redis` 配置文件为 `redis.conf`，在 `redis-cli` 中可以通过 `CONFIG` 命令查询和修改
+- `CONFIG GET <pname>`
+- `CONFIG SET <pname> <value>`
+
+`````col
+````col-md
+flexGrow=1
+===
+
+| 参数             | 说明                         |
+| -------------- | -------------------------- |
+| timeout        | 当客户端闲置多久后关闭，0 表示关闭         |
+| port           | Redis 监听端口                 |
+| loglevel       | 日志记录级别，默认 notice           |
+| dbfilename     | 本地数据库文件名，默认 dump.rdb       |
+| rdbcompression | 本地数据库是否压缩，默认 yes，压缩方式为 LZF |
+| maxmemory      | 占用最大内存                     |
+| requirepass    | 设置登录密码                     |
+
+````
+````col-md
+flexGrow=1
+===
+![[../../../_resources/images/Pasted image 20241113104703.png]]
+````
+`````
+
+设置密码后，使用 `AUTH "密码"` 登录
+## 备份与恢复
+
+- 备份：`save`，执行后会在安装目录下生成 `dump.rdb`
+- 后台备份：`bgsave`
+- 恢复：直接将 `dump.rdb` 放到安装目录下，重启服务即可
+	- 同时启用 RDB 和 AOF 时，优先使用 AOF
+
+安装目录可以通过 `config get dir` 查看，使用 `dbsize` 可以查看所有键数量，`keys *` 可以查看所有键
+## 指令批量执行
+
+将命令写入一个文件，使用 `type <file> | redis-cli` 执行即可
+- Linux 下使用 `cat <file> | redis-cli`
+
+使用 `type <file> | redis-cli --pipe` 可以不显示每条指令执行结果，只在最后显示最终结果，效率更高

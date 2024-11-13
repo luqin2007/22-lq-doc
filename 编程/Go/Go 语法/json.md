@@ -1,5 +1,7 @@
 `json` 包可以将 Json 字符串与结构体互相转换
 
+> [!hint] 只有 `public` 的字段才会写入 Json，即首字母大写的字段
+
 `````col
 ````col-md
 flexGrow=1

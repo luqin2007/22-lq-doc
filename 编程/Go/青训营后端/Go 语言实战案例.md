@@ -55,3 +55,8 @@
 ## relay
 
 代理与服务器建立连接，在客户端与服务器之间传递数据
+- 使用 `net.Dial("tcp", url)` 建立网络连接
+- 使用 `io.Copy` 复制读写缓冲区
+- 使用管道将输入拷贝到 dial，再将 dial 输出到 client
+
+![[../../../_resources/images/Pasted image 20241111224019.png]]

@@ -8,7 +8,7 @@
 - 代码功能上的正确性，新代码本身正确性及未破坏原代码正确性
 - 提高效率，代码出现错误时可在较短的周期内定位和修改
 
-![[../../../_resources/images/Pasted image 20241113000927.png]]
+![[../../../../_resources/images/Pasted image 20241113000927.png]]
 
 1. 测试代码应以 `_test.go` 结尾
 2. 测试函数命名为 `func TestXxx(*testing.T)`
@@ -37,7 +37,7 @@ func TestMain(m *testing.M) {
 - 测试单元粒度应足够小，函数粒度足够小，函数应保证单一职责
 ## 组件依赖
 
-![[../../../_resources/images/Pasted image 20241113002512.png]]
+![[../../../../_resources/images/Pasted image 20241113002512.png]]
 
 组件依赖应尽量满足幂等和稳定性
 - 幂等性：重复运行测试时，输出的内容应保持一致
@@ -58,7 +58,7 @@ func TestMain(m *testing.M) {
 - 直接调用函数进行串行测试，需要执行 `B::N` 次待测函数
 - 通过 `B::RunParallel(func(*testing.PB))` 进行并行测试，传入的函数中检查 `PB::Next()` 是否测试完成
 
-![[../../../_resources/images/Pasted image 20241113003609.png]]
+![[../../../../_resources/images/Pasted image 20241113003609.png]]
 
 测试结果为 `ns/op`
 
@@ -82,5 +82,5 @@ func TestMain(m *testing.M) {
 - 使用 `map` 初始化索引
 - `sync.Once` 用于仅执行一次的代码，可用于初始化单例模式
 
-![[../../../_resources/images/Pasted image 20241113004420.png]]
+![[../../../../_resources/images/Pasted image 20241113004420.png]]
 

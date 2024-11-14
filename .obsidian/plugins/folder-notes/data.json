@@ -32,6 +32,19 @@
       "excludeFromFolderOverview": false,
       "string": "",
       "hideInSettings": false
+    },
+    {
+      "type": "folder",
+      "path": "编程/Go/青训营后端",
+      "subFolders": true,
+      "disableSync": true,
+      "disableAutoCreate": true,
+      "disableFolderNote": false,
+      "enableCollapsing": false,
+      "position": 2,
+      "excludeFromFolderOverview": false,
+      "string": "",
+      "hideInSettings": false
     }
   ],
   "whitelistFolders": [],

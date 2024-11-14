@@ -18,7 +18,7 @@
 - `defer`：函数结束时自下而上执行，用于清理环境，关闭流等
 # Socks5 服务器
 
-![[../../../_resources/images/Pasted image 20241111074929.png]]
+![[../../../../_resources/images/Pasted image 20241111074929.png]]
 ## 服务器监听
 
 使用 `net.Listen()` 开启一个服务器监听并创建服务器对象
@@ -59,4 +59,4 @@
 - 使用 `io.Copy` 复制读写缓冲区
 - 使用管道将输入拷贝到 dial，再将 dial 输出到 client
 
-![[../../../_resources/images/Pasted image 20241111224019.png]]
+![[../../../../_resources/images/Pasted image 20241111224019.png]]

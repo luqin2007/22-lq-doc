@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiGnubash",
+      "LiCommand",
       "SiGithub",
       "LiGithub",
-      "SiOpenwrt",
-      "SiKde",
-      "SiDebian"
+      "SiOpenwrt"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -159,5 +159,7 @@
   "工具/Linux/Debian 系": "SiDebian",
   "工具/Linux/KDE": "SiKde",
   "工具/Linux/OpenWrt": "SiOpenwrt",
-  "工具/git/Github": "SiGithub"
+  "工具/git/Github": "SiGithub",
+  "编程/Shell": "LiCommand",
+  "编程/Shell/Linux Shell": "SiGnubash"
 }

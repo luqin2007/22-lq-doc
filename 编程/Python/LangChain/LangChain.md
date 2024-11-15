@@ -27,7 +27,9 @@ flexGrow=1
 
 1. 配置环境，安装 `langchain` 和相关其他配置
 2. 创建 `llm` 对象，使用相关工具
+
 ---
+
 - [[内部知识库]]
 - 核心组件
 	- [[核心组件/模型/模型|模型]]
@@ -36,7 +38,24 @@ flexGrow=1
 	- [[核心组件/代理|代理]]
 - [[工具和工具箱]]
 - [[检索增强生成]]
+
+---
+
+- [[通过链和代理查询鲜花信息]]
+- [[在AI应用中引入异步通信机制]]
+- [[通过角色扮演脑暴一个鲜花营销方案]]
+- [[根据气候变化自动制定鲜花存储策略]]
+- [[部署一个鲜花网络电商的人脉工具]]
+- [[易速鲜花聊天客服机器人的开发]]
 # 参考
+
+```cardlink
+url: https://juejin.cn/book/7387702347436130304
+title: "LangChain 实战课 - 掘金小册 - 掘金小册"
+description: "手把手带你开发专属的 ChatGPT 应用。「LangChain 实战课」由掘金小册撰写，2114人购买"
+host: juejin.cn
+favicon: https://lf-web-assets.juejin.cn/obj/juejin-web/xitu_juejin_web/static/favicons/favicon-32x32.png
+```
 
 ```cardlink
 url: https://python.langchain.ac.cn/docs/introduction/

@@ -1,0 +1,16 @@
+- [[从这里开始，起飞了]]
+- [[人工智能，很人工，很智能的脚本]]
+- [[根本停不下来的循环和中断控制]]
+- [[请开始你的表演，数组、Subshell 与函数]]
+- [[一大波脚本技巧正向你走来]]
+- [[上古神兵利器 sed]]
+- [[不可思议的编程语言 awk]]
+# 参加
+
+```cardlink
+url: https://book.douban.com/subject/34879025/
+title: "Linux Shell核心编程指南"
+description: "在IT产业链中开源的理念已成为绝大多数企业的共识。随着开源技术的不断进步与创新，云计算也逐步深入到了每个互联网企业的内部。但是，随之而来的便是管理成本的提高，大量的物理或者虚拟主机需要管理与维护，如何..."
+host: book.douban.com
+image: https://img3.doubanio.com/view/subject/l/public/s33513723.jpg
+```

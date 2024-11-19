@@ -49,4 +49,10 @@ func main() {
 
 # 参考
 
-[Fetching Data#siiv](https://book.douban.com/subject/36171041/)
+```cardlink
+url: https://book.douban.com/subject/36171041/
+title: "打开Go语言之门"
+description: "通过不断思考和整理，作者编写了这本更具系统性也更通俗易懂的Go语言入门和进阶书籍，以帮助学习者少走弯路，比其他人更快一步提升职业竞争力。本书共包含 五 个部分：第1部分：快速入门Go 语言。作者挑选..."
+host: book.douban.com
+image: https://img1.doubanio.com/view/subject/l/public/s34363389.jpg
+```

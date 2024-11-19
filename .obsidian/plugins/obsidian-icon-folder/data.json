@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiLua",
       "SiGnubash",
       "LiCommand",
       "SiGithub",
-      "LiGithub",
-      "SiOpenwrt"
+      "LiGithub"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -161,5 +161,6 @@
   "工具/Linux/OpenWrt": "SiOpenwrt",
   "工具/git/Github": "SiGithub",
   "编程/Shell": "LiCommand",
-  "编程/Shell/Linux Shell": "SiGnubash"
+  "编程/Shell/Linux Shell": "SiGnubash",
+  "编程/Lua": "SiLua"
 }

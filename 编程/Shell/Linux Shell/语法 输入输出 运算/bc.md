@@ -1,0 +1,21 @@
+将表达式通过管道输入 `bc` 即可，也可以通过 `bc` 命令进入交互环境，使用 `quit` 退出
+
+![[../../../../_resources/images/Pasted image 20241120192026.png]]
+# 浮点计算
+
+> [!note] 默认除法保留到整数，使用 `scale=n` 设置保留 n 位小数
+
+```reference
+file: "@/_resources/codes/linuxshell/calc.sh"
+lang: "bash"
+```
+# 进制转换
+
+`ibase=n` 设置输入数字为 n 进制，`obase=n` 设置输出数字为 n 进制
+
+![[../../../../_resources/images/Pasted image 20241120192525.png]]
+# 其他
+
+`length(n)` 可以计算计算结果的长度，对于浮点不包含小数点和前导 0
+
+![[../../../../_resources/images/Pasted image 20241120192755.png]]

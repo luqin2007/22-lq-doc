@@ -1,9 +1,9 @@
 {
-  "lastOpenLanguageTab": "go",
+  "lastOpenLanguageTab": "shell",
   "timeout": 10000,
   "allowInput": true,
   "wslMode": false,
-  "shellWSLMode": false,
+  "shellWSLMode": true,
   "onlyCurrentBlock": false,
   "nodePath": "node",
   "nodeArgs": "",

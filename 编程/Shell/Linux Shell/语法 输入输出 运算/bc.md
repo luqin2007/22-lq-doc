@@ -13,9 +13,18 @@ lang: "bash"
 
 `ibase=n` 设置输入数字为 n 进制，`obase=n` 设置输出数字为 n 进制
 
-![[../../../../_resources/images/Pasted image 20241120192525.png]]
+```bash
+echo "obase=2;10" | bc
+echo "ibase=16;obase=2;FF" | bc
+```
 # 其他
 
 `length(n)` 可以计算计算结果的长度，对于浮点不包含小数点和前导 0
 
-![[../../../../_resources/images/Pasted image 20241120192755.png]]
+```bash
+echo "length(123456)" | bc
+echo "obase=2;length(123456)" | bc
+echo "length(123.456)" | bc
+echo "length(0.456)" | bc
+echo "length(0.4560)" | bc
+```

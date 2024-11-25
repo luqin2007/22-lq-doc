@@ -3,42 +3,36 @@ package state
 import (
 	"fmt"
 	"go-luacompiler/binchunk"
+	"go-luacompiler/vm"
 )
 
 func (self *luaState) Load(chunk []byte, chunkName string, mode string) int {
-	// 暂时先只实现加载二进制数据
-	prop := binchunk.Undump(chunk)
-	closure := newLuaClosure(prop)
-	self.stack.push(closure)
+	if "b" == mode {
+		prop := binchunk.Undump(chunk)
+		closure := newLuaClosure(prop)
+		self.stack.push(closure)
+	} else {
+		// TODO 暂时先只实现加载二进制数据
+		panic(fmt.Sprintf("Chunk mode %s not supported!", mode))
+	}
 	return 0
 }
 
-func (self *luaState) Call(nArgs, nResult int) {
+func (self *luaState) Call(nArgs, nResults int) {
 	val := self.stack.get(-nArgs - 1)
-	if c, ok := val.(*Closure); ok {
-		fmt.Printf("call %s<%d,%d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
-		self.callLuaClosure(nArgs, nResult, c)
-	} else {
+	c, ok := val.(*Closure)
+	if !ok {
 		panic("not a function or closure!")
 	}
-}
+	fmt.Printf("call %s<%d,%d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
 
-func (self *luaState) LoadProto(n int) {
-	// TODO
-}
-
-// callLuaClosure 调用闭包（函数）
-//
-//	nArgs 实际传入的参数数量
-//	nResults 实际需要的参数数量
-func (self *luaState) callLuaClosure(nArgs, nResults int, closure *Closure) {
-	nRegs := int(closure.proto.MaxStackSize) // 函数所需寄存器大小
-	nParams := int(closure.proto.NumParams)  // 函数需要传入的参数
-	isVararg := closure.proto.IsVararg == 1  // 函数是否包含变长参数
+	nRegs := int(c.proto.MaxStackSize) // 函数所需寄存器大小
+	nParams := int(c.proto.NumParams)  // 函数声明参数数量
+	isVararg := c.proto.IsVararg == 1  // 函数是否包含变长参数
 
 	// 创建闭包（函数）调用栈
 	newStack := newLuaState(nRegs + 20)
-	newStack.closure = closure
+	newStack.closure = c
 
 	// 从当前栈中提取参数和闭包（函数），并将参数存入被调函数栈
 	funcAndArgs := self.stack.popN(nArgs + 1)
@@ -58,5 +52,37 @@ func (self *luaState) callLuaClosure(nArgs, nResults int, closure *Closure) {
 		results := newStack.popN(newStack.top - nRegs)
 		self.stack.check(len(results))
 		self.stack.pushN(results, nResults)
+	}
+}
+
+func (self *luaState) LoadProto(n int) {
+	proto := self.stack.closure.proto.Protos[n]
+	closure := newLuaClosure(proto)
+	self.stack.push(closure)
+}
+
+func (self *luaState) RegisterCount() int {
+	return int(self.stack.closure.proto.MaxStackSize)
+}
+
+func (self *luaState) LoadVararg(n int) {
+	if n < 0 {
+		n = len(self.stack.varargs)
+	}
+
+	self.stack.check(n)
+	self.stack.pushN(self.stack.varargs, n)
+}
+
+// 执行闭包
+func (self *luaState) runLuaClosure() {
+	for {
+		// 执行指令
+		inst := vm.Instruction(self.Fetch())
+		inst.Execute(self)
+		// RETURN 指令退出
+		if inst.Opcode() == vm.OP_RETURN {
+			break
+		}
 	}
 }

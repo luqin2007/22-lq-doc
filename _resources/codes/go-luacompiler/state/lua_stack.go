@@ -45,8 +45,13 @@ func (self *luaStack) push(val luaValue) {
 }
 
 func (self *luaStack) pushN(vals []luaValue, n int) {
+	nVals := len(vals)
+	if n < 0 {
+		n = nVals
+	}
+
 	for i := 0; i < n; i++ {
-		if i < len(vals) {
+		if i < nVals {
 			self.push(vals[i])
 		} else {
 			self.push(nil)
@@ -67,7 +72,7 @@ func (self *luaStack) pop() (val luaValue) {
 
 func (self *luaStack) popN(n int) []luaValue {
 	vals := make([]luaValue, n)
-	for i := 0; i < n; i++ {
+	for i := n - 1; i >= 0; i-- {
 		vals[i] = self.pop()
 	}
 	return vals

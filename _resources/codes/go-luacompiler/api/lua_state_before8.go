@@ -122,15 +122,4 @@ type LuaState interface {
 	SetField(index int, k string)
 	// SetI 将栈顶元素和给定数字键存入 index 位置的表中
 	SetI(index int, i int64)
-
-	/* 函数调用 */
-
-	// Load 加载编译过的二进制脚本或 Lua 脚本
-	//     mode 表示加载的数据类型，b 表示二进制，t 表示 lua 脚本，bt 表示二者皆可
-	//     返回值 0 表示加载成功
-	Load(chunk []byte, chunkName string, mode string) int
-	// Call 调用函数应先把函数推入栈顶，然后将参数依次推入栈顶
-	Call(nArgs, nResult int)
-	// LoadProto 将当前函数的子函数原型实例化为闭包并推入栈顶
-	LoadProto(n int)
 }

@@ -47,8 +47,8 @@ end: 15
 ```reference
 file: "@/_resources/codes/go-luacompiler/state/lua_value.go"
 lang: "go"
-start: 27
-end: 60
+start: 29
+end: 62
 ```
 
 ## 算术运算符、位运算符

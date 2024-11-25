@@ -96,11 +96,11 @@ func _keyToInteger(key luaValue) luaValue {
 // _expandArray 扩充数组，直到长度为 n
 func (self *luaTable) _expandArray(n int64) {
 	if self.arr == nil {
-		self.arr = make([]luaValue, 0, n)
+		self.arr = make([]luaValue, n)
 	} else {
 		count := n - self.len()
 		if count > 0 {
-			self.arr = append(self.arr, make([]luaValue, 0, n)...)
+			self.arr = append(self.arr, make([]luaValue, n)...)
 		}
 	}
 }

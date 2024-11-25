@@ -60,7 +60,7 @@ LuaState 接口主要包括以下几类函数：
 - LuaStack 索引访问函数
 
 ```reference fold
-file: "@/_resources/codes/go-luacompiler/api/lua_state.go"
+file: "@/_resources/codes/go-luacompiler/api/lua_state_before8.go"
 lang: "go"
 ```
 
@@ -101,6 +101,6 @@ end: 60
 ```reference
 file: "@/_resources/codes/go-luacompiler/state/api_access.go"
 lang: "go"
-start: 112
-end: 123
+start: 106
+end: 119
 ```

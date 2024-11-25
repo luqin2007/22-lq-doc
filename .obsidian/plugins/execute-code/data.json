@@ -1,5 +1,5 @@
 {
-  "lastOpenLanguageTab": "shell",
+  "lastOpenLanguageTab": "lua",
   "timeout": 10000,
   "allowInput": true,
   "wslMode": false,
@@ -15,7 +15,7 @@
   "leanPath": "lean",
   "leanArgs": "",
   "leanInject": "",
-  "luaPath": "lua",
+  "luaPath": "lua54",
   "luaArgs": "",
   "luaFileExtension": "lua",
   "luaInject": "",

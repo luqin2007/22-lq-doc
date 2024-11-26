@@ -5,10 +5,6 @@
   "embedUseExcalidrawFolder": false,
   "templateFilePath": "_resources/excalidraw/template.excalidraw",
   "scriptFolderPath": "_resources/excalidraw/scripts",
-  "fontAssetsPath": "Excalidraw/CJK Fonts",
-  "loadChineseFonts": false,
-  "loadJapaneseFonts": false,
-  "loadKoreanFonts": false,
   "compress": true,
   "decompressForMDView": false,
   "onceOffCompressFlagReset": true,
@@ -31,7 +27,6 @@
   "previewMatchObsidianTheme": false,
   "width": "400",
   "height": "",
-  "overrideObsidianFontSize": false,
   "dynamicStyling": "colorful",
   "isLeftHanded": false,
   "iframeMatchExcalidrawTheme": true,
@@ -41,7 +36,6 @@
   "defaultMode": "normal",
   "defaultPenMode": "never",
   "penModeDoubleTapEraser": true,
-  "penModeSingleFingerPanning": true,
   "penModeCrosshairVisible": true,
   "renderImageInMarkdownReadingMode": true,
   "renderImageInHoverPreviewForMDNotes": false,
@@ -761,7 +755,6 @@
   "areaZoomLimit": 2,
   "longPressDesktop": 500,
   "longPressMobile": 500,
-  "doubleClickLinkOpenViewMode": true,
   "isDebugMode": false,
   "rank": "Bronze",
   "modifierKeyOverrides": [
@@ -784,5 +777,12 @@
       "key": "G"
     }
   ],
-  "showSplashscreen": true
+  "showSplashscreen": true,
+  "fontAssetsPath": "Excalidraw/CJK Fonts",
+  "loadChineseFonts": false,
+  "loadJapaneseFonts": false,
+  "loadKoreanFonts": false,
+  "overrideObsidianFontSize": false,
+  "penModeSingleFingerPanning": true,
+  "doubleClickLinkOpenViewMode": true
 }

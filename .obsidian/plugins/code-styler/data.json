@@ -315,13 +315,13 @@
           "textItalic": true
         },
         "languageTag": {
-          "display": "none",
+          "display": "always",
           "textFont": "",
           "textBold": true,
           "textItalic": false
         },
         "languageIcon": {
-          "display": "if_header_shown",
+          "display": "always",
           "displayColour": true
         },
         "externalReference": {
@@ -349,9 +349,9 @@
       "advanced": {
         "gradientHighlights": false,
         "gradientHighlightsColourStop": "70%",
-        "languageBorderColour": false,
-        "languageBorderWidth": 5,
-        "iconSize": 18
+        "languageBorderColour": true,
+        "languageBorderWidth": 3,
+        "iconSize": 16
       }
     },
     "colours": {
@@ -446,7 +446,7 @@
   "newTheme": "",
   "newHighlight": "",
   "exampleCodeblockParameters": "python title:foo hl:1 unwrap",
-  "exampleCodeblockContent": "print(\"This line is very long and should be used as an example for how the plugin deals with wrapping and unwrapping very long lines given the choice of codeblock parameters and settings.\")\nprint(\"This line is highlighted.\")",
+  "exampleCodeblockContent": "print(\"This line is very long and should be used as an example for how the plugin deals with wrapping and unwrapping very long lines given the choice of codeblock parameters and settings.\")\nprint(\"This line is highlighted.\")\n\ndef hello():\n    print(\"hello world\")\n\nclass AClass:\n    def __init__():\n        pass",
   "exampleInlineCode": "{python icon title:foo} print(\"This is inline code\")",
   "decoratePrint": true,
   "excludedLanguages": "ad-*, reference",

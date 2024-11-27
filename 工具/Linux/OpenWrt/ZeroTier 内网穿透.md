@@ -91,7 +91,7 @@ service zerotier restart
 记下 Openwrt 路由器的 IP 地址，点击 `Routes` 添加新路由
 
 ![[../../../_resources/images/Pasted image 20240831222641.png]]
-- `target`：路由器设备网段，可以在 openwrt
+- `target`：路由器设备网段，可以在 openwrt 接口部分查询
 
 ---
 

@@ -2,27 +2,18 @@ package state
 
 import (
 	"fmt"
-	"go-luacompiler/api"
 	"go-luacompiler/binchunk"
 	"go-luacompiler/vm"
 )
 
 func (self *luaState) Load(chunk []byte, chunkName string, mode string) int {
-	var proto *binchunk.Prototype
-	var closure *Closure
 	if "b" == mode {
-		proto = binchunk.Undump(chunk)
-		closure = newLuaClosure(proto)
+		prop := binchunk.Undump(chunk)
+		closure := newLuaClosure(prop)
+		self.stack.push(closure)
 	} else {
 		// TODO 暂时先只实现加载二进制数据
 		panic(fmt.Sprintf("Chunk mode %s not supported!", mode))
-	}
-	self.stack.push(closure)
-
-	// 设置 _ENV
-	if len(proto.Protos) > 0 {
-		env := self.registry.get(api.LUA_RIDX_GLOBALS)
-		closure.upvals[0] = &upvalue{&env}
 	}
 	return 0
 }
@@ -33,7 +24,7 @@ func (self *luaState) Call(nArgs, nResults int) {
 	if !ok {
 		panic("not a function or closure!")
 	}
-	//fmt.Printf("call %s<%d,%d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
+	fmt.Printf("call %s<%d,%d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
 
 	if c.proto != nil {
 		self.callLuaClosure(c, nArgs, nResults)
@@ -46,27 +37,6 @@ func (self *luaState) LoadProto(n int) {
 	proto := self.stack.closure.proto.Protos[n]
 	closure := newLuaClosure(proto)
 	self.stack.push(closure)
-
-	for i, uvInfo := range proto.Upvalues {
-		idx := int(uvInfo.Idx)
-		if uvInfo.Instack == 1 {
-			// 是当前函数上下文的局部变量：访问局部变量
-			if self.stack.openuvs == nil {
-				self.stack.openuvs = map[int]*upvalue{}
-			}
-			if openuv, ok := self.stack.openuvs[idx]; ok {
-				// Open：栈中直接引用
-				closure.upvals[i] = openuv
-			} else {
-				// Closed：存于其他位置
-				closure.upvals[i] = &upvalue{&self.stack.slots[idx]}
-				self.stack.openuvs[idx] = closure.upvals[i]
-			}
-		} else {
-			// 非局部变量：该参数已被外层函数捕获，直接从外部函数获取
-			closure.upvals[i] = self.stack.closure.upvals[idx]
-		}
-	}
 }
 
 func (self *luaState) RegisterCount() int {
@@ -88,7 +58,7 @@ func (self *luaState) callLuaClosure(c *Closure, nArgs, nResults int) {
 	isVararg := c.proto.IsVararg == 1  // 函数是否包含变长参数
 
 	// 创建闭包（函数）调用栈
-	newStack := newLuaState(nRegs+api.LUA_MINSTACK, self)
+	newStack := newLuaState(nRegs + 20)
 	newStack.closure = c
 
 	// 从当前栈中提取参数和闭包（函数），并将参数存入被调函数栈
@@ -126,7 +96,7 @@ func (self *luaState) runLuaClosure() {
 }
 
 func (self *luaState) callGoClosure(c *Closure, nArgs, nResults int) {
-	newStack := newLuaState(nArgs+api.LUA_MINSTACK, self)
+	newStack := newLuaState(nArgs + 20)
 	newStack.closure = c
 
 	args := self.stack.popN(nArgs)

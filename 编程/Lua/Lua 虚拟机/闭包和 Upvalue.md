@@ -90,3 +90,11 @@ end: 70
 	- `LuaUpvalueIndex(i int) int`：将注册表伪索引转换为 `Upvalue` 索引
 	- `get`，`set`，`isValid`：添加伪索引获取 Upvalue 值
 # 指令
+
+| 指令         | 类型      | 说明                                                 |
+| ---------- | ------- | -------------------------------------------------- |
+| `GETUPVAL` | `iABC`  | 把当前闭包索引为 B 的 Upvalue 值存入寄存器 A 中                    |
+| `SETUPVAL` | `iABC`  | 将寄存器 A 的值赋值给 B                                     |
+| `GETTABUP` | `iABC`  | 取 Upvalue 索引 B 值为表，以寄存器或常量索引 C 的值为键，取值后存入 A        |
+| `SETTABUP` | `iABC`  | 取 Upvalue 索引 A 值为表，以寄存器或常量索引 B 的值为键，将寄存器或常量值 C 存入表 |
+| `JMP`      | `iAsBx` | 无条件跳转；关闭 Upvalue 值                                 |

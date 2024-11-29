@@ -2,7 +2,7 @@
 
 通过 `pacman` 安装多个版本 JDK 后，可以通过 `archlinux-java` 命令方便的切换系统默认版本
 
-```bash
+```shell
 # 安装 jdk
 sudo pacman -S jdk8-openjdk jdk17-openjdk jdk21-openjdk
 ```

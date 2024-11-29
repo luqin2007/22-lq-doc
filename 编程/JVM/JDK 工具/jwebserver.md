@@ -2,7 +2,7 @@
 
 简单的静态 Web 服务器
 
-```bash
+```shell
 javawebserver -p <端口> -d <资源目录> -o <日志级别>
 ```
 

@@ -610,7 +610,7 @@ MongoDB 复制集群至少有两个节点，各个节点角色有：
 	- Delayed 节点：落后于 Primary 节点一段时间的 Hidden 节点，可用于写入无效数据时的恢复
 ### 主节点
 
-```bash
+```shell
 mongod --port <端口> --dbpath "<数据库存储位置>" --replSet 集群名
 ```
 
@@ -641,7 +641,7 @@ MongoDB 提供基于文件的分布式文件存储系统 GridFS，用于存储�
 
 > [!note] GridFS 管理工具 `mongofile` 不包含在 mongo shell 中，需要独立下载
 
-```bash
+```shell
 # 存入
 mongofiles -d gridfs put <文件名>
 ```
@@ -672,7 +672,7 @@ Journaling 日志包含两个内存视图，通过内存映射实现：
 ````tabs
 tab: 导出
 
-```bash
+```shell
 mongoexport \
 -d <数据库名> \
 -c <Collection名> \
@@ -684,7 +684,7 @@ mongoexport \
 
 tab: 导入
 
-```bash
+```shell
 mongoimport \
 -d <数据库名> \
 -c <Collection名> \
@@ -701,7 +701,7 @@ mongoimport \
 ````tabs
 tab: 备份
 
-```bash
+```shell
 mongodump \
   -h <数据库服务器地址> \
   -d <数据库名> \
@@ -710,7 +710,7 @@ mongodump \
 
 tab: 恢复
 
-```bash
+```shell
 mongostore \
   -d <数据库名> \
   -o <备份目录>

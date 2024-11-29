@@ -33,7 +33,7 @@ console.log("Svg Icons", svgIcons);
 
 需要将 `svg` 文件解析为 `<symbol>` 标签才能使用，借助 `svg-sprite-loader` 插件处理
 
-```bash
+```shell
 npm install svg-sprite-loader --D
 ```
 

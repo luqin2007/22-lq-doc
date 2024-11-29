@@ -8,7 +8,7 @@
 
 ![[Pasted image 20230508153819.png]]
 
-```bash
+```shell
 npm i -g ts-node
 ```
 
@@ -37,7 +37,7 @@ npm i -g ts-node
 
 `ts-node` 不能安装到全局，需要安装到项目中
 
-```bash
+```shell
 npm install ts-node
 ```
 
@@ -68,7 +68,7 @@ npm install ts-node
 
 在项目中安装 `@types/express`
 
-```bash
+```shell
 npm i @types/express --save-dev
 ```
 

@@ -1,7 +1,7 @@
 
 `javap` 是 Java 提供的工具，可以查看 class 文件内部细节。Class 字节码可通过 `javap` 从二进制格式反编译成可读文件格式。
 
-```bash
+```shell
 javap [options] class文件1 class文件2 ...
 ```
 

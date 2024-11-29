@@ -1,6 +1,6 @@
 
 > [!error]
-> ```bash
+> ```shell
 > 12:57:54 [vite] Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. Install @vitejs/plugin-vue to handle .vue files.
 > ```
 

@@ -27,7 +27,7 @@ Dapper 促生了多个开源实现，后来出现了原生计算基金会（Clou
 
 以 Jaeger 为例，可以直接通过 Docker 镜像启动
 
-```bash
+```shell
 docker run -d --name jaeger \
            -p 6831:6831/udp -p 16686:16686 -p 14268:14268 \
            jaegertracing/all-in-one:1.55

@@ -14,7 +14,7 @@ Bash 支持一维数组和关联数组，暂不支持多维数组。
 | `!arr[*]`，`!arr[@]` | 输出所有下标         |                                                          |
 > [!note] 索引不连续时，`*` 不会输出不存在的索引
 
-```bash
+```shell
 name[0]="Jacob"
 name[1]="Rose"
 name[2]="Vicky"
@@ -44,7 +44,7 @@ done
 
 也可以使用 `()` 创建数组，下标从 0 开始连续创建，以 ` ` 分隔
 
-```bash
+```shell
 name=(Jacob Rose Vicky Rick  TinTin)
 echo ${name[*]}
 echo ${!name[*]}
@@ -55,7 +55,7 @@ echo ${!name[*]}
 
 > [!note] 普通数组与关联数组之间不可以互相转化
 
-```bash
+```shell
 declare -A man
 man[name]=TOM
 man[age]=26
@@ -69,7 +69,7 @@ echo ${!man[*]}
 
 关联数组也支持 `()` 初始化
 
-```bash
+```shell
 declare -A woman
 woman=([name]=lucy [phone]=13999999999 [age]=27 [addr]=Xian)
 
@@ -83,7 +83,7 @@ echo ${!woman[*]}
 > [!example] 统计 Nginx 日志
 ```reference fold
 file: "@/_resources/codes/linuxshell/nginx_log.sh"
-lang: "bash"
+lang: "shell"
 ```
 # Subshell
 

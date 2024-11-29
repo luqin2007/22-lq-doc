@@ -90,7 +90,7 @@ image: http://apache-kafka.org/images/apache-kafka.png
 	- 每个分区中消息是有序地，但多个分区之间是无序的 - 若要保证所有消息有序应指定固定分区 1
 	- 偏移量：offset，消息在分区的唯一编号
 
-```bash
+```shell
 # 启动内嵌 ZooKeeper 服务器
 .\bin\windows\zookeeper-server-start .\config\zookeeper.properties
 # 启动 Kafka 服务器
@@ -99,7 +99,7 @@ image: http://apache-kafka.org/images/apache-kafka.png
 
 测试（发送端和接收端分别是两个命令行窗口），此时在发送端发送的数据，接收端应该可以看到。
 
-```bash
+```shell
 # 创建 Topic
 .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic springcloud-msg
 # 发送端

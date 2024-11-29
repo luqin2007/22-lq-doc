@@ -16,14 +16,14 @@
 * `--memory`、`-m`：内存可用最大值。设置该参数后允许的最小值为 `4m`
 * `--kernel-memory`：容器可使用的最大内核内存量，可能会阻塞宿主机
 
-```bash
+```shell
 docker run -it name streel --memory 256m
 ```
 
 * `--memory-reservation`：允许指定小于 `--memory` 的软限制，当宿主机内存不足时会激活该限制，仅 `--memory` 设置后可用
 * `--oom-kill-disable`：关闭 OOM 优先级机制，仅 `--memory` 设置后可用
 
-```bash
+```shell
 docker run -it name streel --memory 256m --memory-reservation 128m
 ```
 

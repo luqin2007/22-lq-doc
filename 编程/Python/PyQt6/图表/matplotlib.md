@@ -1,4 +1,4 @@
-```bash
+```shell
 pip install matplotlib
 ```
 

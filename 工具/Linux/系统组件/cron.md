@@ -13,7 +13,7 @@
 
 # crontab
 
-```bash
+```shell
 crontab [-u <用户名>] <options>
 ```
 

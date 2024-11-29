@@ -39,7 +39,7 @@ Debug 模式下，允许我们在文件变化并保存后自动重载，不需�
 
 实际上，这是通过环境变量实现的
 
-```bash
+```shell
 # windows
 set FLASK_DEBUG=1
 # linux

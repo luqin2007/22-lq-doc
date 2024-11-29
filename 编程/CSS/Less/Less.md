@@ -7,13 +7,13 @@ Leaner Style Sheets，是一种向后兼容的 CSS 扩展语言。
 
 Less 有一套配合的编译工具 `less.js`，通过 `npm` 安装，常安装于全局：
 
-```bash
+```shell
 npm install less -g
 ```
 
 `lessc` 工具用于编译 `less` 文件到 `CSS`
 
-```bash
+```shell
 lessc [option option=parameter ...] <source> [description]
 ```
 - option：参数

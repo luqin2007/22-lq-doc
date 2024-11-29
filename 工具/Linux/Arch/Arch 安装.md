@@ -36,7 +36,7 @@
 - `EFI` 分区挂载到 `/mnt/efi`
 - `swap` 分区使用 `swapon` 启用
 
-```bash
+```shell
 mount /dev/<根目录分区> /mnt
 mount --mkdir /dev/<EFI 分区> /mnt/efi
 swapon /dev/<swap 分区>
@@ -66,13 +66,13 @@ image: https://help.mirrors.cernet.edu.cn/og-help.mirrors.cernet.edu.cn/default.
 
 - `fstab` 分区
 
-```bash
+```shell
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
 - 配置新系统
 
-```bash
+```shell
 arch-chroot /mnt
 # 时区
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -93,7 +93,7 @@ passwd <用户名>
 
 选择使用 grub 作为引导程序
 
-```bash
+```shell
 # 安装工具
 pacman -S grub efibootmgr
 # 安装 grub

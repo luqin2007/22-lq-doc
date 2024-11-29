@@ -1,12 +1,12 @@
 PyInstaller 是一个将 Python 脚本打包成应用程序的工具，会在项目目录下会产生 `dist`  目录，包含可执行程序
 
-```bash
+```shell
 pip install Pyinstaller
 ```
 
 若 Python 脚本只有一个文件，可以直接创建
 
-```bash
+```shell
 pyinstaller -F <python 脚本路径>
 ```
 
@@ -17,7 +17,7 @@ pyinstaller -F <python 脚本路径>
 
 若项目比较大，或包含其他依赖库，需要使用 `spec` 配置文件辅助
 
-```bash
+```shell
 pyi-makespec <脚本入口 py 文件>
 ```
 
@@ -37,7 +37,7 @@ LINES: "4-16"
 
 修改后，即可开始打包
 
-```bash
+```shell
 pyinstaller <spec 文件>
 ```
 

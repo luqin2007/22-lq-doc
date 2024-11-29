@@ -6,7 +6,7 @@
 
 1. 创建容器
 
-```bash
+```shell
 # 创建并启动一个 nginx 容器，映射 80 端口
 docker run --name webserver -d -p 80:80 nginx
 ```
@@ -19,7 +19,7 @@ docker run --name webserver -d -p 80:80 nginx
 
 进入 `webserver` 容器并修改 `index.html`
 
-```bash
+```shell
 docker exec -it webserver bash
 echo '<h1>Hello Docker!</h1>' > /usr/share/nginx/html/index.html
 exit
@@ -29,7 +29,7 @@ exit
 
 查看镜像具体改动：`docker diff` 
 
-```bash
+```shell
 docker diff webserver
 ```
 
@@ -40,7 +40,7 @@ docker diff webserver
 	*  `--author` ：作者
 	*  `--message` ：修改内容
 
-```bash
+```shell
 docker commit --author "Tag Wang <twang2218@gmail.com>" --message "修改默认网页" webserver nginx:v2
 ```
 
@@ -60,7 +60,7 @@ RUN echo '<h1>Hello Docker!</h1>' > /usr/share/nginx/html/index.html
 
 2. 生成镜像
 
-```bash
+```shell
 docker build -t nginx:v3 .
 ```
 # 导出镜像
@@ -86,7 +86,7 @@ docker build -t nginx:v3 .
 
 使用 `docker search <name>` 从远程镜像服务器查找镜像
 
-```bash
+```shell
 docker search mysql
 ```
 
@@ -99,7 +99,7 @@ docker search mysql
 
 查找到镜像后，使用 `docker pull <name>:<tag>` 下载镜像，`<tag>` 默认为 `latest`
 
-```bash
+```shell
 docker pull mysql
 ```
 

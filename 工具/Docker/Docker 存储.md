@@ -41,13 +41,13 @@ Docker 存放数据的资源有两类：
 
 使用 `docker volume create <name>`  创建 `volume` 
 
-```bash
+```shell
 docker volume create nginx_volum
 ```
 
 使用 `docker inspect <name>`  可以查看 `volume`  配置，包括挂载点等
 
-```bash
+```shell
 docker inspect nginx_volume
 ```
 
@@ -57,7 +57,7 @@ docker inspect nginx_volume
 
 > [!success] 创建容器时，若未指定任何挂载源，Docker 会自动创建一个匿名数据卷
 
-```bash
+```shell
 # 创建一个匿名卷挂载到 /usr/share/nginx/html
 docker run -dt -v /usr/share/nginx/html --name nginx_with_volume nginx
 ```
@@ -67,14 +67,14 @@ docker run -dt -v /usr/share/nginx/html --name nginx_with_volume nginx
 
 与 `volume`  相似，但 `bind mounts`  可以指定挂载到宿主机的完整路径。如果不存在，Docker 会自动创建对应目录（**不能创建文件**）
 
-```bash
+```shell
 # 将本地 /nginx/html 挂载到容器 /usr/share/nginx/html
 docker run -dt -v /nginx/html:/usr/share/nginx/html --name nginx nginx
 ```
 
 可以以设置读写权限
 
-```bash
+```shell
 # 将本地 /nginx/html 挂载到容器 /usr/share/nginx/html，但只读
 docker run -dt -v /nginx/html:/usr/share/nginx/html:ro --name nginx nginx
 ```
@@ -84,7 +84,7 @@ docker run -dt -v /nginx/html:/usr/share/nginx/html:ro --name nginx nginx
 
  `tmpfs mount`  可以使用 `--tmpfs`  或 `--mount type=tmpfs`  使用：（下面两条等效）
 
-```bash
+```shell
 docker run -d -it --name tmptest --mount type=tmpfs,destination=/app nginx:latest
 docker run -d -it --name tmptest --tmpfs /app nginx:latest
 ```

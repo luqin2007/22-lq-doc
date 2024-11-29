@@ -4,7 +4,7 @@
 
 Linux 下载后设置环境变量：
 
-```bash
+```shell
 # ~/.bashrc，这里 go 解压到 ~/Application/go 中
 export GOPATH=/go
 export PATH=$PATH:~/Application/go/bin

@@ -13,7 +13,7 @@ Vue 自带的一个服务器。对于一个 Vue 项目，使用 `npm run serve` 
 
 使用 `--mode` 可以指定自定义模式
 
-```bash
+```shell
 # 自定义的 demo 模式
 vue-cli-service serve --mode demo
 ```

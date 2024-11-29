@@ -8,7 +8,7 @@
 
 2. 配置 Zerotier 服务：通过 `ssh` 连接路由器，创建并启动 Zerotier
 
-```bash
+```shell
 echo "config zerotier sample_config
     option enabled 1
 " > /etc/config/zerotier
@@ -17,7 +17,7 @@ service zerotier start
 
 3. 可选：配置自己的 `planet`、`moons.d` 服务器
 
-```bash
+```shell
 # 复制默认配置
 mkdir /etc/zerotier
 cp -r /var/lib/zerotier-one/* /etc/zerotier/
@@ -38,7 +38,7 @@ echo "config zerotier 'sample_config'
 
 重启 Zerotier，检查节点
 
-```bash
+```shell
 service zerotier start
 zerotier-cli peers
 ```
@@ -47,7 +47,7 @@ zerotier-cli peers
 
 4. 加入网络，记得在 [[../../远程连接与共享/ZeroTier/ZeroTier|ZeroTier]] 授权路由器
 
-```bash
+```shell
 zerotier-cli join 85edc1bd140ecbfc # 85edc1bd140ecbfc 为网络 ID
 # 查看路由器 ID
 zerotier-cli listnetworks
@@ -57,7 +57,7 @@ zerotier-cli listnetworks
 
 5. 在每次修改配置，如加入网络等，重新拷贝持久化目录
 
-```bash
+```shell
 cp -r /var/lib/zerotier-one/* /etc/zerotier/
 service zerotier restart
 ```

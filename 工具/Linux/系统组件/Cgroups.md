@@ -36,7 +36,7 @@ Cgroups 通过三个组件的互相协作实现的
 
     创建一个目录（`cgroup-test`）作为挂载点，挂载到 `cgroup` 作为 `hierarchy`
 
-    ```bash
+    ```shell
     mkdir cgroup-test
     sudo mount -t cgroup -o none,name=cgroup-test cgroup-test ./cgroup-test
     ```
@@ -54,7 +54,7 @@ Cgroups 通过三个组件的互相协作实现的
 
     直接创建目录即可，系统自动创建对应配置文件
 
-    ```bash
+    ```shell
     cd cgroup-test/
     sudo mkdir cgroup-1
     sudo mkdir cgroup-2
@@ -66,7 +66,7 @@ Cgroups 通过三个组件的互相协作实现的
 
 3. 在 `cgroups` 中移动进程。系统默认进程在根 `cgroups` 上，只需要将进程 ID 写入对应 `cgroups` 的 `tasks` 上即可。
 
-    ```bash
+    ```shell
     cd cgroup-1
     # 将当前终端进程写入 cgroup-1 的 tasks 中
     sudo sh -c "echo $$ >> tasks"
@@ -78,7 +78,7 @@ Cgroups 通过三个组件的互相协作实现的
 
 4. 通过 `subsystem` 限制 `cgroups` 资源
 
-    ```bash
+    ```shell
     sudo sh -c "echo "100m" > memory.limit_in_bytes"
     ```
 

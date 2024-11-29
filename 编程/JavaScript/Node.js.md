@@ -114,7 +114,7 @@ npm 管理的项目通常包含以下部分：
 
 可通过以下命令切换下载源
 
-```bash
+```shell
 npm config get registry
 npm config set registry=新下载源
 # 校验是否切换成功
@@ -123,7 +123,7 @@ npm config get registry
 
 也可以使用 nrm 快速切换下载源
 
-```bash
+```shell
 # 安装到全局
 npm i nrm -g
 

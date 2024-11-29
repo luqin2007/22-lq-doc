@@ -64,13 +64,13 @@ Babel 需要 npm 环境，安装到项目目录下即可，无需安装到全局
 
 1. 在项目中安装 Babel
 
-```bash
+```shell
 npm install --save-dev babel-cil
 ```
 
 2. 执行转换
 
-```bash
+```shell
 babel src -d lib
 ```
 
@@ -91,7 +91,7 @@ babel src -d lib
 
 之后就可以直接构建了。
 
-```bash
+```shell
 npm run build
 ```
 

@@ -1,6 +1,6 @@
 大数据处理的统一分析引擎，分布式计算框架
 
-```bash
+```shell
 pip install pyspark
 ```
 

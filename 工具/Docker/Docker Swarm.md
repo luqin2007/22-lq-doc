@@ -74,33 +74,33 @@ Docker 容器配置：
 
     在 192.168.164.139 上初始化一个集群，该节点将成为 `Leader`  并作为管理节点，其他加入的成员将成为 `Reachable` 
 
-    ```bash
+    ```shell
     docker swarm init --advertise-addr=192.168.164.139
     ```
 2. 加入集群
 
     管理节点先查看令牌信息，同时也直接查询出加入集群的指令
 
-    ```bash
+    ```shell
     docker swarm join-token manager
     ```
 
     之后，使用 `docker swarm join`  即可
 
-    ```bash
+    ```shell
     docker swarm join --token <token> <manager-ip>:2377
     ```
 ## 信息
 
 使用 `docker info`  可以查看所有节点信息和 Swarm 集群信息
 
-```bash
+```shell
 docker info
 ```
 
 通过 `docker node ls`  查看集群环境下各节点信息
 
-```bash
+```shell
 docker node ls
 ```
 
@@ -119,24 +119,24 @@ docker node ls
 
     该指令需要在管理节点执行
 
-    ```bash
+    ```shell
     docker node update --availability=drain <name|id>
     ```
 2. 若删除管理节点，需要将其降级为工作节点
 
     一个集群应至少有一个管理节点
 
-    ```bash
+    ```shell
     docker node demote <name|id>
     ```
 3. 在要移除的节点上运行移除集群
 
-    ```bash
+    ```shell
     docker swarm leave
     ```
 4. 在管理节点中删除节点
 
-    ```bash
+    ```shell
     docker node rm <name|id>
     ```
 # 服务管理
@@ -148,7 +148,7 @@ docker node ls
 
     创建名为 `mynginx` ，使用 `nginx`  镜像的服务（镜像）
 
-    ```bash
+    ```shell
     docker service create --replicas 1 --name mynginx -p 80:80 nginx:latest
     ```
 2. 查看服务运行信息
@@ -160,13 +160,13 @@ docker node ls
 
 集群创建后，允许通过指令弹性扩缩容 Service 中的容器数量
 
-```bash
+```shell
 docker service scale <server name|id>=<count>
 ```
 
 或
 
-```bash
+```shell
 docker service update --replicas <count> <server name|id>
 ```
 ## 调度策略
@@ -179,7 +179,7 @@ Swarm 选择运行的节点时，根据指定的策略计算最适合节点，�
 
 Docker Swarm 允许实现服务的平滑升级，更新服务不停机，客户端无感知
 
-```bash
+```shell
 docker service update --image <image:new-tag> <name>
 ```
 

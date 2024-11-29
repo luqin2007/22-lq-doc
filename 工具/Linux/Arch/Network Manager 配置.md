@@ -2,13 +2,13 @@
 
 若系统安装过程中安装了，可以跳过
 
-```bash
+```shell
 pacman -S networkmanager
 ```
 
 # 启动
 
-```bash
+```shell
 systemctl start NetworkManager.service
 ```
 
@@ -26,7 +26,7 @@ NetworkManager 提供一个命令行界面 `nmcli` 和一个图形界面 `nmtui`
 
 命令行：
 
-```bash
+```shell
 # 列出网络设备
 nmcli device
 # 查找网络
@@ -43,7 +43,7 @@ nmcli radio wifi off
 
 # 管理无线
 
-```bash
+```shell
 # 列出连接列表
 nmcli connection
 # 激活已保存连接

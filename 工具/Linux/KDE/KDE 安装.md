@@ -6,7 +6,7 @@ flexGrow=1
 ===
 # 完整安装
 
-```bash
+```shell
 # 安装 Plasm 桌面
 pacman -S plasma
 # 安装 KDE 应用
@@ -18,7 +18,7 @@ flexGrow=1
 ===
 # 最小安装
 
-```bash
+```shell
 # 安装 Plasm 桌面
 pacman -S plasma-desktop
 # 安装 KDE 应用
@@ -34,26 +34,26 @@ pacman -S kde-applications-meta
 
 # 启动
 
-```bash
+```shell
 /usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
 ```
 
 使用 `xorg-xinit`
 
-```bash title:.xinitrc
+```shell title:.xinitrc
 export DESKTOP_SESSION=plasma
 exec startplasma-x11
 ```
 
 或直接使用 `startx` 启动
 
-```bash
+```shell
 startx /usr/bin/startplasma-x11
 ```
 
 # 开机加载
 
-```bash
+```shell
 systemctl enable sddm.service
 ```
 

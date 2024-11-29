@@ -1,6 +1,6 @@
 扫描代码中过时的 API，包括 jar、类及目录、源文件等
 
-```bash
+```shell
 jdeprscan <路径>
 ```
 

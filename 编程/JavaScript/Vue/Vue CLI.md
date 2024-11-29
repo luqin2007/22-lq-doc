@@ -9,19 +9,19 @@ Vue CLI 是一个基于 Vue.js 进行快速开发的系统
 
 1. 全局安装 `@vue/cli`
 
-    ```bash
+    ```shell
     npm i -g @vue/cli
     ```
 
     升级：
 
-    ```bash
+    ```shell
     npm update -g @vue/cli
     ```
 
 2. 打开图形化界面，通过图形化界面引导创建流程
 
-    ```bash
+    ```shell
     vue ui
     ```
 

@@ -31,7 +31,7 @@ ssh 连接地址就是管理地址，可以在极路由后台查询
 
 打开命令行，进行连接，密码即后台管理密码
 
-```bash
+```shell
 ssh 192.168.199.1 -p 22 -l root
 ```
 
@@ -39,7 +39,7 @@ ssh 192.168.199.1 -p 22 -l root
 
 出现 该界面表示登陆成功。运行以下命令开启永久 ssh 登录：
 
-```bash
+```shell
 /etc/init.d/dropbear enable && /etc/init.d/dropbear start
 ```
 

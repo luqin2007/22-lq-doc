@@ -20,21 +20,21 @@ Vite 将应用模块分为依赖和源代码两类，对其采用不同策略
 
 1. 安装，可以安装到全局，以后再创建项目不需要重新安装
 
-    ```bash
+    ```shell
     npm i vite -g
     ```
 2. 初始化项目
 
-    ```bash
+    ```shell
     npm init vite <project-name>
     ```
 3. 安装依赖
 
-    ```bash
+    ```shell
     npm i
     ```
 4. 启动开发服务器
 
-    ```bash
+    ```shell
     npm run dev
     ```

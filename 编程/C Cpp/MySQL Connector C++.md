@@ -151,7 +151,7 @@ auto table = schema.getTable("<table-name>", true);
 
 1. MySQL 版本过低或缺少 mysqlx 支持，使用 `mysql SHOW plugins` 确认
 
-    ```bash
+    ```shell
     # 设用户名 root
     mysql -u root -p -e "SHOW plugins"
     ```

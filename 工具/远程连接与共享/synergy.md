@@ -24,7 +24,7 @@
 
 * 下载源代码
 
-```bash
+```shell
 git clone git@github.com:symless/synergy-core.git
 ```
 
@@ -107,7 +107,7 @@ synergy-core 使用 OpenSSL 1.1，安装的 OpenSSL 版本为 3.1。
 
 Synergy 需要服务运行
 
-```bash
+```shell
 sc create synergy binPath= "synergy安装目录\synergyd"
 ```
 

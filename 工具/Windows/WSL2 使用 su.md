@@ -4,7 +4,7 @@ WSL2 的 Ubuntu 系统默认没有 `root` 用户密码，无法使用 `su`
 
 设置 `root` 密码即可
 
-```bash
+```shell
 sudo passwd root
 ```
 

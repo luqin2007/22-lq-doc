@@ -154,7 +154,7 @@ Spring 支持加密传输配置文件，主要依赖于 `JCE`（Java Cryptograph
 
 利用 `Keytool` 等工具生成密钥和证书
 
-```bash
+```shell
 # alias     - alias
 # keypass   - secret
 # storepass - password

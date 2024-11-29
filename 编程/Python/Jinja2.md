@@ -3,7 +3,7 @@ Python 模板库，可用于网页生成时将网页逻辑与具体数据分离�
 * 相比 Mako：仅有控制语句，不允许编写太多业务逻辑
 * 相比 Django：性能更好
 
-```bash
+```shell
 pip3 install jinja2
 ```
 

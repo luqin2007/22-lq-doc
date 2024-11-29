@@ -374,7 +374,7 @@ tasks.register('hello') {
 }
 ```
 
-```bash
+```shell
 .\gradlew tasks
 ```
 
@@ -402,7 +402,7 @@ tasks.register('afterHello') {
 }
 ```
 
-```bash
+```shell
 ./gradlew afterHello
 ```
 

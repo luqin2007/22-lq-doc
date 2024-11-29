@@ -4,7 +4,7 @@
 > - 支持 `+`，`?`，`|`
 > - `{}` 和 `()` 不需要 `\` 转义
 
-```bash
+```shell
 grep <option> <regex> <content>
 ```
 

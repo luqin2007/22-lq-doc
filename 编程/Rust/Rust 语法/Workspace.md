@@ -16,7 +16,7 @@ members = [
 
 之后，在项目目录中新建 Crate:
 
-```bash
+```shell
 cargo new test_crate
 # Created binary (application) `test_crate` package
 ```
@@ -30,7 +30,7 @@ test_crate = { path='./test_crate' }
 
 之后运行时，需要指定依赖的二进制包
 
-```bash
+```shell
 cargo run -p test_crate
 ```
 

@@ -4,11 +4,11 @@
 	- `-fN-M`：返回几个元素，N、M 可省略（即 1 和最后一个）
 
 > [!example] 按空格切割字符串，返回第二个串
-> ```bash
+> ```shell
 > echo "a b c" | cut -d ' ' -f2
 > ```
 
 > [!example] 按空格切割字符串，返回第二个串到字符串结尾为止
-> ```bash
+> ```shell
 > echo "a b c" | cut -d ' ' -f2-
 > ```

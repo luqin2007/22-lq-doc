@@ -7,7 +7,7 @@ JVM 的 K2 编译器进入 Beta 阶段。现在 K2 编译器支持多平台了�
 
 指定 languageVersion 为 2.0，设置以下编译参数即可
 
-```bash
+```shell
 ./gradle assemble -Pkotlin.experimental.tryK2=true
 ```
 ## 以下新特性转正

@@ -1,6 +1,6 @@
 QT Designer 需要安装 qt6-tools
 
-```bash
+```shell
 pip install pyqt6-tools
 ```
 
@@ -42,7 +42,7 @@ QT 设计器打开后默认先要选择窗体
 
 `.ui` 文件通过 `PyUic` 转换成 py 文件，位于 `<env>/bin/pyuic6`
 
-```bash
+```shell
 pyuic6 -o <.py 文件> <.ui 文件>
 ```
 

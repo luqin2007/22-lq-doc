@@ -2,7 +2,7 @@
 
 `yay` 更新错误，需要重新安装 `yay`
 
-```bash
+```shell
 sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay

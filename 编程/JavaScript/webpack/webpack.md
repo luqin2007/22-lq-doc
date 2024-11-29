@@ -5,7 +5,7 @@
 ![[Pasted image 20240807234908.png]]
 通常通过 NPM 安装 Webpack
 
-```bash
+```shell
 npm install webpack --save-dev
 npm install webpack-cli --save-dev
 npm install webpack-dev-server --save-dev
@@ -57,7 +57,7 @@ module.exports = {
 
  `webpack`  模式定义了 `webpack`  的执行环境，也可以通过命令参数配置
 
-```bash
+```shell
 webpack --mode=production
 ```
 
@@ -210,7 +210,7 @@ file: "@/_resources/codes/node.js/webpack/mpa/index.html"
 
 `webpack` 默认仅识别 `js`。`css` 等其他模块需要特定加载器，通过 `npm install` 安装
 
-```bash
+```shell
 npm install css-loader --save-dev
 npm install style-loader --save-dev
 ```
@@ -249,7 +249,7 @@ tab: 使用命令行
 例：对 `.jade` 应用 `jade-loader`，对 `.css` 文件应用 `css-loader` 和 `style-loader`
 <br/>
 
-```bash
+```shell
 webpack --module-bindjade-loader--module-bind'css=style-loader!css-loader'
 ```
 ````
@@ -327,7 +327,7 @@ host: json5.org
     * `file-loader`：加载图片
     * `url-loader`：将图片编码成 `base64` 写入页面，减少服务器请求数量
 
- ```bash
+ ```shell
  npm i css-loader style-loader file-loader url-loader --save-dev
  ```
 
@@ -386,7 +386,7 @@ module.exports {
 
 1. 安装加载器和插件
 
-```bash
+```shell
 npm install css-loader style-loader mini-css-extract-plugin --save-dev
 ```
 

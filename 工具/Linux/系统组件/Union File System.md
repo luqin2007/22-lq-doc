@@ -9,7 +9,7 @@ Union File System，简称 `UnionFS` ，是为 Linux、FreeBSD、NetBSD 设计�
 
 Advanced Multi-Layerd Unification Filesystem，重写了 UnionFS 1.x，提高了可靠性和性能，引入可写分支负载等新功能。
 
-> ```bash
+> ```shell
 > sudo mount -t aufs -o \
 >      dirs=./container-layer:./image-layer4:./image-layer3:./image-layer2:./image-layer1 none ./mnt
 > ```
@@ -29,7 +29,7 @@ Advanced Multi-Layerd Unification Filesystem，重写了 UnionFS 1.x，提高了
 
 OverlayFS 是一种堆叠文件系统，它依赖并建立在其它的文件系统之上，不直接参与磁盘空间结构的划分，仅将原来文件系统中不同目录和文件进行合并。
 
-```bash
+```shell
 sudo mount -t overlay -o\
      lowerdir=image-layer4:image-layer3:image-layer2:image-layer1,\
      upperdir=container-layer,\

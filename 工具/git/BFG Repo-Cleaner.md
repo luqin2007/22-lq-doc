@@ -2,7 +2,7 @@
 
 1. 创建仓库副本
 
-```bash
+```shell
 git clone --mirror <仓库名>
 ```
 
@@ -10,7 +10,7 @@ git clone --mirror <仓库名>
 
 > [!tip] `bfg` 只会删除历史提交中的内容，不会影响当前版本文件
 
-```bash
+```shell
 java -jar bfg.jar <参数> <仓库地址>
 ```
 
@@ -22,7 +22,7 @@ java -jar bfg.jar <参数> <仓库地址>
 
 3. 重新提交
 
-```bash
+```shell
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 git push
 ```

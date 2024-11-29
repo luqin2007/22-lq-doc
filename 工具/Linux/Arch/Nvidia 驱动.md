@@ -1,6 +1,6 @@
 # 安装
 
-```bash
+```shell
 lspci -k | grep -A 2 -E "(VGA|3D)"
 ```
 

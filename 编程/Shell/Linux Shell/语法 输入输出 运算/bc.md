@@ -7,13 +7,13 @@
 
 ```reference
 file: "@/_resources/codes/linuxshell/calc.sh"
-lang: "bash"
+lang: "shell"
 ```
 # 进制转换
 
 `ibase=n` 设置输入数字为 n 进制，`obase=n` 设置输出数字为 n 进制
 
-```bash
+```shell
 echo "obase=2;10" | bc
 echo "ibase=16;obase=2;FF" | bc
 ```
@@ -21,7 +21,7 @@ echo "ibase=16;obase=2;FF" | bc
 
 `length(n)` 可以计算计算结果的长度，对于浮点不包含小数点和前导 0
 
-```bash
+```shell
 echo "length(123456)" | bc
 echo "obase=2;length(123456)" | bc
 echo "length(123.456)" | bc

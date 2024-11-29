@@ -425,7 +425,7 @@ fflush(stdout);
 
 很多系统（DOS、UNIX）都支持通过以下方法重定向输入、输出流
 
-```bash
+```shell
 # 输入流：[data] 文件
 # 输出流：[answer] 文件
 program < data > answer

@@ -36,7 +36,7 @@ MySQL 的启动与停止可以有两种方法：
 1. 在系统的服务中启动或停止 MySQL 安装后注册的服务，默认名称为 MySQL80
 2. 使用命令行：（也是服务）
 
-```bash
+```shell
 # 启动
 net start mysql80
 

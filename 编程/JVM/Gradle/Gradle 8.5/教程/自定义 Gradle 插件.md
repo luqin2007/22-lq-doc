@@ -24,7 +24,7 @@ class GreetPlugin implements Plugin<Project> {
 }
 ```
 
-```bash
+```shell
 # Hello from the GreetingPlugin
 gradle -q hello
 ```
@@ -65,7 +65,7 @@ greeting {
 }
 ```
 
-```bash
+```shell
 # Hi from Gradle
 gradle -q hello
 ```
@@ -283,7 +283,7 @@ environments {
 }
 ```
 
-```bash
+```shell
 # 执行任务
 gradle deployToSecondServer
 ```
@@ -438,7 +438,7 @@ gradlePlugin {
 ![[Pasted image 20240202141112.png]]
 5. 发布
 
-```bash
+```shell
 # 直接发布
 ./gradlew publishPlugins
 # 发布验证

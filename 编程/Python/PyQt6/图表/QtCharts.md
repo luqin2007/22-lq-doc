@@ -1,6 +1,6 @@
 QtCharts 由 Riverbank 出品，可绘制各种函数曲线、柱状图、折线图、饼状图等
 
-```bash
+```shell
 pip install PyQt6-Charts PyQt6
 ```
 # 图表

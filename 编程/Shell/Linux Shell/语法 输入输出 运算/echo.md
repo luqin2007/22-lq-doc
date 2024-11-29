@@ -26,7 +26,7 @@
 
 ```reference
 file: "@/_resources/codes/linuxshell/echo_menu.sh"
-lang: "bash"
+lang: "shell"
 ```
 
 ![[../../../../_resources/images/Pasted image 20241120191326.png]]

@@ -8,7 +8,7 @@ ORM：Object Relation Mapping，对象关系映射，解决面向对象语言与
 
 ![[Pasted image 20230730130431-20240513185636-9v81drv.png]]
 
-```bash
+```shell
 pip3 install sqlalchemy
 ```
 

@@ -1,6 +1,6 @@
 MySQL 连接模块
 
-```bash
+```shell
 npm i mysql2
 ```
 

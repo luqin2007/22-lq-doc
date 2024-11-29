@@ -20,7 +20,7 @@ Port 443
 
 * 设置 git 代理
 
-```bash
+```shell
 # http || https
 git config --global http.proxy 127.0.0.1:7890
 git config --global https.proxy 127.0.0.1:7890
@@ -32,14 +32,14 @@ git config --global https.proxy socks5 127.0.0.1:7891
 
 查看代理：
 
-```bash
+```shell
 git config --global --get http.proxy
 git config --global --get https.proxy
 ```
 
 取消代理：
 
-```bash
+```shell
 git config --global --unset-all http.proxy
 git config --global --unset-all https.proxy
 ```

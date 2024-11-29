@@ -3,7 +3,7 @@
 
 `javadoc` 支持导出 HTML5 文档
 
-```bash
+```shell
 javadoc --html5
 ```
 

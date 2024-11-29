@@ -16,7 +16,7 @@
 
 需要安装 `cargo-eval` 库，详见 [Fix Rust Execution #120](https://github.com/twibiral/obsidian-execute-code/pull/120)
 
-```bash
+```shell
 cargo install cargo-eval
 ```
 # 参考

@@ -6,7 +6,7 @@
 
 `Vue3.x` 使用 `@vue/compiler-sfc` 取代了 `vue-template-compiler`，同样需要保持与 `vue` 版本相同（通常最新的都是相同的）
 
-```bash
+```shell
 npm i vue @vue/compiler-sfc --save-dev
 ```
 

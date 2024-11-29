@@ -19,7 +19,7 @@ JavaAgent 的类转换（Instrumentation）分为三种，对应类加载的三�
 
 程序启动时，使用 `-javaagent` 参数可以加载 JavaAgent，此时对应 `Laod-Time Instrumentation`
 
-```bash
+```shell
 java ... -javaagent:JavaAgent的Jar包位置 [premain方法参数]
 ```
 

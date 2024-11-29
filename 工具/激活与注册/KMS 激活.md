@@ -2,7 +2,7 @@
 
 序列号：W269N-WFGWX-YVC9B-4J6C9-T83GX
 
-```bash
+```shell
 slmgr -ipk <序列号>
 slmgr -skms <激活服务器>
 slmgr -ato

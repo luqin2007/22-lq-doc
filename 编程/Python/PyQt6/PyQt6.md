@@ -6,7 +6,7 @@
 ---
 PyQt 是 Python 常用 GUI 库之一，是对 Qt C++ 的全面封装。
 
-```bash
+```shell
 pip install PyQt6
 ```
 

@@ -2,7 +2,7 @@
 
 若曾经创建过的密钥默认保存在 `用户文件夹/.ssh/id_rsa`
 
-```bash
+```shell
 ssh-keygen -t rsa -C "email"
 ```
 
@@ -31,7 +31,7 @@ ssh-keygen -t rsa -C "email"
 
 若设置成功，则可以登陆到 Github 的 ssh
 
-```bash
+```shell
 ssh -T git@github.com
 ```
 

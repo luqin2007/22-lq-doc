@@ -1,6 +1,6 @@
 从控制台中读取输入并存入变量中，有几个变量读几组输入
 
-```bash
+```shell
 read <options> <variables>
 ```
 

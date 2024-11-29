@@ -2,7 +2,7 @@
 
 ## target
 
-```bash
+```shell
 systemctl get-default
 systemctl set-default [target]
 ```

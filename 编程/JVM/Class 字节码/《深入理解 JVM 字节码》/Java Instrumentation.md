@@ -19,7 +19,7 @@ Java Instrumentation 有两种注入方式：Agent Jar 包和 Attach API 远程�
 
 一个加载 `Instrumentation` 的典型使用方式如下：
 
-```bash
+```shell
 java -javaagent:myagent.jar 其它参数...
 ```
 * `myagent.jar`：包含 `Instrumentation Agent` 的 Jar 包

@@ -1,6 +1,6 @@
 Linux 创建远程桌面 VNC 服务
 
-```bash
+```shell
 x0vncserver [options]
 ```
 

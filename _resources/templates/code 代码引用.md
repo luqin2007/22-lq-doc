@@ -31,8 +31,9 @@ if (range.startsWith('-')) {
     end = start
 }
 let lang = await tp.system.prompt('语言：', '')
+let fold = await tp.system.suggester(['否', '是'], [false, true], false, "是否折叠")
 -%>
-```reference
+```reference<%* if (fold) { %> fold<%* } %>
 file: "@/_resources/codes/<% filepath %>"
 <%* if (lang != '') { -%>
 lang: "<% lang %>"

@@ -178,7 +178,7 @@ echo
 echo "$func_var $global_var1 $global_var2"
 ```
 
-例外的是使用 `declare` 创建的关联数组，作为函数内部变量使用，不能在外部访问
+例外的是使用 `declare` 创建的关联数组和使用 `local <var-name>` 创建的变量，作为函数内部变量使用，不能在外部访问
 
 ```shell
 #!/bin/bash

@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiGithub",
+      "SiVmware",
       "RiSlashCommands2",
       "SiLua",
-      "SiGnubash",
-      "LiCommand",
-      "SiGithub"
+      "SiGnubash"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -163,5 +163,6 @@
   "编程/Shell": "LiCommand",
   "编程/Shell/Linux Shell": "SiGnubash",
   "编程/Lua": "SiLua",
-  "工具/Linux/cli工具": "RiSlashCommands2"
+  "工具/Linux/cli工具": "RiSlashCommands2",
+  "工具/Vmware": "SiVmware"
 }

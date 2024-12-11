@@ -1,3 +1,5 @@
+# cURL
+
 命令行文件传输工具，支持 FTP，HTTP，HTTPS，IMAP，STMP，POP3 等常见协议。
 
 ```shell
@@ -33,3 +35,12 @@ curl <options> <url>
 | size_download  | 下载数据的总字节数  |
 | speed_download | 平均每秒下载速度   |
 | time_total     | 完成一次请求的总时间 |
+# wget
+
+命令行文件下载器
+
+```shell
+wget [-b] 下载链接
+```
+
+* `-b`：后台下载，并将日志写入 `wget-log` 文件中

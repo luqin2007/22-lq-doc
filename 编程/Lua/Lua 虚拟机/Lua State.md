@@ -39,8 +39,6 @@ c = "hello"       -- string
 | `function` | 自定义结构体 `closure`  |
 | `thread`   |                   |
 | `userdata` |                   |
-- [ ] TODO therad, userdata 类型实现
-
 为每个类型创建对应的常量，由于 Lua 栈按索引存取值，额外增加一个无效类型 `LUA_TNONE`（-1）
 
 ```go title:api/consts.go

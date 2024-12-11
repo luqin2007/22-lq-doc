@@ -92,7 +92,6 @@
   "编程/JavaScript/ESLint.md": "SiEslint",
   "编程/JavaScript/Node.js.md": "SiNodedotjs",
   "编程/JavaScript/NPM 常用命令.md": "SiNpm",
-  "工具/Linux/bash": "SiGnubash",
   "编程/JavaScript/AutoX.md": "ApAutox",
   "编程/Python/PyInstaller.md": "SiPython",
   "编程/JavaScript/Melvor Idle Mod": "ApMelvor",
@@ -164,5 +163,6 @@
   "编程/Shell/Linux Shell": "SiGnubash",
   "编程/Lua": "SiLua",
   "工具/Linux/cli工具": "RiSlashCommands2",
-  "工具/Vmware": "SiVmware"
+  "工具/Vmware": "SiVmware",
+  "工具/Linux/内置工具": "SiGnubash"
 }

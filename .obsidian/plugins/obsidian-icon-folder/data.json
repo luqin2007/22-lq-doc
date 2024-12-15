@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "ApDida365",
       "RiFileWord2Fill",
       "SiXfce",
       "SiGithub",
-      "SiVmware",
-      "RiSlashCommands2"
+      "SiVmware"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -166,5 +166,6 @@
   "工具/Vmware": "SiVmware",
   "工具/Linux/内置工具": "SiGnubash",
   "工具/Linux/Xfce": "SiXfce",
-  "工具/Office ODT 部署安装.md": "RiFileWord2Fill"
+  "工具/Office ODT 部署安装.md": "RiFileWord2Fill",
+  "工具/滴答清单 crack.md": "ApDida365"
 }

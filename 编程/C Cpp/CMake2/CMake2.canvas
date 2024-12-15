@@ -1,0 +1,22 @@
+{
+	"nodes":[
+		{"id":"573ce343fed69614","type":"group","x":-420,"y":-920,"width":340,"height":380,"label":"CMake 构建"},
+		{"id":"08e9e17b537eea01","type":"text","text":"根据 `CMakeLists` 生成构建脚本\n\n`cmake -B build`","x":-400,"y":-900,"width":300,"height":120},
+		{"id":"aa2b912bace7ba71","type":"text","text":"构建\n\n`cmake --build build`","x":-400,"y":-680,"width":300,"height":120},
+		{"id":"0039e4b1492ae2dd","type":"file","file":"编程/C Cpp/CMake2/CMakeLists.md","x":-1260,"y":-920,"width":640,"height":380},
+		{"id":"dc7eaba3771f67a3","type":"text","text":"-B：指定构建目录","x":20,"y":-930,"width":250,"height":60},
+		{"id":"9d886ef40e47e403","type":"text","text":"-G：指定构建工具","x":20,"y":-810,"width":250,"height":60},
+		{"id":"0a415f5cb12f0611","type":"text","text":"`${CMAKE_CURRENT_SOURCE_DIR}`：环境变量，表示当前编译的项目目录","x":-1260,"y":-1080,"width":640,"height":60},
+		{"id":"d3233bb65e88d9b9","x":-1260,"y":-360,"width":520,"height":611,"type":"file","file":"编程/C Cpp/CMake2/依赖库.md"},
+		{"id":"dc1e4a1353b49f44","x":-1260,"y":340,"width":520,"height":400,"type":"file","file":"编程/C Cpp/CMake2/三方库.md"}
+	],
+	"edges":[
+		{"id":"c48dd707ba4a49f1","fromNode":"08e9e17b537eea01","fromSide":"bottom","toNode":"aa2b912bace7ba71","toSide":"top"},
+		{"id":"02893947e2fcd261","fromNode":"dc7eaba3771f67a3","fromSide":"left","toNode":"08e9e17b537eea01","toSide":"right"},
+		{"id":"6905bf312639f4f3","fromNode":"9d886ef40e47e403","fromSide":"left","toNode":"08e9e17b537eea01","toSide":"right"},
+		{"id":"f5fafc73476dbf54","fromNode":"0039e4b1492ae2dd","fromSide":"right","toNode":"08e9e17b537eea01","toSide":"left"},
+		{"id":"fb1749aab88d86ff","fromNode":"0a415f5cb12f0611","fromSide":"bottom","toNode":"0039e4b1492ae2dd","toSide":"top"},
+		{"id":"a0150aaa6f1c826c","fromNode":"d3233bb65e88d9b9","fromSide":"top","toNode":"0039e4b1492ae2dd","toSide":"bottom"},
+		{"id":"7e0061114189903c","fromNode":"dc1e4a1353b49f44","fromSide":"top","toNode":"d3233bb65e88d9b9","toSide":"bottom"}
+	]
+}

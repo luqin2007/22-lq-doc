@@ -1,0 +1,35 @@
+{
+	"nodes":[
+		{"id":"b1d963beba964e1d","type":"group","x":440,"y":-260,"width":1560,"height":869,"label":"make"},
+		{"id":"4bddbc5df544df17","type":"group","x":960,"y":-20,"width":980,"height":609,"label":"make 参数"},
+		{"id":"2ad207f7fcf77f6f","type":"group","x":-260,"y":-260,"width":505,"height":540,"label":"GNUMake"},
+		{"id":"6952e32591b030ea","type":"group","x":480,"y":-20,"width":433,"height":609,"label":"makefile 执行流程"},
+		{"id":"45f96cd4794716d8","type":"text","text":"`make` 是命令行工具，解释并运行 `makefile` 指令。","x":-240,"y":-240,"width":465,"height":60},
+		{"id":"b08e65bcd83a729a","type":"text","text":"# 编译\n\n生成中间代码 Object File（`.obj` / `.o`）\n- 检验语法正确性\n- 检验函数与变量声明正确性（头文件）","x":-240,"y":-120,"width":465,"height":200},
+		{"id":"23eb86b5a8f3c800","type":"text","text":"# 链接\n\n链接函数和全局变量，找不到实现则产生 Linker Error","x":-240,"y":140,"width":465,"height":120},
+		{"id":"d571174a4866186a","type":"text","text":"# 参考\n\n```cardlink\nurl: https://seisman.github.io/how-to-write-makefile/index.html\ntitle: \"跟我一起写Makefile — 跟我一起写Makefile 1.0 文档\"\nhost: seisman.github.io\n```\n","x":-260,"y":320,"width":505,"height":235},
+		{"id":"8d3f2061537a308e","type":"text","text":"默认 `make` 命令会在目录中查找 `GNUmakefile`、`makefile` 和 `Makefile` 文件\n-  `GNUmakefile` 仅 `GNUMake` 使用\n- 可使用 `-f` 或 `--file` 参数指定其他文件名，可以指定多个文件。","x":1320,"y":-245,"width":637,"height":150},
+		{"id":"6f5070930cc1bb6f","type":"text","text":"执行 `make` 指令后，`make` 会在当前目录下搜索 `makefile` 文件，如果找不到则执行失败。\n\n> [!note] `make` 执行后，返回 0 表示成功，1 表示出现错误，2 表示使用了 `-q` 参数且一些目标不需要更新","x":460,"y":-240,"width":820,"height":140},
+		{"id":"e6d5f6c68799bb6e","type":"text","text":"生成依赖关系链","x":500,"y":306,"width":393,"height":60},
+		{"id":"9717249738fe3a15","type":"text","text":"根据依赖和命令，决定标需要重新生成的目标","x":500,"y":408,"width":393,"height":60},
+		{"id":"cd99f14c81b554eb","type":"text","text":"执行生成命令","x":500,"y":509,"width":393,"height":60},
+		{"id":"06ff85ebf1e22ec2","type":"text","text":"读入 `include` 或 `MAKEFILES` 引入的所有文件","x":500,"y":0,"width":393,"height":60},
+		{"id":"1b2bd4bbd0994d3d","type":"text","text":"- `-n`、`--just-print`：仅打印命令，不执行，用于调试\n- `-W file`，`--what-if=file`：执行依赖于某个文件的命令，常配合 `-n`\n- `-q`，`--question`：查找一个目标，若存在则什么也不做，不能存在则输出错误\n- `-debug=a/b/v/i/j/m`：调试信息，`a` 为 `all`，`i` 包含隐含规则，`j` 包含命令详细信息，`m` 输出 `makefile` 信息\n- `-s`，`--slient`：不输出命令输出\n</br>\n- `-c dir`，`--directory=dir`：指定 `makefile` 目录\n- `-f file`，`--file=file`：指定 `makefile` 文件路径\n- `-I dir`，`--include-dir=dir`：指定源码包含目录\n- `-i`，`--ignore-errors`：忽略所有错误\n\n","x":980,"y":0,"width":940,"height":325},
+		{"id":"ca96ad2b5a17899e","type":"text","text":"初始化文件中的变量","x":500,"y":102,"width":393,"height":60},
+		{"id":"ab0535d9c3683073","type":"text","text":"引入隐式推导分析所有规则","x":500,"y":204,"width":393,"height":60},
+		{"id":"e0de627099c90af6","type":"text","text":"# 参考\n\n```cardlink\nurl: https://seisman.github.io/how-to-write-makefile/invoke.html#id3\ntitle: \"make 的运行 — 跟我一起写Makefile 1.0 文档\"\nhost: seisman.github.io\n```\n","x":980,"y":337,"width":940,"height":232}
+	],
+	"edges":[
+		{"id":"dbb41062fbcb525d","fromNode":"b08e65bcd83a729a","fromSide":"bottom","toNode":"23eb86b5a8f3c800","toSide":"top"},
+		{"id":"e4c3cd2f3451eef2","fromNode":"45f96cd4794716d8","fromSide":"bottom","toNode":"b08e65bcd83a729a","toSide":"top"},
+		{"id":"2dfd7deb15d54dab","fromNode":"6f5070930cc1bb6f","fromSide":"left","toNode":"45f96cd4794716d8","toSide":"right"},
+		{"id":"f301750a0ee29879","fromNode":"6952e32591b030ea","fromSide":"top","toNode":"6f5070930cc1bb6f","toSide":"bottom"},
+		{"id":"80111adc7e5bfc70","fromNode":"06ff85ebf1e22ec2","fromSide":"bottom","toNode":"ca96ad2b5a17899e","toSide":"top"},
+		{"id":"deb12c2bf1e51fbc","fromNode":"ca96ad2b5a17899e","fromSide":"bottom","toNode":"ab0535d9c3683073","toSide":"top"},
+		{"id":"fd909309341f687a","fromNode":"ab0535d9c3683073","fromSide":"bottom","toNode":"e6d5f6c68799bb6e","toSide":"top"},
+		{"id":"c7dc3fc97db4dec2","fromNode":"e6d5f6c68799bb6e","fromSide":"bottom","toNode":"9717249738fe3a15","toSide":"top"},
+		{"id":"92bb2d4919ac9d35","fromNode":"9717249738fe3a15","fromSide":"bottom","toNode":"cd99f14c81b554eb","toSide":"top"},
+		{"id":"d4f8ec6e6cb415a2","fromNode":"4bddbc5df544df17","fromSide":"top","toNode":"6f5070930cc1bb6f","toSide":"bottom"},
+		{"id":"a7c398ec85f537d7","fromNode":"8d3f2061537a308e","fromSide":"left","toNode":"6f5070930cc1bb6f","toSide":"right"}
+	]
+}

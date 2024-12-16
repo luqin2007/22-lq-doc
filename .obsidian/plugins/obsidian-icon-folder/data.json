@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiCmake",
       "ApDida365",
       "RiFileWord2Fill",
       "SiXfce",
-      "SiGithub",
-      "SiVmware"
+      "SiGithub"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -81,7 +81,6 @@
   "编程/Scala/语法": "SiScala",
   "编程/C Cpp/C++": "SiCplusplus",
   "编程": "LiCode2",
-  "编程/C Cpp/CMake": "SiCmake",
   "编程/C Cpp/GNUMake": "SiMake",
   "编程/JVM": "RiJavaFill",
   "编程/JVM/Gradle": "SiGradle",
@@ -167,5 +166,6 @@
   "工具/Linux/内置工具": "SiGnubash",
   "工具/Linux/Xfce": "SiXfce",
   "工具/Office ODT 部署安装.md": "RiFileWord2Fill",
-  "工具/滴答清单 crack.md": "ApDida365"
+  "工具/滴答清单 crack.md": "ApDida365",
+  "编程/C Cpp/CMake": "SiCmake"
 }

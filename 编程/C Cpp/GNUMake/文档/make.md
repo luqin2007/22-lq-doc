@@ -1,4 +1,4 @@
-执行 `make` 指令后，`make` 会在当前目录下搜索 `makefile` 或 `Makefile` 文件，如果找不到则执行失败。
+执行 `make` 指令后，`make` 会在当前目录下搜索 `makefile` 或 `Makefile` 文件，如果找不到则执行失败。
 
 > [!note] `make` 执行后，返回 0 表示成功，1 表示出现错误，2 表示使用了 `-q` 参数且一些目标不需要更新
 
@@ -65,3 +65,11 @@ lang: "makefile"
 - `-f file`，`--file=file`：指定 `makefile` 文件路径
 - `-I dir`，`--include-dir=dir`：指定源码包含目录
 - `-i`，`--ignore-errors`：忽略所有错误
+
+
+
+```cardlink
+url: https://seisman.github.io/how-to-write-makefile/invoke.html#id3
+title: "make 的运行 — 跟我一起写Makefile 1.0 文档"
+host: seisman.github.io
+```

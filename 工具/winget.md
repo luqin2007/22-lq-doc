@@ -95,7 +95,7 @@ image: https://learn.microsoft.com/en-us/media/open-graph-image.png
 
 # 设置
 
-`winget settings/config` 命令使用默认 JSON 文件编辑器打开 Winget 配置文件
+`winget settings/config` 命令使用默认 JSON 文件编辑器打开 Winget 配置文件，文件位于 `C:\Users\lq200\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json`
 
 ## 源配置  `source`
 

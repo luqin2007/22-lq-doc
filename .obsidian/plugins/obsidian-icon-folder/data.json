@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiJson",
+      "SiWindowsxp",
       "SiCmake",
       "ApDida365",
-      "RiFileWord2Fill",
-      "SiXfce",
-      "SiGithub"
+      "RiFileWord2Fill"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -167,5 +167,6 @@
   "工具/Linux/Xfce": "SiXfce",
   "工具/Office ODT 部署安装.md": "RiFileWord2Fill",
   "工具/滴答清单 crack.md": "ApDida365",
-  "编程/C Cpp/CMake": "SiCmake"
+  "编程/C Cpp/CMake": "SiCmake",
+  "编程/CSharp/WPF": "SiWindowsxp"
 }

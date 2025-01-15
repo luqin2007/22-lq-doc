@@ -79,7 +79,6 @@
   "编程/JavaScript/ECMAScript 语法": "SiJavascript",
   "编程/Rust/Rust 语法": "SiRust",
   "编程/Scala/语法": "SiScala",
-  "编程/C Cpp/C++": "SiCplusplus",
   "编程": "LiCode2",
   "编程/C Cpp/GNUMake": "SiMake",
   "编程/JVM": "RiJavaFill",
@@ -168,5 +167,6 @@
   "工具/Office ODT 部署安装.md": "RiFileWord2Fill",
   "工具/滴答清单 crack.md": "ApDida365",
   "编程/C Cpp/CMake": "SiCmake",
-  "编程/CSharp/WPF": "SiWindowsxp"
+  "编程/CSharp/WPF": "SiWindowsxp",
+  "编程/C Cpp/C++语法": "SiCplusplus"
 }

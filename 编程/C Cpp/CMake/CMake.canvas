@@ -1,17 +1,17 @@
 {
 	"nodes":[
-		{"id":"867c373eca4376c9","type":"group","x":-1720,"y":-560,"width":2940,"height":1140,"label":"CMakeLists"},
+		{"id":"867c373eca4376c9","type":"group","x":-1660,"y":-560,"width":2580,"height":960,"label":"CMakeLists"},
 		{"id":"573ce343fed69614","type":"group","x":-420,"y":-920,"width":340,"height":320,"label":"CMake 构建"},
 		{"id":"08e9e17b537eea01","type":"text","text":"根据 `CMakeLists` 生成构建脚本\n\n`cmake -B build`","x":-400,"y":-900,"width":300,"height":120},
 		{"id":"aa2b912bace7ba71","type":"text","text":"构建 `cmake --build build`","x":-400,"y":-680,"width":300,"height":60},
 		{"id":"dc7eaba3771f67a3","type":"text","text":"-B：指定构建目录","x":20,"y":-930,"width":250,"height":60},
 		{"id":"9d886ef40e47e403","type":"text","text":"-G：指定构建工具","x":20,"y":-810,"width":250,"height":60},
-		{"id":"d3233bb65e88d9b9","type":"file","file":"编程/C Cpp/CMake/依赖库.md","x":-1700,"y":-540,"width":520,"height":611},
-		{"id":"dc1e4a1353b49f44","type":"file","file":"编程/C Cpp/CMake/三方库.md","x":-1700,"y":160,"width":520,"height":400},
 		{"id":"0039e4b1492ae2dd","type":"file","file":"编程/C Cpp/CMake/CMakeLists.md","x":-1040,"y":-540,"width":640,"height":380},
-		{"id":"90d230a2f7b07f11","type":"text","text":"```dirtree\n- answer\n  - include\n    - answer.hpp\n  - answer.cpp\n  - CMakeLists.txt\n- main.cpp\n- CMakeLists.txt\n```","x":950,"y":-540,"width":250,"height":241},
-		{"id":"d0e4706556571b58","type":"file","file":"编程/C Cpp/CMake/子项目.md","x":-220,"y":-540,"width":1170,"height":880},
-		{"id":"0a415f5cb12f0611","type":"text","text":"`${CMAKE_CURRENT_SOURCE_DIR}`：环境变量，表示当前编译的项目目录","x":-1040,"y":-80,"width":640,"height":60}
+		{"id":"0a415f5cb12f0611","type":"text","text":"`${CMAKE_CURRENT_SOURCE_DIR}`：环境变量，表示当前编译的项目目录","x":-1040,"y":-80,"width":640,"height":60},
+		{"id":"d3233bb65e88d9b9","type":"file","file":"编程/C Cpp/CMake/依赖库.md","x":-1640,"y":-540,"width":520,"height":560},
+		{"id":"90d230a2f7b07f11","type":"text","text":"```dirtree\n- answer\n  - include\n    - answer.hpp\n  - answer.cpp\n  - CMakeLists.txt\n- main.cpp\n- CMakeLists.txt\n```","x":635,"y":-540,"width":250,"height":241},
+		{"id":"d0e4706556571b58","type":"file","file":"编程/C Cpp/CMake/子项目.md","x":-305,"y":-540,"width":900,"height":880},
+		{"id":"dc1e4a1353b49f44","type":"file","file":"编程/C Cpp/CMake/三方库.md","x":-1640,"y":60,"width":520,"height":300}
 	],
 	"edges":[
 		{"id":"c48dd707ba4a49f1","fromNode":"08e9e17b537eea01","fromSide":"bottom","toNode":"aa2b912bace7ba71","toSide":"top"},

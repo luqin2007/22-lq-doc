@@ -1,8 +1,5 @@
 #cpp11 
 
-> [!note] 使用场景
-> 编译期对数据进行测试，若不通过则产生编译期异常
-
 ```cpp
 static_assert([constant_expression], [string_literal]);
 ```

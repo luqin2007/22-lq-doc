@@ -10,6 +10,8 @@ description: "PhotoPrism 是一款开源的，基于机器学习软件 Google Te
 tags:
   - "clippings"
 ---
+> [!danger] 该应用仅可以通过 Docker 安装
+
 **PhotoPrism** 是一款开源的，基于机器学习软件 Google TensorFlow 的开源照片管理工具，它能够实现自动图像分类，可检测颜色、色度、亮度、质量、全景照片、位置等图片属性，支持直接上传照片，也可以挂载 WebDAV 目录，Docker 傻瓜式安装方式，Web 界面访问和管理照片，可以在家中或服务器上托管。@[Appinn](https://www.appinn.com/photoprism/)
 
 ![PhotoPrism - 基于机器学习 TensorFlow 的自动图像分类、开源照片管理工具](https://static2.appinn.com/images/202105/photoprism.jpg)

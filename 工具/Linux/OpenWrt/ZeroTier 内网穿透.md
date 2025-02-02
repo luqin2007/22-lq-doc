@@ -45,7 +45,7 @@ zerotier-cli peers
 
 ![[../../../_resources/images/Pasted image 20240831191052.png]]
 
-4. 加入网络，记得在 [[../../远程连接与共享/ZeroTier/ZeroTier|ZeroTier]] 授权路由器
+4. 加入网络，记得在 [[../../ZeroTier/ZeroTier|ZeroTier]] 授权路由器
 
 ```shell
 zerotier-cli join 85edc1bd140ecbfc # 85edc1bd140ecbfc 为网络 ID

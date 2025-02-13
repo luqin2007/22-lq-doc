@@ -79,7 +79,7 @@ docker build -t nginx:v3 .
 ![[Pasted image 20240806222547.png]]
 # 删除镜像
 
-使用 `docker rmi <image-name>`  可以删除镜像，`<image-name>`  为镜像名；要删除多个镜像时，使用空格分隔
+使用 `docker rm <image-name>`  可以删除镜像，`<image-name>`  为镜像名；要删除多个镜像时，使用空格分隔
 
 > [!danger] 一般情况下只有镜像没有使用时才能删除镜像，或使用 `-f`  强制删除
 # Docker 镜像服务器

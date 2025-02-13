@@ -1,10 +1,5 @@
 # 安装
-
-`````col
-````col-md
-flexGrow=1
-===
-# 完整安装
+## 完整安装
 
 ```shell
 # 安装 Plasm 桌面
@@ -12,11 +7,7 @@ pacman -S plasma
 # 安装 KDE 应用
 pacman -S kde-applications
 ```
-````
-````col-md
-flexGrow=1
-===
-# 最小安装
+## 最小安装
 
 ```shell
 # 安装 Plasm 桌面
@@ -24,14 +15,11 @@ pacman -S plasma-desktop
 # 安装 KDE 应用
 pacman -S kde-applications-meta
 ```
-````
-`````
 
 > [!note] 中文字体包
 > -  `noto-fonts`：基础字体包
 > - `noto-fonts-cjk`：中日韩字体包
 > - `noto-fonts-emoji`：表情字体包
-
 # 启动
 
 ```shell
@@ -50,7 +38,6 @@ exec startplasma-x11
 ```shell
 startx /usr/bin/startplasma-x11
 ```
-
 # 开机加载
 
 ```shell

@@ -5,10 +5,11 @@ Union File System，简称 `UnionFS` ，是为 Linux、FreeBSD、NetBSD 设计�
   该特性可以让一个只读挂载点的文件被修改，并仅将修改的数据保存在可读写的挂载点上。比如 `Knoppix` 可以将一个 CD 和一个可读写设备上的 `knoppix.img` 的文件系统联合起来，任何对 CD 的修改将应用到 U 盘上，不改变 CD 本来内容
 # AUFS
 
-新版本 Linux 中不再存在 `AUFS`，而是使用 `OverlayFS` 替代
+> [!attention] 新版本 Linux 中不再存在 `AUFS`，而是使用 `OverlayFS` 替代
 
 Advanced Multi-Layerd Unification Filesystem，重写了 UnionFS 1.x，提高了可靠性和性能，引入可写分支负载等新功能。
 
+> [!example] 
 > ```shell
 > sudo mount -t aufs -o \
 >      dirs=./container-layer:./image-layer4:./image-layer3:./image-layer2:./image-layer1 none ./mnt

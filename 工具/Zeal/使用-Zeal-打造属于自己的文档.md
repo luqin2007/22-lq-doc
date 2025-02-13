@@ -21,14 +21,24 @@ tags:
 
 Zeal 是一款免费的离线文档软件，能够让开发者更加便捷地查阅api文档。目前该软件有 windows、mac 以及 linux 版本，内部有超过 200 个文档，涵盖了几乎所有程序开发用到的库、框架以及语言，是一款十分实用的软件。
 
-[Zeal官网](https://link.zhihu.com/?target=https%3A//zealdocs.org/)
+```cardlink
+url: https://zealdocs.org/
+title: "Zeal - Offline Documentation Browser"
+host: zealdocs.org
+favicon: https://zealdocs.org/static/img/favicon-16.png
+```
 
-[Zeal下载](https://link.zhihu.com/?target=https%3A//zealdocs.org/download.html)
+```cardlink
+url: https://zealdocs.org/download.html
+title: "Download · Zeal"
+host: zealdocs.org
+favicon: https://zealdocs.org/static/img/favicon-16.png
+```
 
 下载安装完成之后，界面上是看不到任何的文档的，因为需要去下载文档（Zeal 中文档的格式称为 Docsets）。在首页上面按下 Docsets 或者 Tools -> Docsets，选择你想要的文档进行下载，下载完成后就可以看到你所需要的文档了。
 
 ![[../../_resources/images/Pasted image 20250127203452.png]]
-> 除了在 Zeal 的官网上面下载 Docsets 之外，还能通过 Add Feed 来添加。国外有热心的开发者收集了一个 [Docsets 集合](https://link.zhihu.com/?target=https%3A//zealusercontributions.now.sh/)，我们只需要点开自己需要的 Docsets，复制 xml 地址到 Add Feed 里面，就可以对应下载 Docsets 了。  
+> 除了在 Zeal 的官网上面下载 Docsets 之外，还能通过 Add Feed 来添加。国外有热心的开发者收集了一个 [Docsets 集合](https://github.com/xantiagoma/zealusercontributions)，我们只需要点开自己需要的 Docsets，复制 xml 地址到 Add Feed 里面，就可以对应下载 Docsets 了。  
 
 下载好自己需要的 Docsets 之后，日常就可以在工作中使用离线文档进行工作了。日常使用过程中，有几点需要注意：
 
@@ -44,15 +54,15 @@ Zeal 是一款免费的离线文档软件，能够让开发者更加便捷地查
 
 经过上面的步骤后，这个文档系统已经可以很好地为我们日常开发服务了，但是除了下载常用的 api 文档之外，能不能编写我们自己的文档呢？
 
-Zeal 官方写了一个教我们如何去编写自己的 Docsets 的[文档](https://link.zhihu.com/?target=https%3A//kapeli.com/docsets)，但是该文档写得比较简单，并且没有详细地操作指引，操作起来比较复杂。
+Zeal 官方写了一个教我们如何去编写自己的 Docsets 的[文档](https://kapeli.com/docsets)，但是该文档写得比较简单，并且没有详细地操作指引，操作起来比较复杂。
 
 > 经过实验之后，Zeal 的 Docsets 其实是 html 的集合，那么我们可以先用文档工具，生成一些静态的 html 文档。然后通过 Docsets 官方提供的 Docsets 生成器来把 html 生成 Docsets，这样就可以生成出属于我们自己的 Docsets 了。  
 
 ### 合适的文档生成器
 
-目前各种开发语言都有文档生成器，我比较熟悉的 [Node.js](https://zhida.zhihu.com/search?content_id=176258498&content_type=Article&match_order=1&q=Node.js&zhida_source=entity) 就有数十个像 Gitbook、Docsify、Vuepress 等等。但是并不是每一个都适合用来制作 Docsets，举个例子：
+目前各种开发语言都有文档生成器，我比较熟悉的 Node.js 就有数十个像 Gitbook、Docsify、Vuepress 等等。但是并不是每一个都适合用来制作 Docsets，举个例子：
 
-> Docsify 是一个很棒的生成器，但是用于 Docsets 的话就会有问题。原因是因为 Vuepress 是通过 js 读取 Markdown 来实现的，而 Zeal 内部是一个浏览器，并没有静态服务器，所以制作出来的 Docsets 会出现[跨域](https://zhida.zhihu.com/search?content_id=176258498&content_type=Article&match_order=1&q=%E8%B7%A8%E5%9F%9F&zhida_source=entity)的问题。  
+> Docsify 是一个很棒的生成器，但是用于 Docsets 的话就会有问题。原因是因为 Vuepress 是通过 js 读取 Markdown 来实现的，而 Zeal 内部是一个浏览器，并没有静态服务器，所以制作出来的 Docsets 会出现跨域的问题。  
 
 最终我选择了使用 Gitbook 来制作 Docsets，它能生成静态的 Html 文件，并且能够通过本地双击打开，能够跟 Zeal 完美融合。
 
@@ -87,7 +97,7 @@ Zeal 官方写了一个教我们如何去编写自己的 Docsets 的[文档](htt
 
 ---
 
-有了文档对应的 html 之后，需要把 html 生成 Docsets。我使用 Node.js 生成，在 npm 上面找了一个叫 [docset-generator](https://link.zhihu.com/?target=https%3A//www.npmjs.com/package/docset-generator) 的插件。通过以下代码，即可生成对应的 Docsets：
+有了文档对应的 html 之后，需要把 html 生成 Docsets。我使用 Node.js 生成，在 npm 上面找了一个叫 [docset-generator](https://www.npmjs.com/package/docset-generator) 的插件。通过以下代码，即可生成对应的 Docsets：
 
 ```js
 let DocSetGenerator = require("docset-generator").DocSetGenerator;
@@ -108,7 +118,7 @@ let docSetGenerator = new DocSetGenerator({
 docSetGenerator.create();
 ```
 
-这里我把 Gitbook 和 docset-generator 整合到一个项目中，通过 [npm-run-all](https://link.zhihu.com/?target=https%3A//www.npmjs.com/package/npm-run-all) 插件，先调用 Gitbook 生成 html，然后再生成 Docsets：
+这里我把 Gitbook 和 docset-generator 整合到一个项目中，通过 [npm-run-all](https://www.npmjs.com/package/npm-run-all) 插件，先调用 Gitbook 生成 html，然后再生成 Docsets：
 
 ```json
 "scripts": {

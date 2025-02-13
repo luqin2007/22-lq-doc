@@ -5,7 +5,6 @@
 ```shell
 pacman -S networkmanager
 ```
-
 # 启动
 
 ```shell
@@ -19,7 +18,6 @@ NetworkManager 提供一个命令行界面 `nmcli` 和一个图形界面 `nmtui`
 > [!note] 命令简写
 > - `nmcli connection`：`nmcli con`
 > - `nmcli device`：`nmcli dev`
-
 # 连接无线
 
 图形界面：直接使用 `nmtui` 选择 `activate a connection` 即可
@@ -40,7 +38,6 @@ nmcli device disconnect ifname <DEVICE>
 # 关闭 WiFi
 nmcli radio wifi off
 ```
-
 # 管理无线
 
 ```shell

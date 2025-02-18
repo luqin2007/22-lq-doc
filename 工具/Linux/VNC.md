@@ -18,7 +18,7 @@ sudo apt install tightvncserver
 > [!note] VNC 实例与端口
 > 默认登陆端口为 5901，实例名为 `:1`。可以开启多个端口，名称依次为 `:2`，`:3` 等，端口依次为 5902，5903 等
 
-1. 根据系统桌面环境配置 VNC（`~/.vnc/xstartup`），重启 VNC
+3. 根据系统桌面环境配置 VNC（`~/.vnc/xstartup`），重启 VNC
 
 > [!note] 结束
 > ```sh
@@ -46,10 +46,10 @@ exec startxfce4
 
 正常情况下，VNC 启动后创建一个新桌面会话。若要显示已存在的桌面，可以使用 `x0vncserver` 服务或 `x11vnc`
 
-2. 安装 `tigervnc-standalone-server` 和 `tigervnc-scraping-server`
-3. 使用 `vncpasswd` 配置登录密码
-4. 配置 `~/.vnc/xstartup` [[#桌面环境配置]] 
-5. 使用 `x0vncserver` 转发当前桌面
+1. 安装 `tigervnc-standalone-server` 和 `tigervnc-scraping-server`
+2. 使用 `vncpasswd` 配置登录密码
+3. 配置 `~/.vnc/xstartup` [[#桌面环境配置]] 
+4. 使用 `x0vncserver` 转发当前桌面
 
 ```sh
 x0vncserver -rfbport 5901 -display :0 -PasswordFile ~/.vnc/passwd

@@ -49,15 +49,15 @@
 * `containerd`：管理容器生命周期，管理镜像等
 # 目录
 
-- [[Docker CLI/操作容器]]
-- [[Docker CLI/Docker 镜像]]
-- [[Docker CLI/Docker 容器]]
-- [[Docker CLI/应用容器化]]
-- [[Docker CLI/网络模式]]
-- [[Docker CLI/Docker 存储]]
-- [[Docker CLI/日志管理]]
-- [[Docker Compose/Docker Compose|Docker Compose]]
-- [[Docker Swarm]]
+- [[操作容器]]
+- [[Docker 镜像]]
+- [[Docker 容器]]
+- [[应用容器化]]
+- [[网络模式]]
+- [[Docker 存储]]
+- [[日志管理]]
+- [[../Docker Compose/Docker Compose|Docker Compose]]
+- [[../Docker Swarm|Docker Swarm]]
 
 
 <iframe src="/widgets/widget-excalidraw/" data-src="/widgets/widget-excalidraw/" data-subtype="widget" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 271px; height: 350px;"></iframe>

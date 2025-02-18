@@ -29,17 +29,17 @@ grub-install.exe --target=x86_64-efi --efi-directory=<drive>: --boot-directory=<
 			- 寻找并记录 `vmlinuz` 文件路径
 			- 寻找并记录 `initrd` 文件路径，通常位于 `casper` 目录的 `initrd` 或 `initrd.lz`
 
-![[../_resources/images/Pasted image 20250203130008.png]]
+![[../../_resources/images/Pasted image 20250203130008.png]]
 # 安装
 
 重启选择启动项为 grub，进入 grub 命令行
 
 查找 iso 所在分区，使用 `ls` 命令可以查看所有分区，通常由 `hd` 和 `gpt` 两部分组成，hd 为硬盘编号，gpt 为分区编号，记下分区（如 `(hd1,gpt4)`）
 
-![[../_resources/images/Pasted image 20250203130115.png]]
+![[../../_resources/images/Pasted image 20250203130115.png]]
 
 > [!note] 在 Windows 中可以通过 `diskpart` 查询，两个可能不同，以 grub 的为准。
-> ![[../_resources/images/Pasted image 20250203131219.png]] 
+> ![[../../_resources/images/Pasted image 20250203131219.png]] 
 
 加载驱动，根据 iso 内文件的两种情况，使用不同方式引导
 
@@ -81,7 +81,7 @@ initrd (loop)/<initrd文件>
 boot
 ```
 
-![[../_resources/images/Pasted image 20250203131001.png]]
+![[../../_resources/images/Pasted image 20250203131001.png]]
 
 之后就是正常的光盘安装流程了。
 # 参考

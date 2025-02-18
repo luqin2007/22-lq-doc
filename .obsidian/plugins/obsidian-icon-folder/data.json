@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "SiRedis",
       "LiClipboard",
       "SiOpensourcehardware",
       "SiRustdesk",
-      "RiInstallLine",
-      "SiMan"
+      "RiInstallLine"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -166,5 +166,6 @@
   "工具/tldr.md": "SiMan",
   "工具/Linux/Openwrt": "SiOpenwrt",
   "硬件": "SiOpensourcehardware",
-  "Clippings": "LiClipboard"
+  "Clippings": "LiClipboard",
+  "工具/数据库/Redis.md": "SiRedis"
 }

@@ -3,18 +3,18 @@ Linux Cgroups 提供对一组进程及子进程的资源限制、限制和统计
 * `cgroups`：一种进程分组管理机制。一个 `cgroups` 包含一组进程，并在这个进程组里增加 Linux subsystem 参数配置
 * `subsystem`：一组资源控制模块，关联到一个 `cgroups` 上，对该进程组的进程做限制和控制
 
-| subsystem 模块 | 功能 |
-| ---------------- | ------------------------------------------------------------------------------------------- |
-|`blkio`|控制对块设备（硬盘等）输入输出的访问|
-|`cpu`|控制 `cgroups` 内进程的 CPU 调度策略|
-|`cpuacct`|统计 `cgroups` 中进程的 CPU 占用|
-|`cpuset`|控制 `cgroups` 中进程的 CPU 和内存<sup>（仅限 NUMA 架构）</sup>占用|
-|`devices`|控制 `cgroups` 中进程对设备的访问|
-|`freezer`|控制 `cgroups` 中进程的挂起和恢复|
-|`memory`|控制 `cgroups` 中进程的内存占用|
-|`net_cls`|分析 `cgroups` 中进程产生的网络包，分类以便 tc<sup>(traffic controller)</sup> 限流或监控|
-|`net_prio`|控制 `cgroups` 中进程产生网络包的优先级|
-|`ns`|使 `cgroups` 的进程在新 Namespace 中 fork 新进程时，创建出一个新 `cgroups`，该 `cgroups` 包含新 Namespace 进程|
+| subsystem 模块 | 功能                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `blkio`      | 控制对块设备（硬盘等）输入输出的访问                                                                    |
+| `cpu`        | 控制 `cgroups` 内进程的 CPU 调度策略                                                            |
+| `cpuacct`    | 统计 `cgroups` 中进程的 CPU 占用                                                              |
+| `cpuset`     | 控制 `cgroups` 中进程的 CPU 和内存<sup>（仅限 NUMA 架构）</sup>占用                                    |
+| `devices`    | 控制 `cgroups` 中进程对设备的访问                                                                |
+| `freezer`    | 控制 `cgroups` 中进程的挂起和恢复                                                                |
+| `memory`     | 控制 `cgroups` 中进程的内存占用                                                                 |
+| `net_cls`    | 分析 `cgroups` 中进程产生的网络包，分类以便 tc<sup>(traffic controller)</sup> 限流或监控                   |
+| `net_prio`   | 控制 `cgroups` 中进程产生网络包的优先级                                                             |
+| `ns`         | 使 `cgroups` 的进程在新 Namespace 中 fork 新进程时，创建出一个新 `cgroups`，该 `cgroups` 包含新 Namespace 进程 |
 
   这里只是一部分，还有 `perf_event`，`pids`，`rdma`，`misc` 等
 

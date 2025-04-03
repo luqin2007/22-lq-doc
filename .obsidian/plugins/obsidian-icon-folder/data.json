@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "SiRedis",
-      "LiClipboard",
-      "SiOpensourcehardware",
-      "SiRustdesk",
-      "RiInstallLine"
+      "SiKhronosgroup",
+      "SiVulkan",
+      "ApMinecraft",
+      "ApMelvor",
+      "SiRedis"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -110,7 +110,6 @@
   "编程/JavaScript/NestJS.md": "SiNestjs",
   "编程/JavaScript/Swiper.md": "SiSwiper",
   "编程/JavaScript/Typescript": "SiTypescript",
-  "编程/OpenGL": "SiOpengl",
   "编程/Python/Flask": "SiFlask",
   "编程/Python/manim": "ApManim",
   "编程/Python/PyQt6": "SiQt",
@@ -167,5 +166,9 @@
   "工具/Linux/Openwrt": "SiOpenwrt",
   "硬件": "SiOpensourcehardware",
   "Clippings": "LiClipboard",
-  "工具/数据库/Redis.md": "SiRedis"
+  "工具/数据库/Redis.md": "SiRedis",
+  "游戏/Melvor Idle Mod": "ApMelvor",
+  "游戏/MC": "ApMinecraft",
+  "编程/图形库/OpenGL": "SiOpengl",
+  "编程/图形库/Vulkan": "SiVulkan"
 }

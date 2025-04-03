@@ -55,7 +55,7 @@ vec4 colorRGBA = vec4(color, 1); // 1 0.5 1 1
 矩阵也可以拆分为向量，或者由向量通过构造函数创建。
 # 内建变量
 
-OpenGL 在着色器中有一些内建变量，完整版详见 [[../../_resources/documents/OpenGL/Built-in Variable (GLSL)]]
+OpenGL 在着色器中有一些内建变量，完整版详见 [[../../../_resources/documents/OpenGL/Built-in Variable (GLSL)]]
 * 顶点着色器
   * `gl_Position`：顶点着色器输出，记录顶点坐标
   * `gl_PointSize`：点作为图元时绘制的大小，当且仅当 `glEnable(GL_PROGRAM_POINT_SIZE)` 时可写

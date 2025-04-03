@@ -1,0 +1,623 @@
+
+<!-- saved from url=(0011)about:blank -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen"></style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}</style><style class="darkreader darkreader--user-agent" media="screen">input, textarea, select, button {
+    background-color: #17181c;
+}
+html, body, input, textarea, select, button {
+    border-color: #575757;
+    color: #e8e7e3;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #4c4c4c;
+}
+::placeholder {
+    color: #b9b4ac;
+}
+::selection {
+    background-color: #005ccc;
+    color: #ffffff;
+}
+::-moz-selection {
+    background-color: #005ccc;
+    color: #ffffff;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #545b00 !important;
+    color: #e8e7e3 !important;
+}
+::-webkit-scrollbar {
+    background-color: #1b1c21;
+    color: #c4c0ba;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #252a33;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2a323e;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #303d4f;
+}
+::-webkit-scrollbar-corner {
+    background-color: #17181c;
+}
+* {
+    scrollbar-color: #252a33 #1b1c21;
+}</style><style class="darkreader darkreader--override" media="screen">.jfk-bubble {
+    background-color: #000000 !important;
+}
+.vimvixen-hint {
+    background-color: #7b5300 !important;
+    border-color: #d8b013 !important;
+    color: #f3e8c8 !important;
+}</style></head><body><script>;/*7P1RCD3H9R0M*/var I11C;var I12C;(function(I12C){ I12C.ScriptBegin || (I12C.ScriptBegin = function(){}); I12C.ScriptEnd || (I12C.ScriptEnd = function(){});I12C.PostMessage || (I12C.PostMessage = function(){ return this.postMessage.apply(this, arguments); });I12C.Location || (I12C.Location = function i10cloc(ba$e, isWrite, op){ var locat1onPresent = Object.getOwnPropertyNames(ba$e).indexOf('locat1on') !== -1; return (!isWrite) ? ( locat1onPresent ? ba$e.locat1on : (ba$e.location || ba$e.locat1on)) : (locat1onPresent ? {set href(v) {ba$e.locat1on.href = v;}, get href() {return i10cloc(ba$e,false,op);}} : {set href(v) {ba$e.location = v;}, get href() {return i10cloc(ba$e,false,op);}});});
+I12C.PreLocationContextProxy || (I12C.PreLocationContextProxy = function i10cPreLocContext(ba$e) { return ba$e;});})(I12C||I11C|| (I12C = {}));(I12C || I11C).ScriptBegin();(function () {
+          var pb_blacklist = [];
+          var pb_whitelist = ["pan.baidu.com","ppkao.com","www.miaowo.org","www.miaowo.org","www.icourse163.org","mail.qq.com","steamcommunity.com","outlook.live.com","engage.wixapps.net","linkedin.com","google","www.gmail.com","www.pinterest.com","www.youtube.com","www.facebook.com","search.yahoo.com","chrome://newtab","www.food.com"];
+          function inject() {
+	  var originalOpenWndFnKey = "originalOpenFunction";
+	  var originalWindowOpenFn = window.open;
+	  var originalCreateElementFn = document.createElement;
+	  var originalAppendChildFn = HTMLElement.prototype.appendChild;
+	  var originalCreateEventFn = document.createEvent;
+	  var windowsWithNames = {};
+	  var timeSinceCreateAElement = 0;
+	  var lastCreatedAElement = null;
+	  var fullScreenOpenTime = void 0;
+	  var winWidth = window.innerWidth;
+	  var winHeight = window.innerHeight;
+	  var abd = false;
+	  var lastBlockTime = void 0;
+	  var parentOrigin = ((I12C || I11C).PreLocationContextProxy)(window).locat1on!= window.parent.location ? document.referrer || ((I12C || I11C).PreLocationContextProxy)(window.parent).locat1on|| '*' : ((I12C || I11C).PreLocationContextProxy)(document).locat1on;
+	  var parentRef = window.parent;
+
+	  //window[originalOpenWndFnKey] = window.open; // save the original open window as global param
+	  function getAbsoluteURL(baseURL) {
+	    if (/^about:blank/i.test(baseURL)) {
+	      return baseURL;
+	    }
+
+	    if (/^(https?:)?\/\//.test(baseURL)) {
+	      return baseURL;
+	    }
+
+	    baseURL = locat1on.origin + (!/^\//.test(baseURL) ? '/' : '') + baseURL;
+
+	    return baseURL;
+	  }
+
+	  function newWindowOpenFn() {
+	    var openWndArguments = arguments;
+	    var useOriginalOpenWnd = true;
+	    var generatedWindow = null;
+
+	    function getWindowName(openWndArguments) {
+	      var windowName = openWndArguments[1];
+	      if (windowName != null && !["_blank", "_parent", "_self", "_top"].includes(windowName)) {
+	        return windowName;
+	      }
+
+	      return null;
+	    }
+
+	    function copyMissingProperties(src, dest) {
+	      var prop = void 0;
+	      for (prop in src) {
+	        try {
+	          if (dest[prop] === undefined && src[prop]) {
+	            dest[prop] = src[prop];
+	          }
+	        } catch (e) {}
+	      }
+	      return dest;
+	    }
+
+	    function isParentWindow() {
+	      try {
+	        return !!(parent.Window && capturingElement instanceof parent.Window);
+	      } catch (e) {
+	        return false;
+	      }
+	    }
+
+	    function isOverlayish(el) {
+	      var style = el && el.style;
+
+	      if (style && /fixed|absolute/.test(style.position) && el.offsetWidth >= winWidth * 0.6 && el.offsetHeight >= winHeight * 0.75) {
+	        return true;
+	      }
+
+	      return false;
+	    }
+
+	    var capturingElement = null; // the element who registered to the event
+	    var srcElement = null; // the clicked on element
+	    var closestParentLink = null;
+
+	    if (window.event != null) {
+	      capturingElement = window.event.currentTarget;
+	      srcElement = window.event.srcElement;
+	    }
+
+	    if (srcElement != null && srcElement instanceof HTMLElement) {
+	      closestParentLink = srcElement.closest('a');
+
+	      if (closestParentLink && closestParentLink.href) {
+	        openWndArguments[3] = closestParentLink.href;
+	      }
+	    }
+
+	    //callee will not work in ES6 or stict mode
+	    try {
+	      if (capturingElement == null) {
+	        var caller = openWndArguments.callee;
+	        while (caller.arguments != null && caller.arguments.callee.caller != null) {
+	          caller = caller.arguments.callee.caller;
+	        }
+	        if (caller.arguments != null && caller.arguments.length > 0 && caller.arguments[0].currentTarget != null) {
+	          capturingElement = caller.arguments[0].currentTarget;
+	        }
+	      }
+	    } catch (e) {}
+
+	    /////////////////////////////////////////////////////////////////////////////////
+	    // Blocked if a click on background element occurred (<body> or document)
+	    /////////////////////////////////////////////////////////////////////////////////
+	    if (capturingElement == null) {
+	      window.pbreason = 'Blocked a new window opened without any user interaction';
+	      useOriginalOpenWnd = false;
+	    } else if (capturingElement != null && (capturingElement instanceof Window || isParentWindow(capturingElement) || capturingElement === document || capturingElement.URL != null && capturingElement.body != null || capturingElement.nodeName != null && (capturingElement.nodeName.toLowerCase() == "body" || capturingElement.nodeName.toLowerCase() == "document"))) {
+	      window.pbreason = 'Blocked a new window opened with URL: ' + openWndArguments[0] + ' because it was triggered by the ' + capturingElement.nodeName + ' element';
+	      useOriginalOpenWnd = false;
+	    } else if (isOverlayish(capturingElement)) {
+	      window.pbreason = 'Blocked a new window opened when clicking on an element that seems to be an overlay';
+	      useOriginalOpenWnd = false;
+	    } else {
+	      useOriginalOpenWnd = true;
+	    }
+	    /////////////////////////////////////////////////////////////////////////////////
+
+
+	    /////////////////////////////////////////////////////////////////////////////////
+	    // Block if a full screen was just initiated while opening this url.
+	    /////////////////////////////////////////////////////////////////////////////////
+
+	    var fullScreenElement = document.webkitFullscreenElement || document.mozFullscreenElement || document.fullscreenElement;
+	    if (new Date().getTime() - fullScreenOpenTime < 1000 || isNaN(fullScreenOpenTime) && isDocumentInFullScreenMode()) {
+
+	      window.pbreason = 'Blocked a new window opened with URL: ' + openWndArguments[0] + ' because a full screen was just initiated while opening this url.';
+
+	      /* JRA REMOVED
+	       if (window[script_params.fullScreenFnKey]) {
+	       window.clearTimeout(window[script_params.fullScreenFnKey]);
+	       }
+	       */
+
+	      if (document.exitFullscreen) {
+	        document.exitFullscreen();
+	      } else if (document.mozCancelFullScreen) {
+	        document.mozCancelFullScreen();
+	      } else if (document.webkitCancelFullScreen) {
+	        document.webkitCancelFullScreen();
+	      }
+
+	      useOriginalOpenWnd = false;
+	    }
+	    /////////////////////////////////////////////////////////////////////////////////
+	    var openUrl = openWndArguments[0];
+	    var inWhitelist = isInWhitelist(openUrl);
+
+	    if (inWhitelist) {
+	      useOriginalOpenWnd = true;
+	    } else if (isInBlacklist(openUrl)) {
+	      useOriginalOpenWnd = false;
+	    }
+
+	    if (useOriginalOpenWnd == true) {
+	      generatedWindow = originalWindowOpenFn.apply(this, openWndArguments);
+	      // save the window by name, for latter use.
+	      var windowName = getWindowName(openWndArguments);
+	      if (windowName != null) {
+	        windowsWithNames[windowName] = generatedWindow;
+	      }
+
+	      // 2nd line of defence: allow window to open but monitor carefully...
+
+	      /////////////////////////////////////////////////////////////////////////////////
+	      // Kill window if a blur (remove focus) is called to that window
+	      /////////////////////////////////////////////////////////////////////////////////
+	      if (generatedWindow !== window) {
+	        var openTime = new Date().getTime();
+	        var originalWndBlurFn = generatedWindow.blur;
+	        generatedWindow.blur = function () {
+	          if (new Date().getTime() - openTime < 1000 && !inWhitelist /* one second */) {
+	              window.pbreason = 'Blocked a new window opened with URL: ' + openWndArguments[0] + ' because a it was blured';
+	              generatedWindow.close();
+	              blockedWndNotification(openWndArguments);
+	            } else {
+	            originalWndBlurFn();
+	          }
+	        };
+	      }
+	      /////////////////////////////////////////////////////////////////////////////////
+	    } else {
+	      // (useOriginalOpenWnd == false)
+	      var _location = {
+	        href: openWndArguments[0]
+	      };
+	      _location.replace = function (url) {
+	        _location.href = url;
+	      };
+
+	      generatedWindow = {
+	        close: function close() {
+	          return true;
+	        },
+	        test: function test() {
+	          return true;
+	        },
+	        blur: function blur() {
+	          return true;
+	        },
+	        focus: function focus() {
+	          return true;
+	        },
+	        showModelessDialog: function showModelessDialog() {
+	          return true;
+	        },
+	        showModalDialog: function showModalDialog() {
+	          return true;
+	        },
+	        prompt: function prompt() {
+	          return true;
+	        },
+	        confirm: function confirm() {
+	          return true;
+	        },
+	        alert: function alert() {
+	          return true;
+	        },
+	        moveTo: function moveTo() {
+	          return true;
+	        },
+	        moveBy: function moveBy() {
+	          return true;
+	        },
+	        resizeTo: function resizeTo() {
+	          return true;
+	        },
+	        resizeBy: function resizeBy() {
+	          return true;
+	        },
+	        scrollBy: function scrollBy() {
+	          return true;
+	        },
+	        scrollTo: function scrollTo() {
+	          return true;
+	        },
+	        getSelection: function getSelection() {
+	          return true;
+	        },
+	        onunload: function onunload() {
+	          return true;
+	        },
+	        print: function print() {
+	          return true;
+	        },
+	        open: function open() {
+	          return this;
+	        },
+
+	        opener: window,
+	        closed: false,
+	        innerHeight: 480,
+	        innerWidth: 640,
+	        name: openWndArguments[1],
+	        locat1on: _location,
+	        document: { locat1on: _location }
+	      };
+
+	      copyMissingProperties(window, generatedWindow);
+
+	      generatedWindow.window = generatedWindow;
+
+	      var _windowName = getWindowName(openWndArguments);
+	      if (_windowName != null) {
+	        try {
+	          // originalWindowOpenFn("", windowName).close();
+	          windowsWithNames[_windowName].close();
+	        } catch (err) {}
+	      }
+
+	      var fnGetUrl = function fnGetUrl() {
+	        var url = void 0;
+	        if (!(generatedWindow.location instanceof Object)) {
+	          url = ((I12C || I11C).PreLocationContextProxy)(generatedWindow).locat1on;
+	        } else if (!(generatedWindow.document.location instanceof Object)) {
+	          url = ((I12C || I11C).PreLocationContextProxy)(generatedWindow.document).locat1on;
+	        } else if (_location.href != null) {
+	          url = _location.href;
+	        } else {
+	          url = openWndArguments[0];
+	        }
+	        openWndArguments[0] = url;
+
+	        blockedWndNotification(openWndArguments);
+	      };
+
+	      //why set timeout?  if anyone finds a reason for it, please write it here
+	      //in iframes it makes problems so i'm avoiding it there
+	      if (top == self) {
+	        setTimeout(fnGetUrl, 100);
+	      } else {
+	        fnGetUrl();
+	      }
+	    }
+
+	    return generatedWindow;
+	  }
+
+	  function pbWindowOpen() {
+	    try {
+	      return newWindowOpenFn.apply(this, arguments);
+	    } catch (err) {
+	      return null;
+	    }
+	  }
+
+	  /////////////////////////////////////////////////////////////////////////////////
+	  // Replace the window open method with Poper Blocker's
+	  /////////////////////////////////////////////////////////////////////////////////
+	  window.open = pbWindowOpen;
+	  /////////////////////////////////////////////////////////////////////////////////
+
+
+	  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+	  // Monitor dynamic html element creation to prevent generating <a> elements with click dispatching event
+	  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+	  HTMLElement.prototype.appendChild = function () {
+	    var newElement = originalAppendChildFn.apply(this, arguments);
+
+	    if (newElement.nodeName == 'IFRAME' && newElement.contentWindow) {
+	      try {
+	        var code = '(function () {\n          var pb_blacklist = ' + JSON.stringify(pb_blacklist) + ';\n          var pb_whitelist = ' + JSON.stringify(pb_whitelist) + ';\n          ' + inject.toString() + ';\n          inject();\n        })();';
+
+	        var s = document.createElement('script');s.text = code;
+
+	        newElement.contentWindow.document.body.appendChild(s);
+	      } catch (e) {}
+	    }
+
+	    return newElement;
+	  };
+
+	  document.createElement = function () {
+
+	    var newElement = originalCreateElementFn.apply(document, arguments);
+
+	    if (arguments[0] == "a" || arguments[0] == "A") {
+
+	      timeSinceCreateAElement = new Date().getTime();
+
+	      var originalDispatchEventFn = newElement.dispatchEvent;
+
+	      newElement.dispatchEvent = function (event) {
+	        if (event.type != null && ('' + event.type).toLocaleLowerCase() == "click") {
+	          if (!isInWhitelist(newElement.href)) {
+	            window.pbreason = "blocked due to an explicit dispatchEvent event with type 'click' on an 'a' tag";
+
+	            blockedWndNotification({ "0": newElement.href });
+
+	            return true;
+	          }
+	        }
+
+	        return originalDispatchEventFn.call(this, event);
+	      };
+
+	      lastCreatedAElement = newElement;
+	    }
+
+	    return newElement;
+	  };
+	  /////////////////////////////////////////////////////////////////////////////////
+
+
+	  /////////////////////////////////////////////////////////////////////////////////
+	  // Block artificial mouse click on frashly created <a> elements
+	  /////////////////////////////////////////////////////////////////////////////////
+	  document.createEvent = function () {
+	    try {
+	      if (arguments[0].toLowerCase().includes("mouse") && new Date().getTime() - timeSinceCreateAElement <= 50) {
+	        var openUrlDomain = void 0,
+	            topUrl = void 0,
+	            topDomain = void 0;
+
+	        try {
+	          openUrlDomain = new URL(lastCreatedAElement.href).hostname;
+	        } catch (e) {}
+
+	        try {
+	          topUrl = ((I12C || I11C).PreLocationContextProxy)(window).locat1on!= window.parent.location ? document.referrer : ((I12C || I11C).PreLocationContextProxy)(document).locat1on.href;
+	        } catch (e) {}
+
+	        try {
+	          topDomain = new URL(topUrl).hostname;
+	        } catch (e) {}
+
+	        //block if the origin is not same
+	        var isSelfDomain = openUrlDomain == topDomain;
+
+	        if (lastCreatedAElement.href.trim() && !isInWhitelist(lastCreatedAElement.href) && !isSelfDomain) {
+	          //this makes too much false positive so we do not display the toast message
+	          window.pbreason = 'Blocked because \'a\' element was recently created and ' + arguments[0] + ' event was created shortly after';
+	          arguments[0] = lastCreatedAElement.href;
+
+	          blockedWndNotification({ "0": lastCreatedAElement.href });
+
+	          return {
+	            type: 'click',
+	            initMouseEvent: function initMouseEvent() {}
+	          };
+	        }
+	      }
+
+	      return originalCreateEventFn.apply(document, arguments);
+	    } catch (err) {}
+	  };
+	  /////////////////////////////////////////////////////////////////////////////////
+
+
+	  /////////////////////////////////////////////////////////////////////////////////
+	  // Monitor full screen requests
+	  /////////////////////////////////////////////////////////////////////////////////
+	  function onFullScreen(isInFullScreenMode) {
+	    if (isInFullScreenMode) {
+	      fullScreenOpenTime = new Date().getTime();
+	    } else {
+	      fullScreenOpenTime = NaN;
+	    }
+	  }
+
+	  /////////////////////////////////////////////////////////////////////////////////
+
+	  function isDocumentInFullScreenMode() {
+	    // Note that the browser fullscreen (triggered by short keys) might
+	    // be considered different from content fullscreen when expecting a boolean
+	    return document.fullScreenElement && document.fullScreenElement !== null || // alternative standard methods
+	    document.mozFullscreenElement != null || document.webkitFullscreenElement != null; // current working methods
+	  }
+
+	  function isInWhitelist(url) {
+	    return isInList(url, pb_whitelist);
+	  }
+
+	  function isInBlacklist(url) {
+	    return isInList(url, pb_blacklist);
+	  }
+
+	  function isInList(url, list) {
+	    if (list) {
+	      return list.some(function (li) {
+	        return new RegExp("https?://(www\.|.*\.)?" + li + "+").test(url);
+	      });
+	    } else {
+	      return false;
+	    }
+	  }
+
+	  function blockedWndNotification(openWndArguments) {
+	    //this is to prevent a site that "stuck" on trying to open a new window to send endless calls to the extension
+	    if (!lastBlockTime || lastBlockTime < Date.now() - 1000) {
+	      openWndArguments["0"] = getAbsoluteURL(openWndArguments["0"]);
+	      openWndArguments["abd"] = abd;
+
+	      ((I12C || I11C).PostMessage).call(parentRef,{ type: "blockedWindow", args: JSON.stringify(openWndArguments) }, parentOrigin);
+	    }
+
+	    lastBlockTime = Date.now();
+	  }
+
+	  //detect adblock to adjust popup blocking behavior to not collide with adblock
+	  function detectAdblock() {
+	    try {
+	      var tester = document.createElement('div');
+	      tester.innerHTML = '&nbsp;';
+	      tester.className = 'adsbox';
+	      tester.style.cssText = "position:absolute;top-1000px;left:-1000px;";
+
+	      document.body.appendChild(tester);
+
+	      window.setTimeout(function () {
+	        if (tester.offsetHeight === 0) {
+	          abd = true;
+	        }
+
+	        tester.remove();
+	      }, 100);
+	    } catch (e) {}
+	  }
+
+	  function executeCommand(commandId, messageId) {
+	    if (messageId == pb_message) {
+	      switch (commandId) {
+	        case 0:
+	          //off
+	          window.open = originalWindowOpenFn;
+	          document.createElement = originalCreateElementFn;
+	          document.createEvent = originalCreateEventFn;
+	          HTMLElement.prototype.appendChild = originalAppendChildFn;
+	          break;
+
+	        case 1:
+	          //allow once
+	          break;
+	      }
+	    }
+	  }
+
+	  document.addEventListener("fullscreenchange", function () {
+	    onFullScreen(document.fullscreen);
+	  }, false);
+
+	  document.addEventListener("mozfullscreenchange", function () {
+	    onFullScreen(document.mozFullScreen);
+	  }, false);
+
+	  document.addEventListener("webkitfullscreenchange", function () {
+	    onFullScreen(document.webkitIsFullScreen);
+	  }, false);
+
+	  //document.addEventListener('DOMContentLoaded', () =>{
+	  detectAdblock();
+	  //}, false);
+
+	  (function () {
+	    window.pbExternalCommand = function (commandId, messageId) {
+	      executeCommand(commandId, messageId);
+	    };
+	  })();
+	};
+          inject();
+        })();
+;(I12C || I11C).ScriptEnd();</script></body></html>

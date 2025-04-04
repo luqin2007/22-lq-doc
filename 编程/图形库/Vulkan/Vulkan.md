@@ -1,12 +1,51 @@
 Vulkan 是 [[../OpenGL/OpenGL|OpenGL]] 的继任者，相比 OpenGL 有更加现代化的抽象，相比 Direct3D 原生跨平台。
+- [[环境配置]]
+- [[GLFW]]
+# Vulkan 对象创建
 
-- 初始化与环境配置
-	- [[环境配置]]
-	- [[GLFW]]
-	- [[Vulkan 实例]]
-	- [[Debug Messenger]]
-	- [[设备与逻辑设备]]
-	- [[交换链]]
+Vulkan 对象创建通常分为两步：
+- 创建对应的 `XxxCreateInfo` 对象，提供对应的信息
+- 调用 `CreateXxx` 方法，传入 info 结构体，返回该对象
+
+> [!note] 对应 C 头文件，创建方法为 `vkCreateXxx`，需要传入一个 `VkXxx` 的指针
+
+> [!tip] Cpp 头文件创建的 Info 对象中包含一系列 set 方法，可链式调用，推荐使用方法而不是直接设置值
+
+不同 `Info` 结构体有一些公共的字段
+
+| 成员      | 类型                | 说明                                  |
+| ------- | ----------------- | ----------------------------------- |
+| `sType` | `VkStructureType` | 结构体类型，不同结构体值不同                      |
+| `pNext` | `void*`           | 如有必要，指向一个用于扩展该结构体的结构体，通常为 `nullptr` |
+| `flags` | 各类 `Flags`        | 默认为 0                               |
+# Vulkan 对象关系
+
+- 环境相关
+	Vulkan 实例 Instance：包含一系列 Vulkan 运行必须的状态和信息的变量
+- 设备相关
+	物理设备 PhysicalDevice：表示一个 Vulkan 可调用的设备，通常指显卡。该对象只能获取设备相关信息，不能直接控制
+	逻辑设备 Device：编程层面上与物理设备交互的对象，管理物理设备中的资源（内存缓冲区、管线等）
+- 绘制相关
+	管道 Queue：CPU 侧（代码）向 GPU 侧（设备）提交指令的通道
+	命令缓冲 CommandBuffer：用于存放一组 CPU 向 GPU 提交的指令，可批量向 GPU 提交指令
+	命令池 CommandPool：管理命令缓冲，向 GPU 提交命令缓冲中的所有命令
+	交换链 Swapchain：选择 GPU 中的图像用于显示
+	Surface：用于输出图像到设备显示
+	交换链图像 Image
+# 初始化
+
+初始化 Vulkan 固定管线部分。这里需要经过以下过程：
+
+1. 创建 [[Vulkan 实例]]，作为 Vulkan 应用的根节点
+2. （调试环境）创建[[验证层]]，用于校验 Vulkan API 调用时的错误
+3. 选择物理[[设备]]，创建逻辑设备，创建队列
+4. 创建 [[Surface 与交换链]]
+5. 创建[[图像]]
+6. 创建命令池，存储和发送绘制命令
+
+
+
+- [[第一个三角形]]
 	- [[销毁 Vulkan]]
 - [[基础渲染循环]]
 	- [[即时帧]]
@@ -33,6 +72,13 @@ Vulkan 是 [[../OpenGL/OpenGL|OpenGL]] 的继任者，相比 OpenGL 有更加现
 - [[基础示例]]
 - [[简单示例]]
 # 参考
+
+```cardlink
+url: https://space.bilibili.com/256768793/lists/404887
+title: "单身剑法传人的个人空间-单身剑法传人个人主页-哔哩哔哩视频"
+description: "哔哩哔哩单身剑法传人的个人空间，提供单身剑法传人分享的视频、音频、文章、动态、收藏等内容，关注单身剑法传人账号，第一时间了解UP主动态。没事造轮子。QQ吹水群905217220"
+host: space.bilibili.com
+```
 
 ```cardlink
 url: https://easyvulkan.github.io/

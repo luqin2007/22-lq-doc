@@ -93,28 +93,7 @@ void Context::createDevice() {
 > [!note] 这里找的是同时满足图像和显示的设备。大部分情况都满足，但也可以使用不同设备分别用于图像和显示
 # 创建交换链
 
-交换链创建信息对象 `VkSwapchainCreateInfoKHR` 如下：
-
-| 成员                      | 类型                            | 说明                                                                             |
-| ----------------------- | ----------------------------- | ------------------------------------------------------------------------------ |
-| `surface`               | `SurfaceKHR`                  | Window surface                                                                 |
-| `minImageCount`         | `uint32_t`                    | 交换链中图像的最少数量                                                                    |
-| `imageFormat`           | `Format`                      | 交换链中图像的格式<br>- Rn、Gn、Bn、An：各通道位数<br>- U：底层是无符号整型<br>- NORM：自动标准化（转换为 `[0, 1]`） |
-| `imageColorSpace`       | `ColorSpaceKHR`               | 交换链中图像的色彩空间                                                                    |
-| `imageExtent`           | `Extent2D`                    | 交换链图像的尺寸                                                                       |
-| `imageArrayLayers`      | `uint32_t`                    | 视点数，用于多视点（multiview）或立体显示设备，普通显示器为 1                                           |
-| `imageUsage`            | `ImageUsageFlags`             | 交换链中图像的用途                                                                      |
-| `imageSharingMode`      | `SharingMode`                 | 交换链中图像的分享模式                                                                    |
-| `queueFamilyIndexCount` | `uint32_t`                    | 将会访问交换链图像的队列族总数                                                                |
-| `pQueueFamilyIndices`   | `const uint32_t*`             | 将会访问交换链图像的队列族索引                                                                |
-| `preTransform`          | `SurfaceTransformFlagBitsKHR` | 对交换链图像的变换，比如旋转90°、镜像等                                                          |
-| `compositeAlpha`        | `CompositeAlphaFlagBitsKHR`   | 指定如何处理交换链图像的透明度<br>- `VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR`：由其他代码（包括系统窗口）指定      |
-| `presentMode`           | `PresentModeKHR`              | 呈现方式                                                                           |
-| `clipped`               | `Bool32`                      | 是否允许舍弃掉交换链图像应有但窗口中不会显示的像素                                                      |
-| `oldSwapchain`          | `SwapchainKHR`                | 旧的交换链，在重建交换链时填入                                                                |
-## 交换链信息
-
-交换链中很多信息都需要从设备 Surface 信息 `VkSurfaceCapabilitiesKHR` 获取
+[[CreateInfo 信息#SwapchainCreateInfoKHR|交换链创建]]时很多信息都需要从设备 Surface 信息 `VkSurfaceCapabilitiesKHR` 获取
 
 ```cpp title:Swapchain::initialize
 void Swapchain::initialize(const VkExtent2D& size) {
@@ -168,7 +147,7 @@ void Swapchain::initialize(const VkExtent2D& size) {
         swapchain = context.device.createSwapchainKHR(createInfo);
     }
 ```
-### 图像大小 imageExtent
+## 图像大小 imageExtent
 
 该设备信息从 `surfaceCapabilities` 的 `currentExtent` 属性获取。`-1` 表示当前 Window Surface 大小未指定，此时可以指定一个默认值。
 
@@ -178,7 +157,7 @@ imageExtent = {
         std::clamp(size.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height),
 };
 ```
-### 图像队列数量 minImageCount
+## 图像队列数量 minImageCount
 
 通常，若容许的最小值与最大值数量不等，取最小值 + 1，这里直接取 2
 - 图像队列不宜过少，否则会产生阻塞，即需要渲染一个新图像时，图像队列满（正在被呈现或被渲染）；
@@ -189,7 +168,7 @@ imageExtent = {
 ```cpp title:Swapchain::initialize
 imageCount = std::clamp(2u, capabilities.minImageCount, capabilities.maxImageCount);
 ```
-### 透明通道模式 compositeAlpha
+## 透明通道模式 compositeAlpha
 
 该参数指定处理交换链图像透明度通道的方式
 - `eOpaque`：不透明，`alpha` 通道视为 1
@@ -198,13 +177,13 @@ imageCount = std::clamp(2u, capabilities.minImageCount, capabilities.maxImageCou
 - `eInherit`：由应用程序其他部分指定
 
 > [!note] 透明度不一定由 Vulkan 决定，还有可能被窗口系统影响。此时应将 `compositeAlpha` 设置为 `VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR`
-### 图像用途 imageUsage
+## 图像用途 imageUsage
 
 使用 `surfaceCapabilities.supportedUsageFlags` 获取所有可用的用途
 - 至少有一个 `eColorAttachment` 表示颜色附件
 - `eTransferDst`：数据传输目标，可用于 `vkCmdClearColorImage` 或 `vkCmdBlitImage`
 - `eTransferSrc`：数据传输来源，可用于窗口截屏
-### 图像格式与色彩空间
+## 图像格式与色彩空间
 
 图像格式 `Format` ，色彩空间 `ColorSpaceKHR`
 - 图像格式可以不指定（即 `VK_FORMAT_UNDEFINED`）
@@ -222,7 +201,7 @@ for (auto &fmt: context.phyDevice.getSurfaceFormatsKHR()) {
     }
 }
 ```
-### 呈现模式 presentMode
+## 呈现模式 presentMode
 
 ```cpp title:Swapchain::initialize
 presentMode = PresentModeKHR::eFifo;
@@ -244,7 +223,7 @@ for (auto &present: presents) {
 - `eMailbox`：类似于三重缓冲的模式，渲染缓冲只有一个元素，有新渲染的图片时立刻呈现缓存内的图片
 
 ![[../../../_resources/images/Pasted image 20250315003029.png|250]]  ![[../../../_resources/images/Pasted image 20250315002949.png|250]]  ![[../../../_resources/images/Pasted image 20250315003141.png|250]]
-### 分享模式
+## 共享模式
 
 一个交换链可能被多个队列访问，例如图形队列与呈现队列不同。此时应当设置 `queueFamilyIndices` 和 `imageSharingMode`
 
@@ -261,7 +240,7 @@ if (context.queueFamilyIndices.graphicsQueue == context.queueFamilyIndices.prese
             .setImageSharingMode(SharingMode::eConcurrent);
 }
 ```
-### 透明窗口背景
+## 透明窗口背景
 
 一种实现透明背景窗口的方法
 
@@ -269,6 +248,10 @@ if (context.queueFamilyIndices.graphicsQueue == context.queueFamilyIndices.prese
 - `compositeAlpha` 设置为 `eInherit`
 - 使用 `VkClearColorValue({0f, 0f, 0f, 0f})` 清屏
 - `presentMode` 设置为 `eImmediate` 或 `eMailbox`（但不限制帧数，浪费性能）
+
+---
+
+- [ ] 以下内容未处理
 # 重建交换链
 
 当调整色彩空间等属性后，需要重建交换链

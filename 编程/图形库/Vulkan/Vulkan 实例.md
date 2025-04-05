@@ -27,37 +27,27 @@ return VK_SUCCESS;
 - 扩展：分为实例级和设备级扩展。某些扩展也需要特定层
 	- 使用 `enumerateInstanceExtensionProperties` 可以遍历所有可用扩展，额外提供一个 `layerName` 参数表示扩展用于哪个层
 
-> [!attention] 调试时最好开启[[验证层]] `VK_LAYER_KHRONOS_validation`
-
 当创建 Vulkan 实例时，若存在无法满足的层和扩展，会产生失败结果
 - 不满足层：`VK_ERROR_LAYER_NOT_PRESENT`
 - 不满足扩展：`VK_ERROR_EXTENSION_NOT_PRESENT`
 
 > [!note] 设备层：有些层只能用于设备，所以需要在创建逻辑设备时添加
 > - 使用物理设备对象的 `enumerateDeviceExtensionProperties` 方法可查看所有支持的层
+## 验证层
+
+> [!attention] 调试时最好开启验证层 `VK_LAYER_KHRONOS_validation`
+> 只要添加了该层就有效果，会提示错误的 Vulkan API 调用
+
+> [!warning] Valkan 没有内置验证层，只有安装了 Vulkan SDK 的设备才可用验证层
+> `#NDEBUG` 宏可用于检查非调试环境
+
+> [!tip] 验证层
+> Vulkan SDK 引入验证层系统用于检验 Vulkan 参数、对象、线程、调用等信息，并将参数记录输出。参考 [[../../../_resources/documents/【Vulkan 学习笔记】4.1.3 Validation layers - 哔哩哔哩]]
+
+获取验证层捕捉的 debug 信息，用于调试，使用 `Vk` 创建
 # 创建实例
 
-创建实例所需的信息对象为 `VkInstanceCreateInfo`
-
-| 成员                        | 类型                   | 说明                                       |
-| ------------------------- | -------------------- | ---------------------------------------- |
-| `sType`                   | `VkStructureType`    | `VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO` |
-| `pApplicationInfo`        | `VkApplicationInfo*` | 指向描述本程序相关信息的结构体                          |
-| `enabledLayerCount`       | `uint32_t`           | 所需额外开启的实例级别层数                            |
-| `ppEnabledLayerNames`     | `const char* const*` | 指向由所需开启的层的名称构成的数组（同一名称可以重复出现）            |
-| `enabledExtensionCount`   | `uint32_t`           | 所需额外开启的实例级别扩展数                           |
-| `ppEnabledExtensionNames` | `const char* const*` | 指向由所需开启的扩展的名称构成的数组（同一名称可以重复出现）           |
-
-`VkApplicationInfo` 结构体描述程序具体信息，`apiVersion` 字段填写使用的 VulkanAPI 版本，其他名称版本按需填
-
-| 成员                   | 类型                | 说明                                   |
-| -------------------- | ----------------- | ------------------------------------ |
-| `sType`              | `VkStructureType` | `VK_STRUCTURE_TYPE_APPLICATION_INFO` |
-| `pApplicationName`   | `const void*`     | 应用程序的名称                              |
-| `applicationVersion` | `uint32_t`        | 应用程序的版本号                             |
-| `pEngineName`        | `const void*`     | 引擎的名称                                |
-| `engineVersion`      | `uint32_t`        | 引擎的版本号                               |
-| `apiVersion`         | `uint32_t`        | VulkanAPI的版本号，必填                     |
+创建实例所需的信息对象为 [[CreateInfo 信息#InstanceCreateInfo|InstanceCreateInfo]]，其中 [[CreateInfo 信息#ApplicationInfo|ApplicationInfo]] 的 `apiVersion` 字段填写使用的 VulkanAPI 版本
 
 ```cpp
     void Context::createInstance() {

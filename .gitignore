@@ -13,3 +13,6 @@ package-lock.json
 
 # Kate
 *.kate-swp
+
+# Resilio Sync
+**/.sync
